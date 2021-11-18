@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="keywords" content="EasyJ,开源社区,官网,中间件,DWZ,短链接服务,WebSocket,即插即用,简化配置"/>
+	<meta name="description" content="EasyJ开源项目是为了简化Java项目开发而诞生的，主要提供通用的工具、即插即用功能、中间件，并提供一些简化和增强配置的功能，使业务项目开发变得更加快捷。"/>
+	<title>EasyJ开源社区 - 官网</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+	<link href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" rel="stylesheet"/>
 	<script>
 		const _hmt = window._hmt || [];
 		(function () {
@@ -10,28 +17,77 @@
 			s.parentNode.insertBefore(hm, s);
 		})();
 	</script>
-	<meta charset="UTF-8"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-	<meta name="keywords" content="EasyJ,开源社区,官网,中间件,DWZ,短链接服务,WebSocket,即插即用,简化配置"/>
-	<meta name="description" content="EasyJ开源项目是为了简化Java项目开发而诞生的，主要提供通用的工具、即插即用功能、中间件，并提供一些简化和增强配置的功能，使业务项目开发变得更加快捷。"/>
-	<title>EasyJ开源社区 - 官网</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-	<link href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" rel="stylesheet"/>
 </head>
 <body>
 	<div id="app">Loading...</div>
+
+	<script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script><!--插件：在GitHub上编辑。该插件需在`$docsify`脚本前引入，否则会无效。-->
+
+	<!-- DocSify -->
 	<script>
 		window.$docsify = {
 			name: 'EasyJ开源社区',
 			repo: 'https://github.com/easyj-projects',
 
+			// 封面
 			coverpage: true,
 
+			// 侧边导航栏
 			loadSidebar: true,
-			subMaxLevel: 2
+			subMaxLevel: 2,
+
+
+			// 以下是插件配置
+
+			// 插件：全文检索
+			search: {
+				paths: 'auto',
+				placeholder: '搜索',
+				noData: '<span style="color:red">未找到任何结果</span>',
+			},
+
+			// 插件：字数统计
+			count: {
+				language: 'chinese'
+			},
+
+			// 其他插件
+			plugins: [
+				// 插件：在GitHub上编辑
+				EditOnGithubPlugin.create(
+						'https://github.com/easyj-projects/easyj-projects.github.io/blob/docsify/',
+						null,
+						function (file) {
+							if (file.indexOf('en') === -1) {
+								return '内容有问题？立即去GitHub上提交修改吧！'
+							} else {
+								return 'Some wrong? Edit on GitHub!'
+							}
+						}
+				)
+			]
 		}
 	</script>
-	<script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-	<script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/emoji.min.js"></script>
+
+	<script src="//cdn.jsdelivr.net/npm/docsify@4"></script><!--docsify核心-->
+	<script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script><!--插件：全文检索-->
+	<script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script><!--插件：图片绽放-->
+	<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script><!--插件：代码复制-->
+	<script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script><!--插件：Java语法高亮-->
+	<script src="//unpkg.com/docsify-count/dist/countable.js"></script><!--插件：字数统计-->
+
+	<!-- 评论系统： -->
+	<link href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" rel="stylesheet"/>
+	<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>
+	<script>
+		const gitalk = new Gitalk({
+			clientID: '21bffd940d486618132b',
+			clientSecret: '5b51c3a75de223a4ce17664320d8243689b3da9f',
+			repo: 'easyj-projects.github.io',
+			owner: 'wangliang181230',
+			admin: ['wangliang181230']
+		})
+	</script>
 </body>
 </html>

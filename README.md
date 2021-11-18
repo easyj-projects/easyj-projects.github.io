@@ -1,15 +1,31 @@
-首页
+# 首页
 
 ## 标题1
 
 
-```
-
+```java
 public class Aaaaa {
-
+	
+	public String get() {
+		return "aaaaa";
+    }
+	
 }
-
 ```
+
+
+```xml
+<dependencyManagement>
+	<dependencies>
+		<groupId>icu.easyj.boot</groupId>
+		<artifactId>easyj-spring-boot-bom</artifactId>
+		<version>0.2.3-SNAPSHOT</version>
+		<type>pom</type>
+		<scope>import</scope>
+	</dependencies>
+</dependencyManagement>
+```
+
 
 12312313
 

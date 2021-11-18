@@ -1,6 +1,4 @@
-![logo](img/logo.png)
-
-<h1>EasyJ <small>0.2.2</small></h1>
+<h1><b style="font-size: 180%; margin-left: -10px; font-weight: 700">EasyJ</b> <small>0.2.2</small></h1>
 
 > 简化Java开发的必备组件
 
