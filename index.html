@@ -79,12 +79,13 @@
 	</script>
 
 	<!-- 插件：字数统计 -->
-	<script src="//unpkg.com/docsify-count/dist/countable.js"></script>
 	<script>
+		// 字数统计的配置需要在 'countable.js' 加载前设置好
 		window.$docsify.count = {
 			language: 'chinese'
 		};
 	</script>
+	<script src="//unpkg.com/docsify-count/dist/countable.js"></script>
 
 	<!-- 插件：Java语法高亮 -->
 	<script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script>
