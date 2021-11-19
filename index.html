@@ -21,62 +21,86 @@
 <body>
 	<div id="app">Loading...</div>
 
-	<script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script><!--插件：在GitHub上编辑。该插件需在`$docsify`脚本前引入，否则会无效。-->
-
-	<!-- DocSify -->
+	<!-- DocSify初始化 -->
+	<script src="//cdn.jsdelivr.net/npm/docsify@4"></script><!--docsify核心-->
 	<script>
+		const communityName = 'easyj-projects'; // 项目组名
+		const communityHomePageProjectName = communityName + '.github.io'; // 当前官网项目名
+		const branchName = 'docsify'; // 项目分支名
+
 		window.$docsify = {
 			name: 'EasyJ开源社区',
-			repo: 'https://github.com/easyj-projects',
+			repo: 'https://github.com/' + communityName,
 
 			// 封面
-			coverpage: true,
+			coverpage: false,
 
 			// 侧边导航栏
 			loadSidebar: true,
 			subMaxLevel: 2,
 
-
-			// 以下是插件配置
-
-			// 插件：全文检索
-			search: {
-				paths: 'auto',
-				placeholder: '搜索',
-				noData: '<span style="color:red">未找到任何结果</span>',
-			},
-
-			// 插件：字数统计
-			count: {
-				language: 'chinese'
-			},
-
 			// 其他插件
-			plugins: [
-				// 插件：在GitHub上编辑
-				EditOnGithubPlugin.create(
-						'https://github.com/easyj-projects/easyj-projects.github.io/blob/docsify/',
-						null,
-						function (file) {
-							if (file.indexOf('en') === -1) {
-								return '内容有问题？立即去GitHub上提交修改吧！'
-							} else {
-								return 'Some wrong? Edit on GitHub!'
-							}
-						}
-				)
-			]
+			plugins: []
 		}
 	</script>
 
-	<script src="//cdn.jsdelivr.net/npm/docsify@4"></script><!--docsify核心-->
-	<script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script><!--插件：全文检索-->
-	<script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script><!--插件：图片绽放-->
-	<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script><!--插件：代码复制-->
-	<script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script><!--插件：Java语法高亮-->
-	<script src="//unpkg.com/docsify-count/dist/countable.js"></script><!--插件：字数统计-->
+	<!-- 插件：全文检索 -->
+	<script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+	<script>
+		window.$docsify.search = {
+			paths: 'auto',
+			placeholder: '搜索',
+			noData: '<span style="color:red">未找到任何结果</span>'
+		};
+	</script>
 
-	<!-- 评论系统： -->
+	<!-- 插件：在GitHub上编辑 -->
+	<script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script>
+	<script>
+		window.$docsify.plugins[window.$docsify.plugins.length] = EditOnGithubPlugin.create(
+				'https://github.com/' + communityName + '/' + communityHomePageProjectName + '/blob/' + branchName + '/',
+				null,
+				function (file) {
+					return '文档有问题？立即提交修改！'
+				}
+		);
+	</script>
+
+	<!-- 插件：图片绽放 -->
+	<script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+
+	<!-- 插件：代码复制 -->
+	<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+	<script>
+		window.$docsify.copyCode = {
+			buttonText: '复制',
+			successText: '已复制'
+		};
+	</script>
+
+	<!-- 插件：字数统计 -->
+	<script src="//unpkg.com/docsify-count/dist/countable.js"></script>
+	<script>
+		window.$docsify.count = {
+			language: 'chinese'
+		};
+	</script>
+
+	<!-- 插件：Java语法高亮 -->
+	<script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script>
+
+	<!-- 插件：分页导航 -->
+	<script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+	<script>
+		window.$docsify.pagination = {
+			previousText: '上一章节',
+			nextText: '下一章节',
+			crossChapter: true,
+			crossChapterText: true
+		};
+	</script>
+
+	<!-- 插件：评论系统 -->
 	<link href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" rel="stylesheet"/>
 	<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 	<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>
@@ -84,8 +108,8 @@
 		const gitalk = new Gitalk({
 			clientID: '21bffd940d486618132b',
 			clientSecret: '5b51c3a75de223a4ce17664320d8243689b3da9f',
-			repo: 'easyj-projects.github.io',
-			owner: 'easyj-projects',
+			repo: communityHomePageProjectName,
+			owner: communityName,
 			admin: ['wangliang181230']
 		})
 	</script>

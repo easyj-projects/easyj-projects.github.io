@@ -1,2 +1,5 @@
 * [首页](/)
-* [文档问题反馈](https://github.com/easyj-projects/easyj-projects.github.io/issues/new)
+* [文档](docs/)
+* [博客](blog/)
+* [加入讨论](discussion.md)
+* [问题反馈](feedback.md)
