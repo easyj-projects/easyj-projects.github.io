@@ -1,5 +1,3 @@
-* [首页](/)
-* [文档](docs/)
-* [博客](blog/)
+* [主页](/)
 * [加入讨论](discussion.md)
 * [问题反馈](feedback.md)
