@@ -1,10 +1,22 @@
-const communityName = 'easyj-projects'; // 项目组名
-const communityHomePageProjectName = communityName + '.github.io'; // 当前官网项目名
+const communityName = 'easyj-projects'; // 社区名称/项目组名称
+const projectName = communityName + '.github.io'; // 项目名
 const branchName = 'docsify'; // 项目分支名
+
+
+function pageTitle() {
+	if (location.pathname.indexOf('/docs') === 0) {
+		return 'EasyJ文档';
+	} else if (location.pathname.indexOf('/blog') === 0) {
+		return 'EasyJ博客';
+	} else {
+		return 'EasyJ主页';
+	}
+}
+
 
 // DocSify初始化
 window.$docsify = {
-	name: 'EasyJ开源社区',
+	name: pageTitle(),
 	repo: 'https://github.com/' + communityName,
 
 	// 封面
@@ -46,7 +58,7 @@ window.$docsify = {
 	plugins: [
 		// 插件：在GitHub上编辑
 		EditOnGithubPlugin.create(
-			'https://github.com/' + communityName + '/' + communityHomePageProjectName + '/blob/' + branchName + location.pathname,
+			'https://github.com/' + communityName + '/' + projectName + '/blob/' + branchName + location.pathname,
 			null,
 			function () {
 				return '内容有问题？立即提交修改！'
