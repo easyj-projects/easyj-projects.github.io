@@ -64,5 +64,6 @@ document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-j
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>'); // 插件：分页导航
 // 插件：评论系统 GITalk
 document.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
-document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>');
 document.writeln('<script src="/js/gitalk-config.js"></script>'); // gitalk配置
+//document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>');
+document.writeln('<script src="/js/docsify-plugins-gitalk.js"></script>'); // 重写过上面的文件
