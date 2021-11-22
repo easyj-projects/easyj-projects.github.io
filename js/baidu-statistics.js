@@ -1,3 +1,4 @@
+// 百度统计
 const _hmt = window._hmt || [];
 (function () {
 	var hm = document.createElement("script");
