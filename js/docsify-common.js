@@ -1,8 +1,3 @@
-const communityName = 'easyj-projects'; // 社区名称/项目组名称
-const projectName = communityName + '.github.io'; // 项目名
-const branchName = 'docsify'; // 项目分支名
-
-
 function pageTitle() {
 	if (location.pathname.indexOf('/docs') === 0) {
 		return 'EasyJ文档';
@@ -17,7 +12,7 @@ function pageTitle() {
 // DocSify初始化
 window.$docsify = {
 	name: pageTitle(),
-	repo: 'https://github.com/' + communityName,
+	repo: 'https://github.com/' + config.communityName,
 
 	// 封面
 	coverpage: false,
@@ -58,7 +53,7 @@ window.$docsify = {
 	plugins: [
 		// 插件：在GitHub上编辑
 		EditOnGithubPlugin.create(
-			'https://github.com/' + communityName + '/' + projectName + '/blob/' + branchName + location.pathname,
+			'https://github.com/' + config.communityName + '/' + config.projectName + '/blob/' + config.branchName + location.pathname,
 			null,
 			function () {
 				return '内容有问题？立即提交修改！'

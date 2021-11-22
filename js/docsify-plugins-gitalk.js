@@ -3,25 +3,25 @@
 (function () {
 	/* eslint-disable no-unused-vars */
 	function install(hook) {
-		var dom = Docsify.dom;
+		let dom = Docsify.dom;
 
 		hook.mounted(function (_) {
-			var div = dom.create('div');
+			let div = dom.create('div');
 			div.id = 'gitalk-container';
-			var main = dom.getNode('#main');
+			let main = dom.getNode('#main');
 			div.style = "width: " + (main.clientWidth) + "px; margin: 0 auto 20px;";
 			dom.appendTo(dom.find('.content'), div);
 		});
 
 		hook.doneEach(function (_) {
-			var el = document.getElementById('gitalk-container');
+			let el = document.getElementById('gitalk-container');
 			while (el.hasChildNodes()) {
 				el.removeChild(el.firstChild);
 			}
 
 			//region @Override: 自定义规则动态生成ID
 			window.gitalkConfig.id = generateGitalkId();
-			console.info('gitalk.id = "' + window.gitalkConfig.id + '";');
+			console.info('gitalk.id = "' + window.gitalkConfig.id + '";'); // 打印日志
 			window.gitalk = new Gitalk(window.gitalkConfig);
 			//endregion
 
@@ -36,7 +36,7 @@
 
 // 动态生成gitalk的id，修复如下问题：
 // 1. 选中md中的子菜单时，刷新页面，会导致加载issue数据失败
-// 2. 当菜单的md文件存在`../`时，加载不到实际的issue的
+// 2. 当菜单的md文件路径存在`../`或`./`时，加载不到实际的issue的
 function generateGitalkId() {
 	let pathname = location.pathname;
 	let search = location.search;
