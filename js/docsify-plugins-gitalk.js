@@ -39,7 +39,7 @@
 // 2. 当菜单的md文件路径存在`../`或`./`时，加载不到实际的issue的
 function generateGitalkId() {
 	let pathname = location.pathname;
-	let search = location.search;
+	//let search = location.search; // 不拼接search，因为当前站点没有用到search参数
 	let hashPre = '';
 	let hash = location.hash;
 
@@ -79,5 +79,5 @@ function generateGitalkId() {
 		}
 	}
 
-	return pathname/* + search*/ + hashPre + hash; // 不拼接search，因为当前站点没有用到search参数
+	return pathname + hashPre + hash;
 }

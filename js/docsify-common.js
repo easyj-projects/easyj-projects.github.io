@@ -4,7 +4,7 @@ function pageTitle() {
 	} else if (location.pathname.indexOf('/blog') === 0) {
 		return 'EasyJ博客';
 	} else {
-		return 'EasyJ主页';
+		return 'EasyJ开源社区';
 	}
 }
 
