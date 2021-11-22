@@ -79,5 +79,5 @@ function generateGitalkId() {
 		}
 	}
 
-	return pathname + search + hashPre + hash;
+	return pathname/* + search*/ + hashPre + hash; // 不拼接search，因为当前站点没有用到search参数
 }
