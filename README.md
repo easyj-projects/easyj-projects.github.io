@@ -7,6 +7,6 @@
 - **即插即用：**`@Cache304`、`@ExcelExport`、`出入参加密解密`&emsp;&emsp;&emsp;&nbsp;&nbsp;
 - **中间件：**`DWZ（短链接服务）`、`WebSocket服务中间件`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+<a href="/docs" target="_blank">文档</a> &emsp;
 [GitHub](https://github.com/easyj-projects) &emsp;
-[Gitee](https://gitee.com/easyj-projects) &emsp;
-[Get Started](docs)
+[Gitee](https://gitee.com/easyj-projects)
