@@ -61,10 +61,10 @@ function generateGitalkId() {
 			hashPre = '#/';
 			hash = hash.substring(hashPre.length);
 		}
-		while (hash.indexOf('.') === 0) {
-			if (hash.indexOf('./') === 0) {
+		while (hash.startsWith('.')) {
+			if (hash.startsWith('./')) {
 				hash = hash.substring('./'.length);
-			} else if (hash.indexOf('../') === 0 && pathname.indexOf('/') !== pathname.lastIndexOf('/')) {
+			} else if (hash.startsWith('../') && pathname.indexOf('/') !== pathname.lastIndexOf('/')) {
 				hash = hash.substring('../'.length);
 				if (pathname.lastIndexOf('/') === pathname.length - 1) {
 					pathname = pathname.substring(0, pathname.length - 1);
