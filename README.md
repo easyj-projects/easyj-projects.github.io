@@ -1,17 +1,12 @@
-# 主页
+<h1><b style="font-size: 180%; margin-left: -10px; font-weight: 700">EasyJ</b> <small>0.2.2</small></h1>
 
-这里是主页，目前还没有内容！
+> 简化Java开发的必备组件
 
+- **快捷集成：**想要使用哪个功能，引用对应的starter依赖即可&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+- **简单的配置：**只需配置yaml，连 `logback.xml` 也转换成了yaml进行配置
+- **即插即用：**`@Cache304`、`@ExcelExport`、`出入参加密解密`&emsp;&emsp;&emsp;&nbsp;&nbsp;
+- **中间件：**`DWZ（短链接服务）`、`WebSocket服务中间件`&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-```xml
-<dependencyManagement>
-	<dependencies>
-		<groupId>icu.easyj.boot</groupId>
-		<artifactId>easyj-spring-boot-bom</artifactId>
-		<version>0.2.2</version>
-		<type>pom</type>
-		<scope>import</scope>
-	</dependencies>
-</dependencyManagement>
-```
-
+[GitHub](https://github.com/easyj-projects) &emsp;
+[Gitee](https://gitee.com/easyj-projects) &emsp;
+[Get Started](docs)
