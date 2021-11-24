@@ -1,7 +1,7 @@
 function pageTitle() {
-	if (location.pathname.indexOf('/docs') === 0) {
+	if (location.pathname.startsWith('/docs')) {
 		return 'EasyJ文档';
-	} else if (location.pathname.indexOf('/blog') === 0) {
+	} else if (location.pathname.startsWith('/blog')) {
 		return 'EasyJ博客';
 	} else {
 		return 'EasyJ开源社区';
