@@ -1,4 +1,4 @@
-<!-- 本文与 '/feedback' 文件内容相同 -->
+<!-- 本文件与 '../feedback.md' 文件内容相同 -->
 # 问题反馈
 
 
@@ -13,3 +13,6 @@
 * [功能BUG反馈](https://gitee.com/easyj-projects/easyj/issues/new)
 
 
+#### 去讨论群反馈问题给群管理
+
+* [加入讨论群](discussion.md)
