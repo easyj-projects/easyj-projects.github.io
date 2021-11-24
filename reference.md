@@ -3,7 +3,7 @@
 
 #### 文档
 
-* <a href="docs" target="_blank">参考资料</a>
+* <a href="docs" target="_blank">说明文档</a>
 * <a href="javascript:alert('待生成中');">API文档</a>
 
 
