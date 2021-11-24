@@ -1,5 +1,5 @@
-// 以下代码从 `https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/plugins/gitalk.js` 复制过来
-// 并嵌入了gitalk.id的自定义自动生成规则
+//region 以下代码从 `https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/plugins/gitalk.js` 复制过来，并嵌入了gitalk.id的自定义生成规则
+
 (function () {
 	/* eslint-disable no-unused-vars */
 	function install(hook) {
@@ -33,10 +33,17 @@
 	$docsify.plugins = [].concat(install, $docsify.plugins);
 }());
 
+//endregion
 
-// 动态生成gitalk的id，修复如下问题：
-// 1. 选中md中的子菜单时，刷新页面，会导致加载issue数据失败
-// 2. 当菜单的md文件路径存在`../`或`./`时，加载不到实际的issue的
+
+/**
+ * 动态生成gitalk的id
+ * 修复如下问题：
+ * 1. 选中md中的子菜单时，刷新页面，会导致加载issue数据失败
+ * 2. 当菜单的md文件路径存在`../`或`./`时，因为label不正确，导致加载不到对应的issue
+ *
+ * @returns string 返回gitalk的ID
+ */
 function generateGitalkId() {
 	let pathname = location.pathname;
 	//let search = location.search; // 不拼接search，因为当前站点没有用到search参数
