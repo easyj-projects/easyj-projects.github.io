@@ -5,7 +5,7 @@
 
 * [功能代码仓库（easyj）](https://github.com/easyj-projects/easyj)
 * [示例代码仓库（easyj-samples）](https://github.com/easyj-projects/easyj-samples)
-* [官网源码仓库（easyj-projects.github.io）：即当前站点源码](https://github.com/easyj-projects/easyj-projects/)
+* [官网源码仓库（easyj-projects.github.io）：即当前站点源码](https://github.com/easyj-projects/easyj-projects.github.io)
 
 
 ### [Gitee](https://gitee.com/organizations/easyj-projects/projects)
