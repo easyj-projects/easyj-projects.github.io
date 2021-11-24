@@ -12,3 +12,6 @@
 * [功能BUG反馈](https://gitee.com/easyj-projects/easyj/issues/new)
 
 
+#### 去讨论群反馈问题给群管理
+
+* [加入讨论群](discussion.md)
