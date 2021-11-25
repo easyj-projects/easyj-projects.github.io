@@ -1,3 +1,6 @@
+<!-- 
+# 主页
+-->
 <h1><b style="font-size: 180%; margin-left: -10px; font-weight: 700">EasyJ</b> <small>v0.2.2</small></h1>
 
 > 简化Java开发的必备组件
