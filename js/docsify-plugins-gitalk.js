@@ -51,12 +51,6 @@ function generateGitalkId() {
 	let hash = location.hash;
 
 	if (hash) {
-		// 特殊处理：问题反馈页面固定id值
-		if (hash.indexOf('/feedback') !== -1) {
-			return '/#/feedback';
-		}
-
-
 		// 忽略hash后面的参数，解决问题1
 		if (hash.indexOf('?') >= 0) {
 			hash = hash.substring(0, hash.indexOf('?'));
