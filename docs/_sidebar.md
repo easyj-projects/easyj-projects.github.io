@@ -19,4 +19,4 @@
   * [boot-autoconfigure：自动装配](boot/easyj-spring-boot-autoconfigure.md)
   * [boot-logging：集成logging](boot/easyj-spring-boot-logging.md)
   * [boot-starters：各功能starter依赖](boot/easyj-spring-boot-starters.md)
-* [问题反馈](feedback.md)
+* [反馈问题或提新需求](issues.md)
