@@ -48,7 +48,7 @@
 * 【boot】 部分自动装配的条件优化，避免依赖引用不足但自动装配生效导致项目启动失败。
 * 兼容1.1.x~2.6.x的所有spring-boot中版本下的最新小版本。
 
-##### CI/CD
+##### Test
 
 * `.github/workflows/build.yml`: 为了兼容1.1.x~2.6.x的所有spring-boot版本。同时在github/actions上增加了以上所有版本的自动化测试。（只测试最高小版本，如1.1.x只测试1.1.12.RELEASE版本）
 
@@ -123,7 +123,7 @@
 * 【sdk】 优化额外参数的传递方式。方便业务开发时，通过配置切换调用接口所使用的SDK账号其他参数。
 * 其他一些异常处理优化、日志打印优化、代码重构等。
 
-##### CI/CD
+##### Test
 
 * `.github/workflows/build.yml`: github/actions上，增加Java17的自动化测试。
 
