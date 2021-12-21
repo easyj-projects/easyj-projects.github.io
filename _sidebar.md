@@ -3,3 +3,4 @@
 * [源码仓库](repositories.md)
 * [加入讨论](discussion.md)
 * [反馈问题或提新需求](issues.md)
+* [更新日志](changelog.md)
