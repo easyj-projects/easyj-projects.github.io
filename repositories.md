@@ -12,3 +12,8 @@
 
 * [功能代码仓库（easyj）](https://gitee.com/easyj-projects/easyj)
 * [示例代码仓库（easyj-samples）](https://gitee.com/easyj-projects/easyj-samples)
+
+
+#### 公网Maven仓库（可查看所有依赖及其历史版本号）
+
+* 仓库地址：[https://repo1.maven.org/maven2/icu/easyj](https://repo1.maven.org/maven2/icu/easyj)
