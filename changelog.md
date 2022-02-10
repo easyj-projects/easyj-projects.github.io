@@ -13,7 +13,7 @@
 * 【spring-boot】 新增 时间函数式配置，获取当前时间并可配置格式化：`${easyj.time.now('yyyy-MM-dd HH:mm:ss.SSS')}`。
 * 【core】 `EnhancedServiceLoad`，新增服务的工厂接口，可在注解 `@LoadLevel(factory = Xxxx.class)` 上自定义服务的实例化逻辑。
 
-##### 升级
+##### 依赖升级
 
 * `spring-boot`：v2.6.2 -> v2.6.3
 
