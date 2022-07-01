@@ -73,7 +73,7 @@
             <configuration>
                 <skip>${maven.boot.skip}</skip>
                 <attach>false</attach>
-                <layout>ZIP</layout>
+                <layout>ZIP</layout> <!-- 要想使用-Dloader.path引用外置lib目录，必须将此配置设置为ZIP -->
                 <mainClass>${start-class}</mainClass>
             </configuration>
             <executions>
