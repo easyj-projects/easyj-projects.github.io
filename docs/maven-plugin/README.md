@@ -1,53 +1,17 @@
-# easyj-maven-plugin
-
-## 功能
-
-`easyj-maven-plugin`插件，提供了以下几个goal:
-
-1. [simplify-pom](/docs/#/maven-plugin/simplify-pom)
-2. [spring-boot-extend](/docs/#/maven-plugin/spring-boot-extend)
+~~~~# easyj-maven-plugin
 
 
-## plugin配置
+### 功能：
 
-```xml
-<build>
-    <plugins>
-        <plugin>
-            <groupId>icu.easyj.maven.plugins</groupId>
-            <artifactId>easyj-maven-plugin</artifactId>
-            <version>0.7.3</version>
-            <executions>
-                <execution>
-                    <id>clean-simplify-pom</id>
-                    <goals>
-                        <goal>clean-simplify-pom</goal><!-- 清除扁平化后的pom文件 -->
-                    </goals>
-                </execution>
-                <execution>
-                    <id>simplify-pom</id>
-                    <goals>
-                        <goal>simplify-pom</goal><!-- 扁平化，生成扁平化后的pom文件 -->
-                    </goals>
-                    <configuration>
-                        
-                    </configuration>
-                </execution>
-                <execution>
-                    <id>spring-boot-extend</id>
-                    <phase>prepare-package</phase>
-                    <goals>
-                        <goal>spring-boot-extend</goal>
-                    </goals>
-                </execution>
-            </executions>
-            <configuration>
-                <!-- 以下groupId的JARs，会打包在spring-boot的fatJar中。 -->
-                <includeGroupIds>${project.groupIds}, com.aaa, com.bbb</includeGroupIds>
-                <!-- 是否打包外置lib到 /target/lib.zip 中（默认值：true） -->
-                <zipLib>true</zipLib>
-            </configuration>
-        </plugin>
-    </plugins>
-</build>
-```
+`easyj-maven-plugin`是EasyJ社区自研插件，提供了以下几个功能:
+
+1. [simplify-pom](maven-plugin/simplify-pom.md)：统一版本号、简化POM。
+2. [spring-boot-extend](maven-plugin/spring-boot-extend)：`spring-boot-maven-plugin`扩展插件。
+
+
+### 建议
+
+请使用最新版本的该插件，功能更完善！
+<a href="https://repo1.maven.org/maven2/icu/easyj" target="_blank">
+  <img src="https://img.shields.io/maven-central/v/icu.easyj/easyj-parent.svg" alt="Maven Central">
+</a>
