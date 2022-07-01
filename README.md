@@ -1,7 +1,7 @@
 <!-- 
 # 主页
 -->
-<h1><b style="font-size: 180%; margin-left: -10px; font-weight: 700">EasyJ</b> <small>v0.2.7</small></h1>
+<h1><b style="font-size: 180%; margin-left: -10px; font-weight: 700">EasyJ</b> <small>v0.7.3</small></h1>
 
 [![Test](https://github.com/easyj-projects/easyj/actions/workflows/test.yml/badge.svg)](https://github.com/easyj-projects/easyj/actions/workflows/test.yml)
 [![CodeCov](https://codecov.io/gh/easyj-projects/easyj/branch/develop/graph/badge.svg)](https://codecov.io/gh/easyj-projects/easyj)
