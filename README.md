@@ -1,12 +1,12 @@
 <!-- 
 # 主页
 -->
-<h1><b style="font-size: 180%; margin-left: -10px; font-weight: 700">EasyJ</b> <small>v0.2.5</small></h1>
+<h1><b style="font-size: 180%; margin-left: -10px; font-weight: 700">EasyJ</b> <small>v0.7.3</small></h1>
 
-[![Build Status](https://github.com/easyj-projects/easyj/workflows/build/badge.svg?branch=develop)](https://github.com/easyj-projects/easyj/actions)
-[![codecov](https://codecov.io/gh/easyj-projects/easyj/branch/develop/graph/badge.svg)](https://codecov.io/gh/easyj-projects/easyj)
-[![license](https://img.shields.io/github/license/easyj-projects/easyj.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![maven](https://img.shields.io/maven-central/v/icu.easyj/easyj-parent.svg)](https://search.maven.org/search?q=icu.easyj)
+[![Test](https://github.com/easyj-projects/easyj/actions/workflows/test.yml/badge.svg)](https://github.com/easyj-projects/easyj/actions/workflows/test.yml)
+[![CodeCov](https://codecov.io/gh/easyj-projects/easyj/branch/develop/graph/badge.svg)](https://codecov.io/gh/easyj-projects/easyj)
+[![License](https://img.shields.io/github/license/easyj-projects/easyj.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
+[![Maven](https://img.shields.io/maven-central/v/icu.easyj/easyj-parent.svg)](https://mvnrepository.com/artifact/icu.easyj)
 
 > 简化Java开发的必备组件
 
