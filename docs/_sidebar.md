@@ -19,7 +19,7 @@
   * [boot-autoconfigure：自动装配](boot/easyj-spring-boot-autoconfigure.md)
   * [boot-logging：集成logging](boot/easyj-spring-boot-logging.md)
   * [boot-starters：各功能starter依赖](boot/easyj-spring-boot-starters.md)
-* [maven-plugin](maven-plugin/)
+* [easyj-maven-plugin](maven-plugin/)
   * [simplify-pom：简化pom](maven-plugin/simplify-pom.md)
   * [spring-boot-extend: spring-boot扩展](maven-plugin/spring-boot-extend.md)
 * [反馈问题或提新需求](issues.md)
