@@ -1,10 +1,18 @@
 # easyj-maven-plugin:simplify-pom
 
+
 ### 功能
 
 1. 统一版本号管理：${revision}
 2. 代替 `org.codehaus.mojo:flatten-maven-plugin` 插件，简化pom，同时解决了 `flatten` 与 `shade` 插件不兼容的问题。
 
+
+### 使用方法：
+
+请参照 [easyj-projects/easyj](https://github.com/easyj-projects/easyj) 项目源码中的pom的配置。 
+
+
+### plugin配置
 
 ```xml
 <build>
@@ -14,7 +22,9 @@
             <artifactId>easyj-maven-plugin</artifactId>
             <version>${easyj-maven-plugin.version}</version>
             <configuration>
-                <!-- 扁平化模式，可选值：BOM，映射properties：<maven.simplify.mode>BOM</maven.simplify.mode>} -->
+                <!-- 是否跳过该功能 -->
+                <skip>false</skip>
+                <!-- 扁平化模式，根据需求选择值：NONE | BOM | SHADE | DEPENDENCIES | JAR | POM，默认：AUTO，property: maven.simplify.mode -->
                 <simplifyMode>AUTO</simplifyMode>
                 <!-- 扁平化后的pom文件名 -->
                 <simplifiedPomFileName>.flattened-pom.xml</simplifiedPomFileName>
@@ -39,20 +49,20 @@
                 </createProperties>
             </configuration>
             <executions>
-                <!-- 清除扁平化后的pom文件 -->
-                <execution>
-                    <id>clean-simplify-pom</id>
-                    <phase>clean</phase>
-                    <goals>
-                        <goal>clean-simplify-pom</goal>
-                    </goals>
-                </execution>
                 <!-- 扁平化，生成扁平化后的pom文件 -->
                 <execution>
                     <id>simplify-pom</id>
                     <phase>process-resources</phase>
                     <goals>
                         <goal>simplify-pom</goal>
+                    </goals>
+                </execution>
+                <!-- 清除扁平化后的pom文件 -->
+                <execution>
+                    <id>clean-simplify-pom</id>
+                    <phase>clean</phase>
+                    <goals>
+                        <goal>clean-simplify-pom</goal>
                     </goals>
                 </execution>
             </executions>
