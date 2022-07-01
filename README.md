@@ -19,7 +19,7 @@
 - **简单的配置：** 只需配置yaml，连 `logback.xml` 也转换成了yaml进行配置
 - **&nbsp;&nbsp;&nbsp;&nbsp;即插即用：** `@Cache304`、`@ExcelExport`、`出入参加密解密`
 - **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中间件：**` DWZ（短链接服务）`、`WebSocket服务中间件`
-- **&nbsp;Maven插件：** `simplify`（代替 `maven-flatten-plugin`）、`spring-boot-exten`（支持 `includeGroupIds`）
+- **&nbsp;Maven插件：** `simplify`（代替 `org.codehaus.mojo:flatten-maven-plugin` 插件）、`spring-boot-extend`（支持 `includeGroupIds`）
 
 <a href="/docs" target="_blank">文档</a> &emsp;
 [GitHub](https://github.com/easyj-projects) &emsp;
