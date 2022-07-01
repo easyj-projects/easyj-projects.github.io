@@ -6,7 +6,7 @@
 `easyj-maven-plugin`是EasyJ社区自研插件，提供了以下几个功能:
 
 1. [simplify-pom](maven-plugin/simplify-pom.md)：统一版本号、简化POM。
-2. [spring-boot-extend](maven-plugin/spring-boot-extend)：`spring-boot-maven-plugin`扩展插件。
+2. [spring-boot-extend](maven-plugin/spring-boot-extend)：`spring-boot-maven-plugin`扩展`includeGroupIds`、打包外置 `lib.zip`、创建startup脚本文件~~~~。
 
 
 ### 建议
