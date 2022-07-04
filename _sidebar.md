@@ -4,3 +4,4 @@
 * [源码仓库](repositories.md)
 * [开发者列表](contributors.md)
 * [🚀更新日志](changelog.md)
+* [🚀更新日志-Maven插件](changelog-maven-plugin.md)
