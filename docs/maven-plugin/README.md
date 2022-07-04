@@ -19,5 +19,5 @@
 
 请使用最新版本的该插件，功能更完善！
 <a href="https://repo1.maven.org/maven2/icu/easyj/maven/plugins/easyj-maven-plugin" target="_blank">
-  <img src="https://img.shields.io/maven-central/v/icu.easyj/easyj-parent.svg" alt="Maven Central">
+  <img src="https://img.shields.io/maven-central/v/icu.easyj.maven.plugins/easyj-maven-plugin.svg" alt="Maven Central">
 </a>
