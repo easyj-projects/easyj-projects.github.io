@@ -23,6 +23,8 @@
 
 ##### 新特性🐣
 
+* 【spring-boot】 新增约定配置文件生效条件 `easyj.config.activate.on-any-class`：任意一个类存在就生效（区别于 `easyj.config.activate.on-class`：所有类都存在时生效）。
+* 【web】 新增 `CorsWebMvcConfigurer`，用于允许跨域请求。
 * 【core】 新增 `TimeMeter` 计时器类，用于计算一些操作耗时。
 * 【core】 新增 `ContextEmptyException`：上下文为空异常。
 * 【core】 新增 `<V> Map<String, V> MapUtils.toMap(Object obj, Class<V> valueClass)` 方法，用于将 `Object` 对象转换为 `Map`。
@@ -40,9 +42,6 @@
 > 
 > }
 > ```
-
-* 【spring-boot】 新增约定配置文件生效条件 `easyj.config.activate.on-any-class`：任意一个类存在就生效（区别于 `easyj.config.activate.on-class`：所有类都存在时生效）。
-* 【web】 新增 `CorsWebMvcConfigurer`，用于允许跨域请求。
 
 ##### 优化
 
