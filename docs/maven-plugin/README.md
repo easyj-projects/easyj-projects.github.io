@@ -7,7 +7,7 @@
 
 目前，该插件的源码已独立出去：https://github.com/easyj-projects/easyj-maven-plugin
 
-[更新日志](../../changelog-maven-plugin.md)
+<a href="../#/changelog-maven-plugin" target="_blank">更新日志</a>
 
 ### 功能:
 
