@@ -112,11 +112,13 @@ easyj.logging.logback:
 调用logback提供的工具类：`org.slf4j.MDC`
 
 ```java
-class Test {
+@SpringBootTest
+public class Test {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Test.class);
 
-    public static void main(String[] args) throws Exception {
+    @Test
+    public void test() {
         try {
             // 设置上下文
             MDC.put("id", "1234567890");
@@ -144,11 +146,13 @@ EasyJ专门提供了追踪类：`icu.easyj.core.trace.TraceUtils`
 推荐使用该工具类代替`MDC`
 
 ```java
-class Test {
+@SpringBootTest
+public class Test {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Test.class);
 
-    public static void main(String[] args) throws Exception {
+    @Test
+    public void test() {
         try {
             // 设置上下文
             TraceUtils.put("id", "1234567890");
