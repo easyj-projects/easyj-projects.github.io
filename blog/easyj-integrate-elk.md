@@ -69,7 +69,6 @@ docker logs -f elk
 #### 2.1、引用依赖：
 
 ```xml
-
 <dependency>
 	<groupId>icu.easyj.boot</groupId>
 	<artifactId>easyj-spring-boot-starter-logging</artifactId>
