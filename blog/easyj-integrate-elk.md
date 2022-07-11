@@ -44,7 +44,7 @@ docker logs -f elk
 
 #### 1.4、添加 `Index patterns` （索引模式配置）：
 
-点击 `菜单栏` -> `Stack Management` -> `Index Patterns`
+点击 `菜单栏` ➝ `Stack Management` ➝ `Index Patterns`
 
 进入 http://xxx.xxx.xxx.xxx:5601/app/management/kibana/indexPatterns 界面
 
@@ -54,7 +54,7 @@ docker logs -f elk
 
 #### 1.5、配置 `Index Lifecycle Policies`（索引生命周期策略）：
 
-点击 `菜单栏` -> `Stack Management` -> `Index Lifecycle Policies`
+点击 `菜单栏` ➝ `Stack Management` ➝ `Index Lifecycle Policies`
 
 进入 http://xxx.xxx.xxx.xxx:5601/app/management/data/index_lifecycle_management/policies 界面
 
@@ -97,7 +97,7 @@ easyj.logging.logback:
 
 #### 2.3、验证配置是否正确：
 
-启动应用，产生日志。然后进入 `Kibana` 页面，点击 `菜单栏` -> `Discover` 进入日志查看界面，查看是否成功将日志上传了。
+启动应用，产生日志。然后进入 `Kibana` 页面，点击 `菜单栏` ➝ `Discover` 进入日志查看界面，查看是否成功将日志上传了。
 
 
 ---------------------------
