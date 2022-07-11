@@ -115,15 +115,14 @@ easyj.logging.logback:
 @SpringBootTest
 public class Test {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Test.class);
-
     @Test
-    public void test() {
+    public void testELK() {
+        Logger log = LoggerFactory.getLogger(Test.class);
         try {
             // 设置上下文
             MDC.put("id", "1234567890");
-            LOGGER.info("日志信息");
-            LOGGER.error("异常日志信息", new RuntimeException("模拟异常"));
+            log.info("日志信息");
+            log.error("异常日志信息", new RuntimeException("模拟异常"));
         } finally {
             // 清理单个上下文
             MDC.remove("id");
@@ -149,15 +148,14 @@ EasyJ专门提供了追踪类：`icu.easyj.core.trace.TraceUtils`
 @SpringBootTest
 public class Test {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Test.class);
-
     @Test
-    public void test() {
+    public void testELK() {
+        Logger log = LoggerFactory.getLogger(Test.class);
         try {
             // 设置上下文
             TraceUtils.put("id", "1234567890");
-            LOGGER.info("日志信息");
-            LOGGER.error("异常日志信息", new RuntimeException("模拟异常"));
+            log.info("日志信息");
+            log.error("异常日志信息", new RuntimeException("模拟异常"));
         } finally {
             // 清理单个上下文
             TraceUtils.remove("id");
