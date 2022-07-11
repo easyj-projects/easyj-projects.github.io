@@ -1,2 +1,2 @@
 * [博客主页](/)
-* [文章1](blog1.md)
+* [EasyJ集成分布式日志ELK](easyj-integrate-elk.md)
