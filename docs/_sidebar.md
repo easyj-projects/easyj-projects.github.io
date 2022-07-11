@@ -21,5 +21,5 @@
   * [boot-starters：各功能starter依赖](boot/easyj-spring-boot-starters.md)
 * [easyj-maven-plugin](maven-plugin/)
   * [simplify-pom：简化pom](maven-plugin/simplify-pom.md)
-  * [spring-boot-extend: spring-boot扩展](maven-plugin/spring-boot-extend.md)
+  * [spring-boot-extend：spring-boot扩展](maven-plugin/spring-boot-extend.md)
 * [反馈问题或提新需求](issues.md)
