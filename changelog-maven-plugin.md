@@ -1,12 +1,46 @@
 # 🚀更新日志
 
+##### 插件文档链接：
+<a href="./docs/#/maven-plugin/simplify-pom" target="_blank">simplify-pom</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="./docs/#/maven-plugin/spring-boot-extend" target="_blank">spring-boot-extend</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="./docs/#/maven-plugin/spring-boot-release" target="_blank">spring-boot-release</a>
 
-# v0.7.x（2022-06-28 ~ 至今）
+---------------------------------------------------------------------------------------------------------------------------
+
+# v1.0.x（2022-07-11 ~ 至今）
+
+##### 复制并改造第三方类
+
+* 复制 `org.apache.maven.model.io.xpp3.MavenXpp3Writer` 类到项目中，方便进行各种改造，部分新特性是改造该类实现的。
+
+##### 新特性🐣
+
+* `simplify-pom` 插件，新增 `fileComment` 属性，用于添加简化后的POM文件的注释内容。
+* `simplify-pom` 插件，新增 `useTabIndent` 属性，使用 `\t` 代替两个空格作为缩进符，可减小POM文件大小。
+* `simplify-pom` 插件，新增 `removeLocalProperties` 属性，用于移除不需要保留的 `properties`。
+
+##### Bug修复🐞
+
+* `spring-boot-release` 插件，修复发布路径下的冒号被移除的问题。
+
+##### 优化
+
+* `simplify-pom` 插件，会移除部分多余的空格，且部分TAG顺序调整，使内容顺序更加合理。
+* `simplify-pom` 插件，会对 `properties` 进行排序了。
+* `simplify-pom` 插件，会移除 `<modules>`，因为它们仅用于当前项目的解析，对于parent引用，并没有用处。
+* `skip-install-deploy` 插件，支持配置 `properties` 来跳过 `install` 和 `deploy`，配置更简单。
+* `spring-boot-extend` 插件代码重构。
+* 调整部分日志内容。
+
+---------------------------------------------------------------------------------------------------------------------------
+
+# v0.7.x（2022-06-28 ~ 2022-07-11）
 
 ##### 新特性🐣
 
 * `spring-boot-extend` 插件，新增可将多个应用共用的依赖从 `lib` 分离到 `lib-common` 中，减小需上传的文件大小，加快项目部署效率，且方便后期更新共用依赖的版本号。
 * `spring-boot-extend` 插件，新增生成 `startup.bat` 和 `startup.sh` 文件，用于快速启用应用。
+* 新增 `spring-boot-release` 插件，用于辅助发布 `spring-boot` 应用。
 
 ##### Bug修复🐞
 

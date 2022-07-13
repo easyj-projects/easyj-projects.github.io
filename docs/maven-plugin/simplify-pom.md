@@ -1,10 +1,15 @@
-# easyj-maven-plugin:simplify-pom
+# easyj-maven-plugin : simplify-pom
 
 
-### 功能
+### 功能：
 
 1. 统一版本号管理：${revision}
 2. 代替 `org.codehaus.mojo:flatten-maven-plugin` 插件，简化pom，同时解决了 `flatten` 与 `shade` 插件不兼容的问题。
+
+
+### 起始版本：
+
+v0.4.0版本新增的插件，推荐使用最新版本的该插件，功能比较齐全，BUG较少。
 
 
 ### 使用方法：
@@ -12,7 +17,7 @@
 请参照 [easyj-projects/easyj](https://github.com/easyj-projects/easyj) 项目源码中的pom的配置。 
 
 
-### plugin配置
+### plugin配置：
 
 ```xml
 <build>
@@ -30,6 +35,10 @@
                 <simplifiedPomFileName>.flattened-pom.xml</simplifiedPomFileName>
                 <!-- 是否开源项目，开源项目下，部分信息标签必须 -->
                 <isOpenSourceProject>false</isOpenSourceProject>
+                <!-- POM注释内容（v1.0.1新特性） -->
+                <fileComment>POM注释内容</fileComment>
+                <!-- 是否使用制表符`\t`代替两个空格进行缩进（v1.0.1新特性） -->
+                <useTabIndent>false</useTabIndent>
                 <!-- 引用依赖中，是否保留scope=provided的依赖 -->
                 <keepProvidedDependencies>false</keepProvidedDependencies>
                 <!-- 引用依赖中，是否保留scope=test的依赖 -->
@@ -47,6 +56,8 @@
                     <propertyKey1>propertyValue1</propertyKey1>
                     <propertyKey2>propertyValue2</propertyKey2>
                 </createProperties>
+                <!-- 移除不再需要的properties -->
+                <removeLocalProperties>propertyKey1, propertyKey2</removeLocalProperties>
             </configuration>
             <executions>
                 <!-- 扁平化，生成扁平化后的pom文件 -->
