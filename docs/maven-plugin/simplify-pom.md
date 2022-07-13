@@ -27,24 +27,24 @@ v0.4.0版本新增的插件，推荐使用最新版本的该插件，功能比�
             <artifactId>easyj-maven-plugin</artifactId>
             <version>${easyj-maven-plugin.version}</version>
             <configuration>
-                <!-- 是否跳过该功能 -->
+                <!-- 是否跳过该插件（默认：false） -->
                 <skip>false</skip>
-                <!-- 扁平化模式，根据需求选择值：NONE | BOM | SHADE | DEPENDENCIES | JAR | POM，默认：AUTO，property: maven.simplify.mode -->
+                <!-- 扁平化模式，根据需求选择值：NONE | BOM | SHADE | DEPENDENCIES | JAR | POM（默认：AUTO；property: maven.simplify.mode） -->
                 <simplifyMode>AUTO</simplifyMode>
-                <!-- 扁平化后的pom文件名 -->
+                <!-- 扁平化后的pom文件名（默认：.simplified-pom.xml） -->
                 <simplifiedPomFileName>.flattened-pom.xml</simplifiedPomFileName>
-                <!-- 是否开源项目，开源项目下，部分信息标签必须 -->
+                <!-- 是否开源项目，开源项目下，部分信息标签必须（默认：true） -->
                 <isOpenSourceProject>false</isOpenSourceProject>
                 <!-- POM注释内容（v1.0.1新特性） -->
                 <fileComment>POM注释内容</fileComment>
-                <!-- 是否使用制表符`\t`代替两个空格进行缩进（v1.0.1新特性） -->
-                <useTabIndent>false</useTabIndent>
-                <!-- 引用依赖中，是否保留scope=provided的依赖 -->
+                <!-- 是否使用制表符`\t`代替两个空格进行缩进（v1.0.1新特性）（默认：false） -->
+                <useTabIndent>true</useTabIndent>
+                <!-- 引用依赖中，是否保留scope=provided的依赖（默认：false） -->
                 <keepProvidedDependencies>false</keepProvidedDependencies>
-                <!-- 引用依赖中，是否保留scope=test的依赖 -->
-                <keepTestDependencies>false</keepTestDependencies>
-                <!-- 引用依赖中，是否保留optional=true的依赖 -->
+                <!-- 引用依赖中，是否保留optional=true的依赖（默认：false） -->
                 <keepOptionalDependencies>false</keepOptionalDependencies>
+                <!-- 引用依赖中，是否保留scope=test的依赖（默认：false） -->
+                <keepTestDependencies>false</keepTestDependencies>
                 <!-- 需移除的依赖，支持配置完整groupId:artifactId、通配符、正则表达式。 -->
                 <excludeDependencies>
                     <exclude>icu.easyj:easyj-all</exclude>
