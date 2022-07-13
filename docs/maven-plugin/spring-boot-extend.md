@@ -1,18 +1,23 @@
-# easyj-maven-plugin:spring-boot-extend
+# easyj-maven-plugin : spring-boot-extend
 
 
-### 说明
+### 说明：
 
-与 `spring-boot-maven-plugin` 插件一起使用，提供一些 `spring-boot` 应用所需的功能。
+必须与 `spring-boot-maven-plugin` 插件一起使用，提供一些 `spring-boot` 应用所需的功能。
 
 > 1. 主要 `spring-boot-maven-plugin` 官方竟然不给支持 `includeGroupIds`，无奈之下，只好自己开发该功能。
 > 2. 外置 `lib` 打包成 `lib.zip` 功能，同时提供共用lib分离到 `lib-common\` 目录下的功能。
 
 
-### 关联spring-boot官方issue和PR
+### 关联spring-boot官方issue和PR：
 
 > 1. [spring-boot.issue#12794](https://github.com/spring-projects/spring-boot/issues/12794)（Closed）：The `spring-boot-maven-plugin` not provide `includeGroupIds`.
 > 2. [spring-boot.pr#12813](https://github.com/spring-projects/spring-boot/pull/12813)（Closed）：Add support for `includeGroupIds`.
+
+
+### 起始版本：
+
+v0.6.8版本新增的插件。
 
 
 ### 使用方法：
@@ -20,7 +25,7 @@
 暂无！请根据下面的plugin配置说明，直接去尝试吧。
 
 
-### plugin配置
+### plugin配置：
 
 ```xml
 <build>

@@ -13,6 +13,7 @@
 
 1. [simplify-pom](maven-plugin/simplify-pom.md)：统一版本号、简化POM。
 2. [spring-boot-extend](maven-plugin/spring-boot-extend)：`spring-boot-maven-plugin`扩展`includeGroupIds`、打包外置 `lib.zip`、创建startup脚本文件。
+3. [spring-boot-release](maven-plugin/spring-boot-release)：用于辅助 `spring-boot` 应用的发布工作。
 
 
 ### 建议

@@ -4,7 +4,10 @@
 <h1>
   <b style="font-size: 180%; margin-left: -10px; font-weight: 700">EasyJ</b>
   <a href="https://repo1.maven.org/maven2/icu/easyj" target="_blank">
-    <img src="https://img.shields.io/maven-central/v/icu.easyj/easyj-parent.svg" alt="Maven Central">
+    <img src="https://img.shields.io/maven-central/v/icu.easyj/easyj-parent.svg" alt="easyj.version">
+  </a>
+  <a href="https://repo1.maven.org/maven2/icu/easyj/maven/plugins/easyj-maven-plugin" target="_blank">
+    <img src="https://img.shields.io/maven-central/v/icu.easyj.maven.plugins/easyj-maven-plugin.svg" alt="easyj-maven-plugin.version">
   </a>
 </h1> 
 

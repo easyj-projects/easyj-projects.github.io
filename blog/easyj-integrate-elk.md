@@ -40,11 +40,11 @@ docker logs -f elk
 
 #### 1.3、验证容器：
 
-在浏览器中访问： http://xxx.xxx.xxx.xxx:5601 ，并展示出 `kibana` 的界面，就说明部署成功。
+在浏览器中访问： http://xxx.xxx.xxx.xxx:5601 ，并展示出 `Kibana` 的界面，就说明部署成功。
 
 #### 1.4、添加 `Index patterns` （索引模式配置）：
 
-点击 `菜单栏` -> `Stack Management` -> `Index Patterns`
+点击 `菜单栏` ➝ `Stack Management` ➝ `Index Patterns`
 
 进入 http://xxx.xxx.xxx.xxx:5601/app/management/kibana/indexPatterns 界面
 
@@ -54,12 +54,13 @@ docker logs -f elk
 
 #### 1.5、配置 `Index Lifecycle Policies`（索引生命周期策略）：
 
-点击 `菜单栏` -> `Stack Management` -> `Index Lifecycle Policies`
+点击 `菜单栏` ➝ `Stack Management` ➝ `Index Lifecycle Policies`
 
 进入 http://xxx.xxx.xxx.xxx:5601/app/management/data/index_lifecycle_management/policies 界面
 
 > 1. 选择 `logstash-policy`
 > 2. 根据自己的需求调整 `Hot phase`、`Warm phase`、`Cold phase`、`Delete phase` 的配置。
+
 
 ---------------------------
 
@@ -69,11 +70,10 @@ docker logs -f elk
 #### 2.1、引用依赖：
 
 ```xml
-
 <dependency>
-	<groupId>icu.easyj.boot</groupId>
-	<artifactId>easyj-spring-boot-starter-logging</artifactId>
-	<version>0.7.4</version>
+    <groupId>icu.easyj.boot</groupId>
+    <artifactId>easyj-spring-boot-starter-logging</artifactId>
+    <version>0.7.4</version>
 </dependency>
 ```
 
@@ -97,12 +97,86 @@ easyj.logging.logback:
 
 #### 2.3、验证配置是否正确：
 
-成功启用应用，并前往
+启动应用，产生日志。然后进入 `Kibana` 页面，点击 `菜单栏` ➝ `Discover` 进入日志查看界面，查看是否成功将日志上传了。
+
 
 ---------------------------
 
 
-#### 三、问题处理
+### 三、开发者进阶
+
+#### 3.1、上下文关联日志
+
+为了更快的检索到相关的日志信息，往往需要将一些日志信息与业务ID等关联起来。这时候，就需要设置一些上下文。
+
+调用logback提供的工具类：`org.slf4j.MDC`
+
+```java
+@SpringBootTest
+public class Test {
+
+    @Test
+    public void testELK() {
+        Logger log = LoggerFactory.getLogger(Test.class);
+        try {
+            // 设置上下文
+            MDC.put("id", "1234567890");
+            log.info("日志信息");
+            log.error("异常日志信息", new RuntimeException("模拟异常"));
+        } finally {
+            // 清理单个上下文
+            MDC.remove("id");
+        }
+
+
+        // 在部分程序结束的地方清空所有上下文
+        //MDC.clear();
+    }
+
+}
+```
+
+EasyJ专门提供了追踪类：`icu.easyj.core.trace.TraceUtils`
+
+该工具类使用了门面模式，主要用于追踪请求或日志或其他更多内容。
+
+目前该工具类实现了 `zipkin` 和 `slf4j` 上下文追踪内容.
+
+推荐使用该工具类代替`MDC`
+
+```java
+@SpringBootTest
+public class Test {
+
+    @Test
+    public void testELK() {
+        Logger log = LoggerFactory.getLogger(Test.class);
+        try {
+            // 设置上下文
+            TraceUtils.put("id", "1234567890");
+            log.info("日志信息");
+            log.error("异常日志信息", new RuntimeException("模拟异常"));
+        } finally {
+            // 清理单个上下文
+            TraceUtils.remove("id");
+        }
+
+
+        // 在部分程序结束的地方清空所有上下文
+        //TraceUtils.clear();
+    }
+
+}
+```
+
+设置了上下文后，在上下文作用范围内，进行写日志时，上下文也会和日志一起被上传。
+然后我们就可以在 `Kibana` 日志查看界面中，输入筛选条件 `1234567890` 或 `"id":"1234567890"`，来查找与该数据相关的日志信息。
+
+
+---------------------------
+
+
+### 四、问题处理
 
 #### 问题一、内存权限太小导致ELK启动失败
 
@@ -142,4 +216,3 @@ vm.max_map_count=262144
 ```shell
 sysctl -p
 ```
-
