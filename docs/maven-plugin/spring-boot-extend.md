@@ -42,6 +42,8 @@ v0.6.8版本新增的插件。
 
                 <!-- 以下groupId的JARs，会打包在spring-boot的fatJar中。 -->
                 <includeGroupIds>${project.groupIds}, com.aaa, com.bbb</includeGroupIds>
+                <!-- 增量的includeGroupIds，用于单个项目配置，includeGroupIds可在公司框架中统一配置。（v1.0.4 新特性） -->
+                <additionalIncludeGroupIds>com.ccc, com.ddd</additionalIncludeGroupIds>
                 <!-- 是否打包外置lib到 /target/lib.zip 中，默认：true -->
                 <zipLib>true</zipLib>
                 <!--
