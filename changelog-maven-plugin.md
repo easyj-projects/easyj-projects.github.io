@@ -18,6 +18,7 @@
 * `simplify-pom` 插件，新增 `fileComment` 属性，用于添加简化后的POM文件的注释内容。
 * `simplify-pom` 插件，新增 `useTabIndent` 属性，使用 `\t` 代替两个空格作为缩进符，可减小POM文件大小。
 * `simplify-pom` 插件，新增 `removeLocalProperties` 属性，用于移除不需要保留的 `properties`。
+* `spring-boot-extend` 插件，新增 `additionalIncludeGroupIds` 属性，用于项目中增量配置，`includeGroupIds` 则用于公司框架中统一配置。
 
 ##### Bug修复🐞
 
