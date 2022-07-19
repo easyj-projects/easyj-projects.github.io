@@ -10,13 +10,14 @@
 
 ### 一、部署ELK
 
-EasyJ社区在 `sebp/elk:7.12.1` 镜像的基础上，调整了部分内容，用于快速集成。
+#### 1.1、下载ELK镜像：
+
+EasyJ社区在 `sebp/elk:7.12.1` 镜像的基础上，调整了部分内容，并上传了 `easyj/elk:7.12.1` 镜像，用于快速集成。
 
 （ 具体调整内容请查看：https://hub.docker.com/repository/docker/easyj/elk ）
 
-#### 1.1、下载ELK镜像：
-
 ```shell
+#拉取镜像
 docker pull easyj/elk:7.12.1
 ```
 
@@ -34,7 +35,7 @@ docker run --name elk \
     --restart=always \
     -dit easyj/elk:7.12.1
 
-#查看日志
+#查看启动日志
 docker logs -f elk
 ```
 
@@ -59,13 +60,13 @@ docker logs -f elk
 进入 http://xxx.xxx.xxx.xxx:5601/app/management/data/index_lifecycle_management/policies 界面
 
 > 1. 选择 `logstash-policy`
-> 2. 根据自己的需求调整 `Hot phase`、`Warm phase`、`Cold phase`、`Delete phase` 的配置。
+> 2. 根据自己的需求调整 `Hot phase`、`Warm phase`、`Cold phase`、`Delete phase` 的配置，最主要配置的是过时自动删除。
 
 
 ---------------------------
 
 
-### 二、使用EasyJ快速集成和配置
+### 二、使用 `easyj-spring-boot-starter-logging` 快速集成 `ELK`
 
 #### 2.1、引用依赖：
 
@@ -83,16 +84,18 @@ docker logs -f elk
 
 ```yaml
 logging:
-  # `easyj-spring-boot-logging`中内置了该配置文件，可直接配置使用
-  # 如果项目自己已经配置了 `logback-spring.xml`，那么请将相关配置复制到自己的配置文件中
+  #`easyj-spring-boot-logging.jar`中内置了已设置好的配置文件，可直接引用
+  #如果项目自己已经配置了 `logback-spring.xml`，那么请将相关配置复制到自己的配置文件中
   config: classpath:easyj/logging/logback/logback-spring.xml
+  #或
+  #config: ${easyj.logging.logback.config} #值是一样的
 
-  #path: logs/${server.port:80} #file-appender所需配置，*.log文件存放路径，与ELK无关
-
+  #path: logs/${server.port:80} #file-appender所需配置，*.log文件存放路径，与集成ELK无关
 easyj.logging.logback:
   logstash-appender:
     enabled: true #启用logstash-appender，用于将日志上传到logstash
     destination: xxx.xxx.xxx.xxx:4560 #部署的ELK中，logstash开放的TCP通道地址
+    #destination: xxx.xxx.xxx.xxx:4560,xxx.xxx.xxx.xxx:4560 #可配置多个地址，用逗号隔开
 ```
 
 #### 2.3、验证配置是否正确：
@@ -103,26 +106,26 @@ easyj.logging.logback:
 ---------------------------
 
 
-### 三、开发者进阶
-
-#### 3.1、上下文关联日志
+### 三、上下文关联日志（开发者进阶）
 
 为了更快的检索到相关的日志信息，往往需要将一些日志信息与业务ID等关联起来。这时候，就需要设置一些上下文。
 
-调用logback提供的工具类：`org.slf4j.MDC`
+下面提供两种上下文设置方式：
+
+##### 3.1、调用logback提供的工具类：`org.slf4j.MDC`
 
 ```java
 @SpringBootTest
-public class Test {
+public class TestELK {
 
     @Test
-    public void testELK() {
+    public void testContextToELK() {
         Logger log = LoggerFactory.getLogger(Test.class);
         try {
             // 设置上下文
             MDC.put("id", "1234567890");
-            log.info("日志信息");
-            log.error("异常日志信息", new RuntimeException("模拟异常"));
+            log.info("测试info日志信息");
+            log.error("测试error日志信息", new RuntimeException("模拟异常"));
         } finally {
             // 清理单个上下文
             MDC.remove("id");
@@ -136,26 +139,26 @@ public class Test {
 }
 ```
 
-EasyJ专门提供了追踪类：`icu.easyj.core.trace.TraceUtils`
+##### 3.2、EasyJ专门提供了追踪类：`icu.easyj.core.trace.TraceUtils`
 
-该工具类使用了门面模式，主要用于追踪请求或日志或其他更多内容。
+该工具类使用了 `门面模式`，主要用于追踪请求或日志或其他更多内容；
 
-目前该工具类实现了 `zipkin` 和 `slf4j` 上下文追踪内容.
+默认情况下，该工具类实现了 `zipkin` 和 `slf4j` 上下文追踪内容，开发者可通过 `SPI机制` 自定义增加实现类；
 
-推荐使用该工具类代替`MDC`
+推荐使用该工具类代替`org.slf4j.MDC`，代码如下：
 
 ```java
 @SpringBootTest
-public class Test {
+public class TestELK {
 
     @Test
-    public void testELK() {
+    public void testContextToELK() {
         Logger log = LoggerFactory.getLogger(Test.class);
         try {
             // 设置上下文
             TraceUtils.put("id", "1234567890");
-            log.info("日志信息");
-            log.error("异常日志信息", new RuntimeException("模拟异常"));
+            log.info("测试info日志信息");
+            log.error("测试error日志信息", new RuntimeException("模拟异常"));
         } finally {
             // 清理单个上下文
             TraceUtils.remove("id");
@@ -169,8 +172,13 @@ public class Test {
 }
 ```
 
-设置了上下文后，在上下文作用范围内，进行写日志时，上下文也会和日志一起被上传。
+##### 3.3、根据上下文查询关联的日志
+
+设置了上下文后，在上下文作用范围内，进行写日志时，上下文也会和日志一起被上传到 `ELK` 中。
+
 然后我们就可以在 `Kibana` 日志查看界面中，输入筛选条件 `1234567890` 或 `"id":"1234567890"`，来查找与该数据相关的日志信息。
+
+如果应用集成了 `zipkin` 链路跟踪，那么也可以通过它的 `traceId` 来查找日志。因为 `traceId` 也是设置到上下文中的。
 
 
 ---------------------------
@@ -178,15 +186,15 @@ public class Test {
 
 ### 四、问题处理
 
-#### 问题一、内存权限太小导致ELK启动失败
+#### 4.1、问题：内存权限太小导致ELK启动失败
 
-错误日志：
+##### 4.1.1、错误日志：
 
 ```log
 max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 ```
 
-解决方法：
+##### 4.1.2、解决方法：
 
 （引用自 https://blog.csdn.net/qq_43655835/article/details/104633359 ）
 
@@ -216,3 +224,6 @@ vm.max_map_count=262144
 ```shell
 sysctl -p
 ```
+
+##### 4.1.3、补充说明：
+在 `easyj/elk:7.12.1` 镜像中，其实已设置过 `vm.max_map_count=262144` 参数，不会碰到该问题。

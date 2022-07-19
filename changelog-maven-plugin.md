@@ -18,6 +18,7 @@
 * `simplify-pom` 插件，新增 `fileComment` 属性，用于添加简化后的POM文件的注释内容。
 * `simplify-pom` 插件，新增 `useTabIndent` 属性，使用 `\t` 代替两个空格作为缩进符，可减小POM文件大小。
 * `simplify-pom` 插件，新增 `removeLocalProperties` 属性，用于移除不需要保留的 `properties`。
+* `spring-boot-extend` 插件，新增 `additionalIncludeGroupIds` 属性，用于项目中增量配置，`includeGroupIds` 则用于公司框架中统一配置。
 
 ##### Bug修复🐞
 
@@ -71,19 +72,16 @@
 
 # v0.5.x (2022-05-27 ~ 2022-06-07)
 
-##### 新特性🐣
-
-* `simplify-pom` 插件，可将 `<revision></revision>` 给删除掉，因为留着也没用。
-* `simplify-pom` 插件，可将与 `<parent>` 的相同的 `<groupId>` 与 `<version>` 给删除掉，因为可以继承下来。
-* `simplify-pom` 插件，可将 `<scope>compile</scope>` 和 `<optional>false</optional>` 给删除掉，因为它们是默认值。
-* `simplify-pom` 插件，可将 `<reports></reports>` 给删除掉。
-
 ##### Bug修复🐞
 
 * 修复 `simplify-pom` 在部分情况下，导致项目构建失败的问题。
 
 ##### 优化
 
+* `simplify-pom` 插件，可将 `<revision></revision>` 给删除掉，因为留着也没用。
+* `simplify-pom` 插件，可将与 `<parent>` 的相同的 `<groupId>` 与 `<version>` 给删除掉，因为可以继承下来。
+* `simplify-pom` 插件，可将 `<scope>compile</scope>` 和 `<optional>false</optional>` 给删除掉，因为它们是默认值。
+* `simplify-pom` 插件，可将 `<reports></reports>` 给删除掉。
 * `simplify-pom` 插件，分成两个配置，用于控制 `skipScopeProvided` 和 `skipOptional`。
 * `simplify-pom` 插件，优化日志打印。
 
