@@ -5,5 +5,5 @@
   * [middleware-dwz：EasyJ自研的短链接服务](middleware/easyj-dwz.md)
   * [middleware-websocket：EasyJ自研的WebSocket中间件](middleware/easyj-websocket.md)
 * [boot：集成到SpringBoot](boot/)
-* [easyj-maven-plugin](maven-plugin/)
+* [easyj-maven-plugin：含3个插件](maven-plugin/)
 * [反馈问题或提新需求](issues.md)

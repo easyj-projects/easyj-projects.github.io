@@ -11,5 +11,5 @@
 * [sdk：云服务SDK封装](sdk/)
 * [middleware：EasyJ自研中间件](middleware/)
 * [boot：集成到SpringBoot](boot/)
-* [easyj-maven-plugin](maven-plugin/)
+* [easyj-maven-plugin：含3个插件](maven-plugin/)
 * [反馈问题或提新需求](issues.md)
