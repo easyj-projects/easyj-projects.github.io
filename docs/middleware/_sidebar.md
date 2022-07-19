@@ -2,6 +2,8 @@
 * [all：含8个基本模块](all/)
 * [sdk：云服务SDK封装](sdk/)
 * [middleware：EasyJ自研中间件](middleware/)
+  * [middleware-dwz：EasyJ自研的短链接服务](middleware/easyj-dwz.md)
+  * [middleware-websocket：EasyJ自研的WebSocket中间件](middleware/easyj-websocket.md)
 * [boot：集成到SpringBoot](boot/)
 * [easyj-maven-plugin](maven-plugin/)
 * [反馈问题或提新需求](issues.md)

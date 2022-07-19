@@ -4,4 +4,7 @@
 * [middleware：EasyJ自研中间件](middleware/)
 * [boot：集成到SpringBoot](boot/)
 * [easyj-maven-plugin](maven-plugin/)
+  * [simplify-pom：简化pom](maven-plugin/simplify-pom.md)
+  * [spring-boot-extend：spring-boot扩展](maven-plugin/spring-boot-extend.md)
+  * [spring-boot-release：辅助spring-boot发布](maven-plugin/spring-boot-release.md)
 * [反馈问题或提新需求](issues.md)
