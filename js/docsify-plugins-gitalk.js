@@ -80,5 +80,9 @@ function generateGitalkId() {
 		}
 	}
 
+	if (pathname.startsWith("/easyj-projects.github.io")) {
+		pathname = pathname.substring("/easyj-projects.github.io".length);
+	}
+
 	return pathname + hashPre + hash;
 }

@@ -1,3 +1,11 @@
 # easyj-all
 
-`easyj-all`包含了以下8个模块的所有代码，如果以下8个模块的代码都要使用，则请直接引用该依赖。
+`easyj-all` 是由其他所有基础模块合并而成的一个模块，如果要使用所有基础模块，就直接引用此依赖吧：
+
+```xml
+<dependency>
+    <groupId>icu.easyj</groupId>
+    <artifactId>easyj-all</artifactId>
+    <version>0.7.4</version>
+</dependency>
+```
