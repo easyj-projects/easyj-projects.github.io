@@ -1,7 +1,12 @@
 function pageTitle() {
-	if (location.pathname.startsWith('/docs')) {
+	let pathname = location.pathname;
+	if (pathname.startsWith("/easyj-projects.github.io")) {
+		pathname = pathname.substring("/easyj-projects.github.io".length);
+	}
+
+	if (pathname.startsWith('/docs')) {
 		return '📝EasyJ文档';
-	} else if (location.pathname.startsWith('/blog')) {
+	} else if (pathname.startsWith('/blog')) {
 		return '📚EasyJ博客';
 	} else {
 		return 'EasyJ开源社区';
