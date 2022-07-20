@@ -27,3 +27,5 @@
 <a href="/docs" target="_blank">文档</a> &emsp;
 [GitHub](https://github.com/easyj-projects) &emsp;
 [Gitee](https://gitee.com/easyj-projects)
+
+https://easyj.icu 域名太卡了？ 尝试访问 https://easyj-projects.gitee.io/easyj-projects.github.io 吧！
