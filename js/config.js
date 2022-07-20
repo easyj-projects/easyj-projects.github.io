@@ -15,3 +15,10 @@ window.gitalkConfig = {
 };
 // 创建gitalk实例
 //window.gitalk = new Gitalk(window.gitalkConfig); // 因为在重写的 `docsify-plugins-gitalk.js` 文件中有创建对象，所以这里无需创建对象
+
+{
+	let scripts = document.getElementsByTagName("script");
+	let currentScriptSrc = scripts[scripts.length - 1].getAttribute("src");
+	window.fileRootPath = currentScriptSrc.substring(0, currentScriptSrc.indexOf("config.js"));
+	console.info('window.fileRootPath = "' + fileRootPath + '";');
+}

@@ -21,7 +21,7 @@
 
 			//region @Override: 自定义规则动态生成ID
 			window.gitalkConfig.id = generateGitalkId();
-			console.info('gitalk.id = "' + window.gitalkConfig.id + '";'); // 打印日志
+			console.info('window.gitalkConfig.id = "' + window.gitalkConfig.id + '";');
 			window.gitalk = new Gitalk(window.gitalkConfig);
 			//endregion
 

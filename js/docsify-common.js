@@ -77,4 +77,4 @@ document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/do
 // 插件：评论系统 GITalk
 document.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
 //document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>');
-document.writeln('<script src="/js/docsify-plugins-gitalk.js"></script>'); // 重写过上面的文件
+document.writeln('<script src="' + window.fileRootPath + 'docsify-plugins-gitalk.js"></script>'); // 重写过上面的文件
