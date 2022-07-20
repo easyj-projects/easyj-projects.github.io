@@ -11,6 +11,13 @@
 v0.7.4版本新增的插件。
 
 
+### 最新版本：
+
+<a href="https://repo1.maven.org/maven2/icu/easyj/maven/plugins/easyj-maven-plugin" target="_blank">
+  <img src="https://img.shields.io/maven-central/v/icu.easyj.maven.plugins/easyj-maven-plugin.svg" alt="easyj-maven-plugin.version">
+</a>
+
+
 ### plugin配置：
 
 ```xml

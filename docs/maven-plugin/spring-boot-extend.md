@@ -20,6 +20,13 @@
 v0.6.8版本新增的插件。
 
 
+### 最新版本：
+
+<a href="https://repo1.maven.org/maven2/icu/easyj/maven/plugins/easyj-maven-plugin" target="_blank">
+  <img src="https://img.shields.io/maven-central/v/icu.easyj.maven.plugins/easyj-maven-plugin.svg" alt="easyj-maven-plugin.version">
+</a>
+
+
 ### 使用方法：
 
 暂无！请根据下面的plugin配置说明，直接去尝试吧。

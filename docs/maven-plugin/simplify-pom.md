@@ -12,6 +12,13 @@
 v0.4.0版本新增的插件，推荐使用最新版本的该插件，功能比较齐全，BUG较少。
 
 
+### 最新版本：
+
+<a href="https://repo1.maven.org/maven2/icu/easyj/maven/plugins/easyj-maven-plugin" target="_blank">
+  <img src="https://img.shields.io/maven-central/v/icu.easyj.maven.plugins/easyj-maven-plugin.svg" alt="easyj-maven-plugin.version">
+</a>
+
+
 ### 使用方法：
 
 请参照 [easyj-projects/easyj](https://github.com/easyj-projects/easyj) 项目源码中的pom的配置。 
