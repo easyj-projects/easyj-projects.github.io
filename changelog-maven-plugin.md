@@ -1,6 +1,7 @@
 # 🚀更新日志
 
 ##### 插件文档链接：
+
 <a href="./docs/#/maven-plugin/simplify-pom" target="_blank">simplify-pom</a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="./docs/#/maven-plugin/spring-boot-extend" target="_blank">spring-boot-extend</a>&nbsp;&nbsp;&nbsp;&nbsp;
 <a href="./docs/#/maven-plugin/spring-boot-release" target="_blank">spring-boot-release</a>
@@ -19,6 +20,7 @@
 * `simplify-pom` 插件，新增 `useTabIndent` 属性，使用 `\t` 代替两个空格作为缩进符，可减小POM文件大小。
 * `simplify-pom` 插件，新增 `removeLocalProperties` 属性，用于移除不需要保留的 `properties`。
 * `spring-boot-extend` 插件，新增 `additionalIncludeGroupIds` 属性，用于项目中增量配置，`includeGroupIds` 则用于公司框架中统一配置。
+* 新增 `replace-java` 插件，可通过模板文件 `*.java.template` 生成java文件，模板文件中，可设置占位符。（遗留问题：无法直接通过IDE编译功能生成class文件，且IDE的文件索引不会添加该template文件。）
 
 ##### Bug修复🐞
 
@@ -26,12 +28,19 @@
 
 ##### 优化
 
+* `easyj-maven-plugin` 插件，兼容低版本 `maven`。
 * `simplify-pom` 插件，会移除部分多余的空格，且部分TAG顺序调整，使内容顺序更加合理。
 * `simplify-pom` 插件，会对 `properties` 进行排序了。
 * `simplify-pom` 插件，会移除 `<modules>`，因为它们仅用于当前项目的解析，对于parent引用，并没有用处。
 * `skip-install-deploy` 插件，支持配置 `properties` 来跳过 `install` 和 `deploy`，配置更简单。
 * `spring-boot-extend` 插件代码重构。
 * 调整部分日志内容。
+
+#### 过期插件
+
+* 移除 `shade-compatible-flatten` 插件。
+* 移除 `undeploy-spring-boot-jar` 插件。
+
 
 ---------------------------------------------------------------------------------------------------------------------------
 
