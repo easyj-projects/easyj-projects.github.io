@@ -1,4 +1,6 @@
-// 以下代码从 `https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.js` 复制过来的：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
+// 以下代码从 `https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.js` 复制过来的：
+// 1. 修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题：line 151
+// 2. 修复搜索时报 'handlePostContent is undefined' 的错误：line 191
 (function () {
 	/**
 	 * Converts a colon formatted string to a object with properties.
@@ -184,9 +186,10 @@
 					token.text = getTableData(token);
 					token.text = getListData(token);
 
-					index[slug].body = index[slug].body
-						? index[slug].body + token.text
-						: token.text;
+					//region @Override：修复搜索时报 'handlePostContent is undefined' 的错误
+					//index[slug].body = index[slug].body ? index[slug].body + token.text : token.text;
+					index[slug].body = token.text || ''; // 上面这行代码导致的错误，修改成此行代码
+					//endregion
 				}
 			}
 		});

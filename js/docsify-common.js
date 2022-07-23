@@ -33,7 +33,7 @@ window.$docsify = {
 	// 插件：全文检索
 	search: {
 		paths: 'auto',
-		placeholder: '搜索',
+		placeholder: '全站搜索',
 		noData: '<span style="color:red">未找到任何结果</span>'
 	},
 
