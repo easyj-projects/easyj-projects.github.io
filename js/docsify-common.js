@@ -72,13 +72,16 @@ window.$docsify = {
 }
 
 
-document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>'); // 插件：全文检索
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>'); // 插件：图片缩放
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>'); // 插件：代码复制
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-count/dist/countable.min.js"></script>'); // 插件：字数统计
 document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>'); // 插件：Java语法高亮
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>'); // 插件：分页导航
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>'); // 插件：侧边栏扩展与折叠
+
+// 插件：全文检索
+//document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>');
+document.writeln('<script src="' + window.fileRootPath + 'docsify-plugins-search.js"></script>'); // 重写过上面的文件，修复了搜索结果地址不对的问题
 
 // 插件：评论系统 GITalk
 document.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
