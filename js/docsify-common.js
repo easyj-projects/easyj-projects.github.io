@@ -1,9 +1,10 @@
-function pageTitle() {
-	let pathname = location.pathname;
-	if (pathname.startsWith("/easyj-projects.github.io")) {
-		pathname = pathname.substring("/easyj-projects.github.io".length);
-	}
+let pathname = location.pathname;
+if (pathname.startsWith("/easyj-projects.github.io")) {
+	pathname = pathname.substring("/easyj-projects.github.io".length);
+}
 
+// 获取页面标题
+function pageTitle() {
 	if (pathname.startsWith('/docs')) {
 		return '📝EasyJ文档';
 	} else if (pathname.startsWith('/blog')) {
@@ -13,6 +14,9 @@ function pageTitle() {
 	}
 }
 
+// '在GitHub上编辑' 功能的URL
+let editOnGithubUrl = 'https://github.com/' + config.communityName + '/' + config.projectName + '/blob/' + config.branchName + pathname;
+console.info('editOnGithubUrl = "' + editOnGithubUrl + '";');
 
 // DocSify初始化
 window.$docsify = {
@@ -62,9 +66,9 @@ window.$docsify = {
 	plugins: [
 		// 插件：在GitHub上编辑
 		EditOnGithubPlugin.create(
-			'https://github.com/' + config.communityName + '/' + config.projectName + '/blob/' + config.branchName + location.pathname,
+			editOnGithubUrl,
 			null,
-			function () {
+			function (file) {
 				return '内容有问题？立即提交修改！'
 			}
 		)
