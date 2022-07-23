@@ -3,6 +3,19 @@ if (pathname.startsWith("/easyj-projects.github.io")) {
 	pathname = pathname.substring("/easyj-projects.github.io".length);
 }
 
+// 部分页面特殊处理一下
+if (pathname === "/docs/") {
+	setInterval(function () {
+		if (location.hash === "#/discussion") {
+			location.href = "../#/discussion";
+		}
+	}, 100);
+}
+
+// '在GitHub上编辑' 功能的URL
+let editOnGithubUrl = 'https://github.com/' + config.communityName + '/' + config.projectName + '/blob/' + config.branchName + pathname;
+console.info('editOnGithubUrl = "' + editOnGithubUrl + '";');
+
 // 获取页面标题
 function pageTitle() {
 	if (pathname.startsWith('/docs')) {
@@ -13,10 +26,6 @@ function pageTitle() {
 		return 'EasyJ开源社区';
 	}
 }
-
-// '在GitHub上编辑' 功能的URL
-let editOnGithubUrl = 'https://github.com/' + config.communityName + '/' + config.projectName + '/blob/' + config.branchName + pathname;
-console.info('editOnGithubUrl = "' + editOnGithubUrl + '";');
 
 // DocSify初始化
 window.$docsify = {
@@ -73,7 +82,7 @@ window.$docsify = {
 			}
 		)
 	]
-}
+};
 
 
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>'); // 插件：图片缩放
