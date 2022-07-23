@@ -17,14 +17,18 @@ function pageTitle() {
 // DocSify初始化
 window.$docsify = {
 	name: pageTitle(),
-	repo: 'https://github.com/' + config.communityName,
-
-	// 封面
-	coverpage: false,
+	repo: "https://github.com/" + config.communityName,
 
 	// 侧边导航栏
 	loadSidebar: true,
-	subMaxLevel: 2,
+	subMaxLevel: 3,
+	sidebarDisplayLevel: 0,
+	alias: {
+		"/.*/_sidebar.md": "/_sidebar.md"
+	},
+
+	// 自动将侧边栏的导航作为标题显示
+	//autoHeader: true,
 
 	// 插件：全文检索
 	search: {
@@ -74,6 +78,8 @@ document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/doc
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-count/dist/countable.min.js"></script>'); // 插件：字数统计
 document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>'); // 插件：Java语法高亮
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>'); // 插件：分页导航
+document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>'); // 插件：侧边栏扩展与折叠
+
 // 插件：评论系统 GITalk
 document.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
 //document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>');
