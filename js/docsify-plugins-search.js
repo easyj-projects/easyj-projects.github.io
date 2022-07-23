@@ -1,4 +1,4 @@
-// 以下代码从 `https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.js` 复制过来，修复了搜索结果地址不对的问题
+// 以下代码从 `https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.js` 复制过来的：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
 (function () {
 	/**
 	 * Converts a colon formatted string to a object with properties.
@@ -144,6 +144,10 @@
 				} else {
 					slug = router.toURL(path, {id: slugify(escapeHtml(token.text))});
 				}
+
+				//region @Override：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
+				slug = location.pathname + slug;
+				//endregion
 
 				if (str) {
 					title = str

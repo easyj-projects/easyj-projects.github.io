@@ -1,4 +1,4 @@
-//region 以下代码从 `https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/plugins/gitalk.js` 复制过来，并嵌入了gitalk.id的自定义生成规则
+//region 以下代码从 `https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/plugins/gitalk.js` 复制过来的：自定义规则动态生成ID
 
 (function () {
 	/* eslint-disable no-unused-vars */
@@ -19,7 +19,7 @@
 				el.removeChild(el.firstChild);
 			}
 
-			//region @Override: 自定义规则动态生成ID
+			//region @Override：自定义规则动态生成ID
 			window.gitalkConfig.id = generateGitalkId();
 			console.info('window.gitalkConfig.id = "' + window.gitalkConfig.id + '";');
 			window.gitalk = new Gitalk(window.gitalkConfig);
