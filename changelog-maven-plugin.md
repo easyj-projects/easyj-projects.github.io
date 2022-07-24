@@ -19,6 +19,7 @@
 * `simplify-pom` 插件，新增 `fileComment` 属性，用于添加简化后的POM文件的注释内容。
 * `simplify-pom` 插件，新增 `useTabIndent` 属性，使用 `\t` 代替两个空格作为缩进符，可减小POM文件大小。
 * `simplify-pom` 插件，新增 `removeLocalProperties` 属性，用于移除不需要保留的 `properties`。
+* `simplify-pom` 插件，新增 `artifactNameTemplate` 属性，用于统一所有模块POM中 `<name>` 规则。
 * `spring-boot-extend` 插件，新增 `additionalIncludeGroupIds` 属性，用于项目中增量配置，`includeGroupIds` 则用于公司框架中统一配置。
 * 新增 `replace-java` 插件，可通过模板文件 `*.java.template` 生成java文件，模板文件中，可设置占位符。（遗留问题：无法直接通过IDE编译功能生成class文件，且IDE的文件索引不会添加该template文件。）
 
@@ -33,7 +34,8 @@
 * `simplify-pom` 插件，会对 `properties` 进行排序了。
 * `simplify-pom` 插件，会移除 `<modules>`，因为它们仅用于当前项目的解析，对于parent引用，并没有用处。
 * `skip-install-deploy` 插件，支持配置 `properties` 来跳过 `install` 和 `deploy`，配置更简单。
-* `spring-boot-extend` 插件代码重构。
+* `spring-boot-extend` 插件，外置 `lib/` 的jar文件，其最近修改时间设置为其实际生成时间（即 `/META-INF/MANIFEST.MF` 文件生成时间）。
+* `spring-boot-extend` 插件，代码重构。
 * 调整部分日志内容。
 
 #### 过期插件
