@@ -82,7 +82,7 @@
 			lookbehind: true
 		},
 		'assign-left': {
-			pattern: /(^|[\s;|&]|[<>]\(|)?(\w+\.)*\w+(?=\+?=)|(-{1,2})\w+(?=(\+?=|\s+|$))/,
+			pattern: /(^|[\s;|&]|[<>]\()\w+(?:\.\w+)*(?=\+?=)|-{1,2}\w+(?:-\w+)*(?=\+?=|\s+|$)/,
 			inside: {
 				'environment': {
 					pattern: RegExp('(^|[\\s;|&]|[<>]\\()' + envVars),
