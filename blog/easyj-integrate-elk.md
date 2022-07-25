@@ -113,7 +113,7 @@ easyj.logging.logback:
 
 下面提供两种上下文设置方式：
 
-#### 3.1、调用logback提供的工具类：`org.slf4j.MDC`
+### 3.1、调用logback提供的工具类：`org.slf4j.MDC`
 
 ```java
 @SpringBootTest
@@ -140,7 +140,7 @@ public class TestELK {
 }
 ```
 
-#### 3.2、EasyJ专门提供了追踪类：`icu.easyj.core.trace.TraceUtils`
+### 3.2、EasyJ专门提供了追踪类：`icu.easyj.core.trace.TraceUtils`
 
 该工具类使用了 `门面模式`，主要用于追踪请求或日志或其他更多内容；
 
@@ -173,7 +173,7 @@ public class TestELK {
 }
 ```
 
-#### 3.3、根据上下文查询关联的日志
+### 3.3、根据上下文查询关联的日志
 
 设置了上下文后，在上下文作用范围内，进行写日志时，上下文也会和日志一起被上传到 `ELK` 中。
 

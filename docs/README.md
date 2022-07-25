@@ -1,8 +1,8 @@
 # 快速开始
 
-### 先导入BOM（依赖集）
+### 导入BOM（依赖清单）
 
-1. springboot项目
+#### spring-boot项目
 
 ```xml
 <dependencyManagement>
@@ -16,7 +16,7 @@
 </dependencyManagement>
 ```
 
-2. 非springboot项目
+#### 非spring-boot项目
 
 ```xml
 <dependencyManagement>
@@ -35,9 +35,10 @@
 
 导入 `BOM` 后，引用依赖时就不需要 `<version>` 了。
 
-1. springboot项目
+#### spring-boot项目
 
 ```xml
+<!-- 按需引用依赖 -->
 <dependencies>
 	<!-- @Cache304 启动包 -->
 	<dependency>
@@ -64,10 +65,14 @@
 		<artifactId>easyj-spring-boot-test</artifactId>
 		<scope>test</scope>
 	</dependency>
+
+	<!--
+		其他需要的依赖
+	-->
 </dependencies>
 ```
 
-2. 非springboot项目
+#### 非spring-boot项目
 
 ```xml
 <dependencies>
