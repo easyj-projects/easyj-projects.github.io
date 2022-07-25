@@ -352,6 +352,9 @@
 		const isExpired = localStorage.getItem(expireKey) < Date.now();
 
 		INDEXS = JSON.parse(localStorage.getItem(indexKey));
+		if (!INDEXS) {
+			INDEXS = {};
+		}
 
 		if (isExpired) {
 			INDEXS = {};
