@@ -85,7 +85,7 @@ document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/d
 
 // 插件：全文检索
 //document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>');
-document.writeln('<script src="' + config.jsRootPath + 'docsify-plugins-search.js"></script>'); // 重写过上面的文件：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
+document.writeln('<script src="' + config.jsRootPath + 'optimize/docsify-plugins-search.js"></script>'); // 重写过上面的文件：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
 
 // 插件：语法高亮
 document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>'); // java
@@ -93,9 +93,9 @@ document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-y
 document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-properties.min.js"></script>'); // properties
 document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-log.min.js"></script>'); // log
 //document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>'); // bash
-document.writeln('<script src=' + config.jsRootPath + 'prism-bash.js></script>'); // bash：增加了 `sysctl` 单词高亮
+document.writeln('<script src="' + config.jsRootPath + 'optimize/prism-bash.js"></script>'); // bash：增加了 `sysctl` 单词高亮
 
 // 插件：评论系统 GITalk
 document.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
 //document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>');
-document.writeln('<script src="' + config.jsRootPath + 'docsify-plugins-gitalk.js"></script>'); // 重写过上面的文件：自定义规则动态生成ID
+document.writeln('<script src="' + config.jsRootPath + 'optimize/docsify-plugins-gitalk.js"></script>'); // 重写过上面的文件：自定义规则动态生成ID
