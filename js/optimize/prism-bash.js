@@ -94,8 +94,9 @@
 			lookbehind: true
 		},
 		'parameter': {
-			pattern: /[^|\s]-{1,2}(\w+:[+-]?)?\w+(?:\.\w+)*(?=[=\s]|$)/,
-			alias: 'variable'
+			pattern: /(^|\s)-{1,2}(\w+:[+-]?)?\w+(?:\.\w+)*(?=[=\s]|$)/,
+			alias: 'variable',
+			lookbehind: true
 		},
 		'string': [
 			{
