@@ -47,7 +47,7 @@
 
 	/* eslint-disable no-unused-vars */
 
-	let INDEXS = {};
+	var INDEXS = {};
 
 	const LOCAL_STORAGE = {
 		EXPIRE_KEY: 'docsify.search.expires',
