@@ -208,7 +208,7 @@ public class TestELK {
 #### 4.1.1、错误日志：
 
 ```log
-max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+[ERROR] max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 ```
 
 #### 4.1.2、解决方法：
