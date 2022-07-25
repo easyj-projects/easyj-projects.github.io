@@ -116,6 +116,14 @@ easyj.logging.logback:
 ### 3.1、调用logback提供的工具类：`org.slf4j.MDC`
 
 ```java
+package icu.easyj.spring.boot.test;
+
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
+import org.springframework.boot.test.context.SpringBootTest;
+
 @SpringBootTest
 public class TestELK {
 
@@ -149,6 +157,14 @@ public class TestELK {
 推荐使用该工具类代替`org.slf4j.MDC`，代码如下：
 
 ```java
+package icu.easyj.spring.boot.test;
+
+import icu.easyj.core.trace.TraceUtils;
+import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.context.SpringBootTest;
+
 @SpringBootTest
 public class TestELK {
 
