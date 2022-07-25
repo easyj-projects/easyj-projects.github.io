@@ -148,7 +148,18 @@
 				}
 
 				//region @Override：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
-				slug = location.pathname + slug;
+				let pathname = location.pathname;
+				let flag = false;
+				while (slug.startsWith("#/../") && pathname.lastIndexOf("/") > 1) {
+					flag = true;
+					if (pathname.endsWith("/")) {
+						pathname = pathname.substring(0, pathname.length - 1);
+					}
+					pathname = pathname.substring(0, pathname.lastIndexOf("/"));
+
+					slug = "#/" + slug.substring(5);
+				}
+				slug = pathname + (flag ? "/" : "") + slug;
 				//endregion
 
 				if (str) {
@@ -358,7 +369,8 @@
 
 			Docsify.get(vm.router.getFile(path), false, vm.config.requestHeaders).then(
 				function (result) {
-					INDEXS[path] = genIndex(path, result, vm.router, config.depth);
+					let indexKey = path === "/../issues" ? "/issues" : path; // 特殊处理一下
+					INDEXS[indexKey] = genIndex(path, result, vm.router, config.depth);
 					len === ++count && saveData(config.maxAge, expireKey, indexKey);
 				}
 			);
