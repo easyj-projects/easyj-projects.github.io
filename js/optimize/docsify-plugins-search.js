@@ -363,15 +363,15 @@
 		let count = 0;
 
 		paths.forEach(function (path) {
-			let indexKey = path === "/../issues" ? "/issues" : path; // 特殊处理一下
+			let key = path === "/../issues" ? "/issues" : path; // 特殊处理一下
 
-			if (INDEXS[indexKey]) {
+			if (INDEXS[key]) {
 				return count++;
 			}
 
 			Docsify.get(vm.router.getFile(path), false, vm.config.requestHeaders).then(
 				function (result) {
-					INDEXS[indexKey] = genIndex(path, result, vm.router, config.depth);
+					INDEXS[key] = genIndex(path, result, vm.router, config.depth);
 					len === ++count && saveData(config.maxAge, expireKey, indexKey);
 				}
 			);
