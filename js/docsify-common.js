@@ -92,8 +92,9 @@ document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-j
 document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>'); // yaml
 document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-properties.min.js"></script>'); // properties
 document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-log.min.js"></script>'); // log
+// bash语法高亮：支持了parameter，增加了两个操作 `java` 和 `sysctl`（已提交PR：https://github.com/PrismJS/prism/pull/3505）
 //document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>'); // bash
-document.writeln('<script src="' + config.jsRootPath + 'optimize/prism-bash.js"></script>'); // bash：增加了 `sysctl` 单词高亮
+document.writeln('<script src="' + config.jsRootPath + 'optimize/prism-bash.min.js"></script>');
 
 // 插件：评论系统 GITalk
 document.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
