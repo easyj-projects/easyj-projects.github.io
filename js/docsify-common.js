@@ -1,10 +1,5 @@
-let pathname = location.pathname;
-if (pathname.startsWith("/easyj-projects.github.io")) {
-	pathname = pathname.substring("/easyj-projects.github.io".length);
-}
-
 // 部分页面特殊处理一下
-if (pathname === "/docs/") {
+if (config.pathName === "/docs/") {
 	setInterval(function () {
 		if (location.hash === "#/discussion") {
 			location.href = "../#/discussion";
@@ -12,15 +7,11 @@ if (pathname === "/docs/") {
 	}, 100);
 }
 
-// '在GitHub上编辑' 功能的URL
-let editOnGithubUrl = 'https://github.com/' + config.communityName + '/' + config.projectName + '/blob/' + config.branchName + pathname;
-console.info('editOnGithubUrl = "' + editOnGithubUrl + '";');
-
 // 获取页面标题
 function pageTitle() {
-	if (pathname.startsWith('/docs')) {
+	if (config.pathName.startsWith('/docs')) {
 		return '📝EasyJ文档';
-	} else if (pathname.startsWith('/blog')) {
+	} else if (config.pathName.startsWith('/blog')) {
 		return '📚EasyJ博客';
 	} else {
 		return 'EasyJ开源社区';
@@ -75,7 +66,7 @@ window.$docsify = {
 	plugins: [
 		// 插件：在GitHub上编辑
 		EditOnGithubPlugin.create(
-			editOnGithubUrl,
+			'https://github.com/' + config.communityName + '/' + config.projectName + '/blob/' + config.branchName + config.pathName,
 			null,
 			function (file) {
 				return '内容有问题？立即提交修改！'
@@ -85,18 +76,26 @@ window.$docsify = {
 };
 
 
+// 常用插件
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>'); // 插件：图片缩放
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>'); // 插件：代码复制
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-count/dist/countable.min.js"></script>'); // 插件：字数统计
-document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>'); // 插件：Java语法高亮
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>'); // 插件：分页导航
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>'); // 插件：侧边栏扩展与折叠
 
 // 插件：全文检索
 //document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>');
-document.writeln('<script src="' + config.srcRootPath + 'docsify-plugins-search.js"></script>'); // 重写过上面的文件：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
+document.writeln('<script src="' + config.jsRootPath + 'docsify-plugins-search.js"></script>'); // 重写过上面的文件：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
+
+// 插件：语法高亮
+document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>'); // java
+document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>'); // yaml
+document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-properties.min.js"></script>'); // properties
+document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-log.min.js"></script>'); // log
+//document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>'); // bash
+document.writeln('<script src=' + config.jsRootPath + 'prism-bash.js></script>'); // bash：增加了 `sysctl` 单词高亮
 
 // 插件：评论系统 GITalk
 document.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
 //document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>');
-document.writeln('<script src="' + config.srcRootPath + 'docsify-plugins-gitalk.js"></script>'); // 重写过上面的文件：自定义规则动态生成ID
+document.writeln('<script src="' + config.jsRootPath + 'docsify-plugins-gitalk.js"></script>'); // 重写过上面的文件：自定义规则动态生成ID

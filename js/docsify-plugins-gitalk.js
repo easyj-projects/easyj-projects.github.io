@@ -45,7 +45,7 @@
  * @returns string 返回gitalk的ID
  */
 function generateGitalkId() {
-	let pathname = location.pathname;
+	let pathname = config.pathName;
 	//let search = location.search; // 不拼接search，因为当前站点没有用到search参数
 	let hashPre = '';
 	let hash = location.hash;
@@ -78,10 +78,6 @@ function generateGitalkId() {
 				break;
 			}
 		}
-	}
-
-	if (pathname.startsWith("/easyj-projects.github.io")) {
-		pathname = pathname.substring("/easyj-projects.github.io".length);
 	}
 
 	return pathname + hashPre + hash;

@@ -16,14 +16,14 @@ EasyJ社区在 `sebp/elk:7.12.1` 镜像的基础上，调整了部分内容，�
 
 （ 具体调整内容请查看：https://hub.docker.com/repository/docker/easyj/elk ）
 
-```shell
+```bash
 #拉取镜像
 docker pull easyj/elk:7.12.1
 ```
 
 ### 1.2、启用ELK容器：
 
-```shell
+```bash
 #启用容器
 docker run --name elk \
     -p 5601:5601 \
@@ -31,9 +31,10 @@ docker run --name elk \
     -p 9300:9300 \
     -p 5044:5044 \
     -p 4560:4560 \
-    --privileged \
     --restart=always \
-    -dit easyj/elk:7.12.1
+    --privileged \
+    -dit \
+    easyj/elk:7.12.1
 
 #查看启动日志
 docker logs -f elk
@@ -198,7 +199,7 @@ max virtual memory areas vm.max_map_count [65530] is too low, increase to at lea
 
 （引用自 https://blog.csdn.net/qq_43655835/article/details/104633359 ）
 
-```shell
+```bash
 #启动容器
 docker start elk 
 #快速进入容器
@@ -215,13 +216,13 @@ vim /etc/sysctl.conf
 
 在 `/etc/sysctl.conf` 文件最后添加一行：
 
-```config
+```properties
 vm.max_map_count=262144
 ```
 
 再输入以下命令使配置生效：
 
-```shell
+```bash
 sysctl -p
 ```
 
