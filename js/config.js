@@ -4,7 +4,7 @@ let projectName = 'easyj-projects.github.io';
 // 生成可用的pathname，避免部分插件运行异常
 let pathName = location.pathname;
 if (pathName.endsWith("/index.html")) {
-	location.href = pathName.substring(0, pathName.length - "/index.html".length);
+	location.href = pathName.substring(0, pathName.length - "/index.html".length) || "/";
 }
 if (pathName.startsWith("/" + projectName)) {
 	pathName = pathName.substring(("/" + projectName).length);
