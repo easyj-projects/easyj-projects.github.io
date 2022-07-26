@@ -75,6 +75,17 @@ window.$docsify = {
 	]
 };
 
+// 语法高亮插件 Prism 的配置
+window.PrismConfig = {
+	languages: {
+		java: {
+			// 自定义变量匹配规则
+			variable: {
+				pattern: /\b(log\w*|LOG[A-Z]+|var1|var2)\b/
+			}
+		}
+	}
+};
 
 // 常用插件
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>'); // 插件：图片缩放
@@ -88,13 +99,11 @@ document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/d
 document.writeln('<script src="' + config.jsRootPath + 'optimize/docsify-plugins-search.js"></script>'); // 重写过上面的文件：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
 
 // 插件：语法高亮
-document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-java.min.js"></script>'); // java
+document.writeln('<script src="' + config.jsRootPath + 'optimize/prism-bash.min.js"></script>'); // bash：支持了parameter，并增加了两个操作 `java` 和 `sysctl`（提交PR已合并，将在新版本中可用：https://github.com/PrismJS/prism/pull/3505）
+document.writeln('<script src="' + config.jsRootPath + 'optimize/prism-java.min.js"></script>'); // java，重写：可自定义variable匹配规则
 document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>'); // yaml
 document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-properties.min.js"></script>'); // properties
 document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-log.min.js"></script>'); // log
-// bash语法高亮：支持了parameter，增加了两个操作 `java` 和 `sysctl`（已提交PR：https://github.com/PrismJS/prism/pull/3505）
-//document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-bash.min.js"></script>'); // bash
-document.writeln('<script src="' + config.jsRootPath + 'optimize/prism-bash.min.js"></script>');
 
 // 插件：评论系统 GITalk
 document.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
