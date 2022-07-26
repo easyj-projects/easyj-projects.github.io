@@ -91,7 +91,7 @@ document.writeln('<script src="' + config.jsRootPath + 'optimize/prism-bash.min.
 document.writeln('<script src="' + config.jsRootPath + 'optimize/prism-java.min.js"></script>'); // java，重写：可自定义variable匹配规则
 document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>'); // yaml
 document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-properties.min.js"></script>'); // properties
-document.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-log.min.js"></script>'); // log
+document.writeln('<script src="' + config.jsRootPath + 'optimize/prism-log.js"></script>'); // log
 
 // 插件：评论系统 GITalk
 document.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
