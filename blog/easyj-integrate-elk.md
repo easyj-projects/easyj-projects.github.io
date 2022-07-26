@@ -19,12 +19,13 @@ EasyJ社区在 `sebp/elk:7.12.1` 镜像的基础上，调整了部分内容，�
 ```bash
 #拉取镜像
 docker pull easyj/elk:7.12.1
+
 ```
 
 ### 1.2、启用ELK容器：
 
 ```bash
-#启用容器
+#创建并启动容器
 docker run --name elk \
     -p 5601:5601 \
     -p 9200:9200 \
@@ -36,8 +37,12 @@ docker run --name elk \
     -dit \
     easyj/elk:7.12.1
 
+#启动容器
+docker start elk
+
 #查看启动日志
 docker logs -f elk
+
 ```
 
 ### 1.3、验证容器：
@@ -221,6 +226,9 @@ docker start elk
 #快速进入容器
 docker exec -it elk bash
 
+```
+
+```bash
 #修改参数
 sysctl -w vm.max_map_count=262144
 #查看参数
@@ -228,6 +236,7 @@ sysctl -a|grep vm.max_map_count
 
 #修改配置文件
 vim /etc/sysctl.conf
+
 ```
 
 在 `/etc/sysctl.conf` 文件最后添加一行：
@@ -240,6 +249,7 @@ vm.max_map_count=262144
 
 ```bash
 sysctl -p
+
 ```
 
 #### 4.1.3、补充说明：
