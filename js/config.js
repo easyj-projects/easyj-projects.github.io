@@ -54,4 +54,4 @@ window.gitalkConfig = {
 //window.gitalk = new Gitalk(window.gitalkConfig); // 因为在重写的 `docsify-plugins-gitalk.js` 文件中有创建对象，所以这里无需创建对象
 
 // 百度统计
-document.writeln('<script src="' + config.jsRootPath + 'baidu-statistics.js"></script>'); // 重写过上面的文件：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
+document.writeln('<script src="' + config.jsRootPath + 'baidu-statistics.min.js"></script>'); // 重写过上面的文件：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
