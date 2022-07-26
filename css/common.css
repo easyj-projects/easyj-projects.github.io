@@ -4,4 +4,5 @@
 .ml250{margin-left:250px}
 .clear{zoom:1}
 .clear:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.lang-java .token.function{color:#136770}
 .token.annotation{color:#bfb352}
