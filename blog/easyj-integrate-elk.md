@@ -87,16 +87,16 @@ docker logs -f elk
 logging:
   #`easyj-spring-boot-logging.jar`中内置了已设置好的配置文件，可直接引用
   #如果项目自己已经配置了 `logback-spring.xml`，那么请将相关配置复制到自己的配置文件中
-  config: classpath:easyj/logging/logback/logback-spring.xml
+  config: "classpath:easyj/logging/logback/logback-spring.xml"
   #或
-  #config: ${easyj.logging.logback.config} #值是一样的
+  #config: "${easyj.logging.logback.config}" #值是一样的
 
-  #path: logs/${server.port:80} #file-appender所需配置，*.log文件存放路径，与集成ELK无关
+  #path: "logs/${server.port:80}" #file-appender所需配置，*.log文件存放路径，与集成ELK无关
 easyj.logging.logback:
   logstash-appender:
     enabled: true #启用logstash-appender，用于将日志上传到logstash
-    destination: xxx.xxx.xxx.xxx:4560 #部署的ELK中，logstash开放的TCP通道地址
-    #destination: xxx.xxx.xxx.xxx:4560,xxx.xxx.xxx.xxx:4560 #可配置多个地址，用逗号隔开
+    destination: "xxx.xxx.xxx.xxx:4560" #部署的ELK中，logstash开放的TCP通道地址
+    #destination: "xxx.xxx.xxx.xxx:4560,xxx.xxx.xxx.xxx:4560" #可配置多个地址，用逗号隔开
 ```
 
 ### 2.3、验证配置是否正确：
