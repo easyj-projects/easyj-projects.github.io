@@ -34,11 +34,11 @@
 > ```java
 > class Test {
 > 
->   public static void main(String[] args) {
->     String json = "{\"a\": 1}"; // JSON数据中的a为整形数字
->     Map<String, String> map = JSONUtils.toBean(json, Map.class); // 这一行代码不会抛出异常
->     String a = map.get("a"); // 将抛出 java.lang.ClassCastException 异常，a的实际类型却是Integer
->   }
+>     public static void main(String[] args) {
+>         String json = "{\"a\": 1}"; // JSON数据中的a为整形数字
+>         Map<String, String> map = JSONUtils.toBean(json, Map.class); // 这一行代码不会抛出异常
+>         String a = map.get("a"); // 将抛出 java.lang.ClassCastException 异常，a的实际类型却是Integer
+>     }
 > 
 > }
 > ```
