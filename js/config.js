@@ -30,6 +30,17 @@ window.config = {
 // 打印配置值
 console.info(config);
 
+// 语法高亮插件 Prism 的配置
+window.PrismConfig = {
+	languages: {
+		java: {
+			// 自定义变量匹配规则
+			variable: {
+				pattern: /\b(log\w*|LOG[A-Z]+|var1|var2)\b/
+			}
+		}
+	}
+};
 
 // 插件：Gitalk（评论系统）配置
 window.gitalkConfig = {

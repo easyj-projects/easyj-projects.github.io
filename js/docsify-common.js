@@ -75,18 +75,6 @@ window.$docsify = {
 	]
 };
 
-// 语法高亮插件 Prism 的配置
-window.PrismConfig = {
-	languages: {
-		java: {
-			// 自定义变量匹配规则
-			variable: {
-				pattern: /\b(log\w*|LOG[A-Z]+|var1|var2)\b/
-			}
-		}
-	}
-};
-
 // 常用插件
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>'); // 插件：图片缩放
 document.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>'); // 插件：代码复制
