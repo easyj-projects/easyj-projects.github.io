@@ -1,28 +1,23 @@
-// 部分页面特殊处理一下
-if (config.pathName === "/docs/") {
-	setInterval(function () {
-		if (location.hash === "#/discussion") {
-			location.href = "../#/discussion";
-		}
-	}, 100);
-}
+(function (w, d, l) {
+	const c = w.config;
+	const pathName = c.pathName;
+	const jsRootPath = c.jsRootPath;
 
-(function (w, d) {
-	// 获取页面标题
-	function pageTitle() {
-		if (config.pathName.startsWith('/docs')) {
-			return '📝EasyJ文档';
-		} else if (config.pathName.startsWith('/blog')) {
-			return '📚EasyJ博客';
-		} else {
-			return 'EasyJ开源社区';
-		}
+
+	// 部分页面特殊处理一下
+	if (pathName === "/docs/") {
+		setInterval(function () {
+			if (l.hash === "#/discussion") {
+				l.href = "../#/discussion";
+			}
+		}, 100);
 	}
+
 
 	// DocSify初始化
 	w.$docsify = {
 		name: pageTitle(),
-		repo: "https://github.com/" + config.communityName,
+		repo: "https://github.com/" + c.communityName,
 
 		// 侧边导航栏
 		loadSidebar: true,
@@ -67,16 +62,15 @@ if (config.pathName === "/docs/") {
 		plugins: [
 			// 插件：在GitHub上编辑
 			EditOnGithubPlugin.create(
-				'https://github.com/' + config.communityName + '/' + config.projectName + '/blob/' + config.branchName + config.pathName,
+				'https://github.com/' + c.communityName + '/' + c.projectName + '/blob/' + c.branchName + pathName,
 				null,
-				function (file) {
+				function () {
 					return '内容有问题？立即提交修改！'
 				}
 			)
 		]
 	};
 
-	const jsRootPath = config.jsRootPath;
 
 	// 常用插件
 	d.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>'); // 插件：图片缩放
@@ -86,7 +80,6 @@ if (config.pathName === "/docs/") {
 	d.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>'); // 插件：侧边栏扩展与折叠
 
 	// 插件：全文检索
-	//d.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>');
 	d.writeln('<script src="' + jsRootPath + 'optimize/docsify-plugins-search.min.js"></script>'); // 重写过上面的文件：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
 
 	// 插件：语法高亮
@@ -98,6 +91,20 @@ if (config.pathName === "/docs/") {
 
 	// 插件：评论系统 GITalk
 	d.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
-	//d.writeln('<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>');
 	d.writeln('<script src="' + jsRootPath + 'optimize/docsify-plugins-gitalk.min.js"></script>'); // 重写过上面的文件：自定义规则动态生成ID
-})(window, document);
+
+	// 百度统计
+	d.writeln('<script src="' + jsRootPath + 'baidu-statistics.min.js"></script>');
+
+
+	// 获取页面标题
+	function pageTitle() {
+		if (pathName.startsWith('/docs')) {
+			return '📝EasyJ文档';
+		} else if (pathName.startsWith('/blog')) {
+			return '📚EasyJ博客';
+		} else {
+			return 'EasyJ开源社区';
+		}
+	}
+})(window, document, location);
