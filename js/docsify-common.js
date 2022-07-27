@@ -16,6 +16,10 @@
 	// 创建Gitalk实例
 	//w.gitalk = new Gitalk(gitalkConfig); // 因为在重写的 `docsify-plugins-gitalk.js` 文件中有创建对象，所以这里无需创建对象
 
+	// 生成 EditOnGithubPlugin 的url
+	const editOnGithubUrl = 'https://github.com/' + c.communityName + '/' + c.projectName + '/blob/' + c.branchName + pathName;
+	c.debug && console.info("editOnGithubUrl = '" + editOnGithubUrl + "';");
+
 	// DocSify初始化
 	w.$docsify = {
 		name: pageTitle(),
@@ -62,7 +66,7 @@
 		plugins: [
 			// 插件：在GitHub上编辑
 			EditOnGithubPlugin.create(
-				'https://github.com/' + c.communityName + '/' + c.projectName + '/blob/' + c.branchName + pathName,
+				editOnGithubUrl,
 				null,
 				function () {
 					return '内容有问题？立即提交修改！'
