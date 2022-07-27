@@ -13,6 +13,8 @@
 		}, 100);
 	}
 
+	// 创建Gitalk实例
+	//w.gitalk = new Gitalk(gitalkConfig); // 因为在重写的 `docsify-plugins-gitalk.js` 文件中有创建对象，所以这里无需创建对象
 
 	// DocSify初始化
 	w.$docsify = {
@@ -43,12 +45,10 @@
 			successText: '已复制'
 		},
 
-
 		// 插件：字数统计
 		count: {
 			language: 'chinese'
 		},
-
 
 		// 插件：分页导航
 		pagination: {

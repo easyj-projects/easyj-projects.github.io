@@ -20,7 +20,9 @@
 
 			//region @Override：自定义规则动态生成ID
 			w.gitalkConfig.id = generateGitalkId();
-			console.info('window.gitalkConfig.id = "' + w.gitalkConfig.id + '";');
+			if (w.config.debug) {
+				console.info('window.gitalkConfig.id = "' + w.gitalkConfig.id + '";');
+			}
 			w.gitalk = new Gitalk(w.gitalkConfig);
 			//endregion
 

@@ -5,6 +5,7 @@
 
 	// 站点配置
 	const c = {
+		debug: true,
 		communityName: 'easyj-projects', // 社区名称/项目组名称
 		projectName: projectName, // 项目名
 		branchName: 'docsify', // 项目分支名
@@ -12,9 +13,6 @@
 		jsRootPath: getJsRootPath() // 自动生成 jsRootPath
 	};
 	w.config = c;
-	// 打印配置值
-	console.info("window.config:");
-	console.info(c);
 
 
 	// 插件：Gitalk（评论系统）配置
@@ -25,11 +23,15 @@
 		owner: c.communityName,
 		admin: ['wangliang181230']
 	};
-	// 打印配置值
-	console.info("window.gitalkConfig:");
-	console.info(gitalkConfig);
-	// 创建Gitalk实例
-	//w.gitalk = new Gitalk(gitalkConfig); // 因为在重写的 `docsify-plugins-gitalk.js` 文件中有创建对象，所以这里无需创建对象
+
+
+	// 打印配置值日志
+	if (c.debug) {
+		console.info("window.config:");
+		console.info(c);
+		console.info("window.gitalkConfig:");
+		console.info(gitalkConfig);
+	}
 
 
 	//region 自动生成部分配置的方法
