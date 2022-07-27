@@ -1,0 +1,38 @@
+{
+	"name": "easyj-projects.github.io",
+	"version": "1.0.0",
+	"description": "EasyJ官网项目",
+	"main": "./src/js/config.js",
+	"directories": {
+		"doc": "docs"
+	},
+	"devDependencies": {
+		"gulp": "^4.0.2",
+		"gulp-clean-css": "^4.3.0",
+		"gulp-concat": "^2.3.4",
+		"gulp-header": "^2.0.7",
+		"gulp-jsdoc3": "^3.0.0",
+		"gulp-minify-css": "^1.2.4",
+		"gulp-rename": "^1.2.0",
+		"gulp-replace": "^1.0.0",
+		"gulp-terser": "^2.1.0",
+		"gulp-uglify": "^3.0.2"
+	},
+	"scripts": {
+		"build": "gulp"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/easyj-projects/easyj-projects.github.io.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/easyj-projects/easyj-projects.github.io/issues"
+	},
+	"homepage": "https://easyj.icu",
+	"dependencies": {
+		"gulp-jshint": "^2.1.0"
+	}
+}
