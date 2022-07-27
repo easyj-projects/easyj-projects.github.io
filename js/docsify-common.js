@@ -18,7 +18,7 @@
 
 	// 生成 EditOnGithubPlugin 的url
 	const editOnGithubUrl = 'https://github.com/' + c.communityName + '/' + c.projectName + '/blob/' + c.branchName + pathName;
-	c.debug && console.info("editOnGithubUrl = '" + editOnGithubUrl + "';");
+	c.debug && console.info('editOnGithubUrl = "' + editOnGithubUrl + '";');
 
 	// DocSify初始化
 	w.$docsify = {
