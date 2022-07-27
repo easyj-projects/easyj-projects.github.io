@@ -55,7 +55,7 @@
 	function getJsRootPath() {
 		let scripts = d.getElementsByTagName("script");
 		let currentScriptSrc = scripts[scripts.length - 1].getAttribute("src");
-		return currentScriptSrc.substring(0, currentScriptSrc.indexOf("config.js"));
+		return currentScriptSrc.substring(0, currentScriptSrc.indexOf("config"));
 	}
 
 	//endregion
