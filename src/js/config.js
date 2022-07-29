@@ -32,25 +32,22 @@
 	// 目前不一样的内容比较少，直接switch处理，当内容多起来后，分文件保存配置
 	switch (env) {
 		case 'local':
-			c.gitalkConfig.clientId = 'bdc9fcdddaa09cb492be';
+			c.gitalkConfig.clientID = 'bdc9fcdddaa09cb492be';
 			c.gitalkConfig.clientSecret = '9f65568e2686e6898e4f6296069438343dd9a904';
 			break;
 		case 'gitee':
-			c.gitalkConfig.clientId = 'e6bd1dd55a90bfe99f3d';
+			c.gitalkConfig.clientID = 'e6bd1dd55a90bfe99f3d';
 			c.gitalkConfig.clientSecret = 'c4bb05e24ccaf9145e4b4fe4aa4457337f8f0971';
 			break;
 		default:
-			c.gitalkConfig.clientId = '21bffd940d486618132b';
+			c.gitalkConfig.clientID = '21bffd940d486618132b';
 			c.gitalkConfig.clientSecret = '5b51c3a75de223a4ce17664320d8243689b3da9f';
 			break;
 	}
 
 
 	// 打印配置值日志
-	if (c.debug) {
-		console.info("window.config:");
-		console.info(c);
-	}
+	c.debug && console.info("window.config: " + JSON.stringify(c));
 
 
 	//region 自动生成部分配置的方法

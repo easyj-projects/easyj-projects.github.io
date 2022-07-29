@@ -1,6 +1,7 @@
 //以下代码从 `https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/plugins/gitalk.js` 复制过来的：自定义规则动态生成ID
 (function (w) {
 	const c = w.config;
+
 	/* eslint-disable no-unused-vars */
 	function install(hook) {
 		let dom = Docsify.dom;
@@ -21,9 +22,7 @@
 
 			//region @Override：自定义规则动态生成ID
 			c.gitalkConfig.id = generateGitalkId();
-			if (c.debug) {
-				console.info('window.config.gitalkConfig.id = "' + c.gitalkConfig.id + '";');
-			}
+			c.debug && console.info('window.gitalkConfig: ' + JSON.stringify(c.gitalkConfig));
 			w.gitalk = new Gitalk(c.gitalkConfig);
 			//endregion
 
