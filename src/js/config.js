@@ -21,9 +21,9 @@
 	c.gitalkConfig = {
 		//clientID: 'xxxxxxx', // 不同环境不同配置
 		//clientSecret: 'yyy', // 不同环境不同配置
-		repo: projectName,
-		owner: c.communityName,
-		admin: ['wangliang181230']
+		repo: projectName, // 项目/仓库名称
+		owner: c.communityName, // 拥有者
+		admin: ['wangliang181230'] // 管理员的githubID
 	};
 
 
