@@ -56,7 +56,8 @@
 			pattern: /(^|[^.])(?:<<=?|>>>?=?|->|--|\+\+|&&|\|\||::|[?:~]|[-+*/%&|^!=<>]=?)/m,
 			lookbehind: true
 		},
-		'constant': /\b[A-Z][A-Z_\d]{2,}\b/,
+		'generic-parameter': /\b[A-Z]\b/,
+		'constant': /\b[A-Z][A-Z_\d]+\b/,
 		'variable': /\b[a-z]\w*\b/
 	});
 
@@ -82,6 +83,7 @@
 		'generics': {
 			pattern: /<(?:[\w\s,.?]|&(?!&)|<(?:[\w\s,.?]|&(?!&)|<(?:[\w\s,.?]|&(?!&)|<(?:[\w\s,.?]|&(?!&))*>)*>)*>)*>/,
 			inside: {
+				'generic-parameter': /\b[A-Z]+\b/,
 				'class-name': className,
 				'keyword': keywords,
 				'punctuation': /[<>(),.:]/,
