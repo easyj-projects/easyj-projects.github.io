@@ -1,11 +1,14 @@
 (function (w, d, l) {
+	// 环境名：不同 location.hostname 对应不同的环境名
+	const env = getEnv();
+
 	// 项目名配置
 	const projectName = 'easyj-projects.github.io';
 
-
 	// 站点配置
 	const c = {
-		debug: true,
+		debug: true/*(env !== 'github')*/, // 非github环境，全部默认启用debug
+		env: env, // 环境名：local、gitee、github
 		communityName: 'easyj-projects', // 社区名称/项目组名称
 		projectName: projectName, // 项目名
 		branchName: 'docsify', // 项目分支名
@@ -14,27 +17,53 @@
 	};
 	w.config = c;
 
-
 	// 插件：Gitalk（评论系统）配置
-	w.gitalkConfig = {
-		clientID: '21bffd940d486618132b',
-		clientSecret: '5b51c3a75de223a4ce17664320d8243689b3da9f',
+	c.gitalkConfig = {
+		//clientID: 'xxxxxxx', // 不同环境不同配置
+		//clientSecret: 'yyy', // 不同环境不同配置
 		repo: projectName,
 		owner: c.communityName,
 		admin: ['wangliang181230']
 	};
 
 
+	// 根据环境名，加载环境配置（以下配置请进入 https://github.com/settings/developers 添加）
+	//d.writeln('<script src="' + c.jsRootPath + 'config-' + env + '.min.js"></script>');
+	// 目前不一样的内容比较少，直接switch处理，当内容多起来后，分文件保存配置
+	switch (env) {
+		case 'local':
+			c.gitalkConfig.clientId = 'bdc9fcdddaa09cb492be';
+			c.gitalkConfig.clientSecret = '9f65568e2686e6898e4f6296069438343dd9a904';
+			break;
+		case 'gitee':
+			c.gitalkConfig.clientId = 'e6bd1dd55a90bfe99f3d';
+			c.gitalkConfig.clientSecret = 'c4bb05e24ccaf9145e4b4fe4aa4457337f8f0971';
+			break;
+		default:
+			c.gitalkConfig.clientId = '21bffd940d486618132b';
+			c.gitalkConfig.clientSecret = '5b51c3a75de223a4ce17664320d8243689b3da9f';
+			break;
+	}
+
+
 	// 打印配置值日志
 	if (c.debug) {
 		console.info("window.config:");
 		console.info(c);
-		console.info("window.gitalkConfig:");
-		console.info(gitalkConfig);
 	}
 
 
 	//region 自动生成部分配置的方法
+
+	function getEnv() {
+		if (l.hostname === 'localhost' || l.hostname === '127.0.0.1') {
+			return 'local';
+		} else if (l.host === 'easyj-projects.gitee.io') {
+			return 'gitee';
+		} else {
+			return 'github';
+		}
+	}
 
 	function getPathName() {
 		// 生成可用的pathname，避免部分插件运行异常

@@ -14,7 +14,7 @@
 	}
 
 	// 创建Gitalk实例
-	//w.gitalk = new Gitalk(gitalkConfig); // 因为在重写的 `docsify-plugins-gitalk.js` 文件中有创建对象，所以这里无需创建对象
+	//w.gitalk = new Gitalk(c.gitalkConfig); // 因为在重写的 `docsify-plugins-gitalk.js` 文件中有创建对象，所以这里无需创建对象
 
 	// 生成 EditOnGithubPlugin 的url
 	const editOnGithubUrl = 'https://github.com/' + c.communityName + '/' + c.projectName + '/blob/' + c.branchName + pathName;

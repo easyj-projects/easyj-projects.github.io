@@ -1,5 +1,6 @@
 //以下代码从 `https://cdn.jsdelivr.net/npm/docsify@4.12.1/lib/plugins/gitalk.js` 复制过来的：自定义规则动态生成ID
 (function (w) {
+	const c = w.config;
 	/* eslint-disable no-unused-vars */
 	function install(hook) {
 		let dom = Docsify.dom;
@@ -19,11 +20,11 @@
 			}
 
 			//region @Override：自定义规则动态生成ID
-			w.gitalkConfig.id = generateGitalkId();
-			if (w.config.debug) {
-				console.info('window.gitalkConfig.id = "' + w.gitalkConfig.id + '";');
+			c.gitalkConfig.id = generateGitalkId();
+			if (c.debug) {
+				console.info('window.config.gitalkConfig.id = "' + c.gitalkConfig.id + '";');
 			}
-			w.gitalk = new Gitalk(w.gitalkConfig);
+			w.gitalk = new Gitalk(c.gitalkConfig);
 			//endregion
 
 			// eslint-disable-next-line
@@ -43,7 +44,7 @@
 	 * @returns string 返回gitalk的ID
 	 */
 	function generateGitalkId() {
-		let pathName = config.pathName;
+		let pathName = c.pathName;
 		//let search = location.search; // 不拼接search，因为当前站点没有用到search参数
 		let hashPre = '';
 		let hash = location.hash;
