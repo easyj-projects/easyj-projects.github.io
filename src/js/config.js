@@ -9,6 +9,7 @@
 	const c = {
 		debug: true/*(env !== 'github')*/, // 非github环境，全部默认启用debug
 		env: env, // 环境名：local、gitee、github
+		vcsRoot: 'https://github.com/', // 代码仓库根地址
 		communityName: 'easyj-projects', // 社区名称/项目组名称
 		projectName: projectName, // 项目名
 		branchName: 'docsify', // 项目分支名
@@ -36,6 +37,7 @@
 			c.gitalkConfig.clientSecret = '9f65568e2686e6898e4f6296069438343dd9a904';
 			break;
 		case 'gitee':
+			c.vcsRoot = 'https://gitee.com/';
 			c.gitalkConfig.clientID = 'e6bd1dd55a90bfe99f3d';
 			c.gitalkConfig.clientSecret = 'c4bb05e24ccaf9145e4b4fe4aa4457337f8f0971';
 			break;
