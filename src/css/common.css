@@ -5,4 +5,4 @@
 .clear{zoom:1}
 .clear:after{content:".";display:block;height:0;clear:both;visibility:hidden}
 .lang-java .token.function{color:#136770}
-.token.annotation{color:#bfb352}
+.lang-java .token.annotation{color:#bfb352;font-family: "微软雅黑", serif}

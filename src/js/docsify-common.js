@@ -86,13 +86,6 @@
 	// 插件：全文检索
 	d.writeln('<script src="' + jsRootPath + 'optimize/docsify-plugins-search.min.js"></script>'); // 重写过上面的文件：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
 
-	// 插件：语法高亮
-	d.writeln('<script src="' + jsRootPath + 'optimize/prism-bash.min.js"></script>'); // bash：支持了parameter，并增加了两个操作 `java` 和 `sysctl`（提交PR已合并，将在新版本中可用：https://github.com/PrismJS/prism/pull/3505）
-	d.writeln('<script src="' + jsRootPath + 'optimize/prism-java.min.js"></script>'); // java，重写：可自定义variable匹配规则
-	d.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-yaml.min.js"></script>'); // yaml
-	d.writeln('<script src="//cdn.jsdelivr.net/npm/prismjs/components/prism-properties.min.js"></script>'); // properties
-	d.writeln('<script src="' + jsRootPath + 'optimize/prism-log.min.js"></script>'); // log
-
 	// 插件：评论系统 GITalk
 	d.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
 	d.writeln('<script src="' + jsRootPath + 'optimize/docsify-plugins-gitalk.min.js"></script>'); // 重写过上面的文件：自定义规则动态生成ID
