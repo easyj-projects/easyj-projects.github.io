@@ -23,7 +23,7 @@
 	// DocSify初始化
 	w.$docsify = {
 		name: pageTitle(),
-		repo: "https://github.com/" + c.communityName,
+		repo: c.vcsRoot + c.communityName,
 
 		// 侧边导航栏
 		loadSidebar: true,
