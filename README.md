@@ -24,7 +24,7 @@
 - **&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中间件：**` DWZ（短链接服务）`、`WebSocket服务中间件`
 - **&nbsp;Maven插件：** `simplify`（代替 `org.codehaus.mojo:flatten-maven-plugin` 插件）、`spring-boot-extend`（支持 `includeGroupIds`）
 
-<a href="./docs" target="_blank">文档</a> &emsp;
+<a href="./docs">文档</a> &emsp;
 [GitHub](https://github.com/easyj-projects) &emsp;
 [Gitee](https://gitee.com/easyj-projects)
 
