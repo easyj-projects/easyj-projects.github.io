@@ -9,7 +9,7 @@
 
 ### 起始版本：
 
-v0.4.0版本新增的插件，推荐使用最新版本的该插件，功能比较齐全，BUG较少。
+`v0.4.0` 版本新增的插件，推荐使用最新版本的该插件，功能比较齐全，BUG较少。
 
 
 ### 最新版本：
@@ -38,8 +38,16 @@ v0.4.0版本新增的插件，推荐使用最新版本的该插件，功能比�
                 <skip>false</skip>
                 <!-- 扁平化模式，根据需求选择值：NONE | BOM | SHADE | DEPENDENCIES | JAR | POM（默认：AUTO；property: maven.simplify.mode） -->
                 <simplifyMode>AUTO</simplifyMode>
+                <!-- <dependencyManagement> 中是否展开import的依赖（默认：false） -->
+                <expandImportDependencyManagement>false</expandImportDependencyManagement>
+                <!-- 是否更新pom文件（默认：false） -->
+                <updatePomFile>true</updatePomFile>
                 <!-- 扁平化后的pom文件名（默认：.simplified-pom.xml） -->
                 <simplifiedPomFileName>.flattened-pom.xml</simplifiedPomFileName>
+                <!-- 是否移除parent，顺便将parent的部分信息复制到当前POM中（默认：null，表示根据不同的simplifier做不同的处理） -->
+                <removeParent>null</removeParent><!-- Boolean类型 -->
+                <!-- <name>内容模板，用于生成所有子模块的<name>，例：'${project.groupId}::${project.artifactId}' -->
+                <artifactNameTemplate></artifactNameTemplate>
                 <!-- 是否开源项目，开源项目下，部分信息标签必须（默认：true） -->
                 <isOpenSourceProject>false</isOpenSourceProject>
                 <!-- POM注释内容（v1.0.1新特性） -->

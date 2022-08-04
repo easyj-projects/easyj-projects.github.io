@@ -8,7 +8,7 @@
 
 ### 起始版本：
 
-v0.7.4版本新增的插件。
+`v0.7.4` 版本新增的插件。
 
 
 ### 最新版本：
@@ -39,9 +39,14 @@ v0.7.4版本新增的插件。
                         <goal>spring-boot-release</goal>
                     </goals>
                     <configuration>
-                        <!-- 发布文件夹，支持 {groupId}、{artifactId}、{version}、{finalName} 占位符配置 -->
+                        <!-- 源文件的文件夹列表，注意：不会读取子文件夹的文件。 -->
+                        <sourceDirectories>
+                            <directory>${project.basedir}/src/main/resources</directory>
+                            <directory>${project.basedir}/src/main/resources/config</directory>
+                        </sourceDirectories>
+                        <!-- 发布文件夹，支持 {groupId}、{artifactId}、{version}、{finalName} 占位符配置（无默认值，配置后才能使用此goal） -->
                         <releaseDirectory>${maven.spring-boot-release.dir}</releaseDirectory>
-                        <!-- 匹配 /target 一级目录下的文件，并将匹配到的文件复制到发布文件夹下。 -->
+                        <!-- 匹配 /target 一级目录下的文件，并将匹配到的文件复制到发布文件夹下。（以下为默认值） -->
                         <filePatterns>
                             <pattern>{finalName}.jar</pattern>
                             <pattern>lib-*.zip</pattern>

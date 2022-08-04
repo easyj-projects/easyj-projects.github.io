@@ -17,7 +17,7 @@
 
 ### 起始版本：
 
-v0.6.8版本新增的插件。
+`v0.6.8` 版本新增的插件。
 
 
 ### 最新版本：
@@ -51,8 +51,6 @@ v0.6.8版本新增的插件。
                 <includeGroupIds>${project.groupIds}, com.aaa, com.bbb</includeGroupIds>
                 <!-- 增量的includeGroupIds，用于单个项目配置，includeGroupIds可在公司框架中统一配置。（v1.0.4 新特性） -->
                 <additionalIncludeGroupIds>com.ccc, com.ddd</additionalIncludeGroupIds>
-                <!-- 是否打包外置lib到 /target/lib.zip 中，默认：true -->
-                <zipLib>true</zipLib>
                 <!--
                    通用依赖的匹配串，支持配置完整groupId:artifactId、通配符、正则表达式。
                    匹配到的依赖，会被复制到 /target/lib-common/ 目录下，并打包进 lib-common.zip 中。
@@ -62,11 +60,31 @@ v0.6.8版本新增的插件。
                     <pattern>icu.easyj:*</pattern>
                     <pattern>^icu\.easyj\:easyj\-.*$</pattern>
                 </commonDependencyPatternSet>
+                <!-- 是否打包外置lib到 /target/lib.zip 中，默认：true -->
+                <zipLib>true</zipLib>
+                <!-- 是否创建lib.history.md文件，记录外置lib历史信息，用于在每次打包时，如果外置lib有变更，提醒开发人员此次需要更新外置lib。（默认：true） -->
+                <createLibHistory>true</createLibHistory>
 
                 <!-- 是否创建 startup.bat 和 startup.sh 文件 -->
                 <needCreateStartupFile>true</needCreateStartupFile>
-                <!-- startup脚本，可用变量：{loaderPath}、{finalName}、{artifactId}，注意变量前面没有 '$'. 以下为默认值. -->
-                <startupScript>java -jar {loaderPath} {finalName}.jar</startupScript>
+                <!-- startup脚本，可用变量：{loaderPath}、{finalName}、{artifactId}，注意变量前面没有 '$'. （以下为默认值） -->
+                <startupScript>
+                    java -jar ^
+                         -Xms128m -Xmx128m ^
+                         {loaderPath} ^
+                         -Dspring.profiles.active={activeProfile} ^
+                         -Dspring.config.location=application.yml ^
+                         -Dspring.config.additional-location=application-{activeProfile}.yml ^
+                         {startupScriptAdditionalParameter} ^
+                         {finalName}.jar
+                </startupScript>
+                <!-- 启动脚本补充参数，用于替换startupScript中的占位符 {startupScriptAdditionalParameter}。（默认为空） -->
+                <startupScriptAdditionalParameter>
+                    -Dxxxxxxx.xxxxx=a ^
+                    -Dyyyyyyy.yyyyy=b
+                </startupScriptAdditionalParameter>
+                <!-- 激活环境名，用于替换startupScript中的占位符 {activeProfile}（默认：prod） -->
+                <activeProfile>prod</activeProfile>
             </configuration>
             <executions>
                 <execution>
