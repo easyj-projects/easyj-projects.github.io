@@ -69,8 +69,8 @@
                 <needCreateStartupFile>true</needCreateStartupFile>
                 <!-- startup脚本，可用变量：{loaderPath}、{finalName}、{artifactId}，注意变量前面没有 '$'. （以下为默认值） -->
                 <startupScript>
-                    java -jar ^
-                         -Xms128m -Xmx128m ^
+                    java -Xms64m -Xmx128m ^
+                         -jar ^
                          {loaderPath} ^
                          -Dspring.profiles.active={activeProfile} ^
                          -Dspring.config.location=application.yml ^
