@@ -141,7 +141,7 @@ public class TestELK {
 
     @Test
     public void testContextRelationLog() {
-        Logger log = LoggerFactory.getLogger(Test.class);
+        Logger log = LoggerFactory.getLogger(TestELK.class);
         try {
             // 设置上下文
             MDC.put("id", "1234567890");
@@ -184,7 +184,7 @@ public class TestELK {
 
     @Test
     public void testContextRelationLog() {
-        Logger log = LoggerFactory.getLogger(Test.class);
+        Logger log = LoggerFactory.getLogger(TestELK.class);
         try {
             // 设置上下文
             TraceUtils.put("id", "1234567890");
