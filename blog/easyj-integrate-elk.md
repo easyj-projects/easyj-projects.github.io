@@ -8,7 +8,7 @@
 ---------------------------
 
 
-## 一、部署ELK
+## 一、部署ELK（如已部署，请跳过该步骤）
 
 ### 1.1、下载ELK镜像：
 
@@ -80,7 +80,7 @@ docker logs -f elk
 <dependency>
     <groupId>icu.easyj.boot</groupId>
     <artifactId>easyj-spring-boot-starter-logging</artifactId>
-    <version>0.7.4</version>
+    <version>0.7.5</version>
 </dependency>
 ```
 
@@ -112,13 +112,20 @@ easyj.logging.logback:
 ---------------------------
 
 
-## 三、上下文关联日志（开发者进阶）
+## 三、进阶：上下文关联日志
 
 为了更快的检索到相关的日志信息，往往需要将一些日志信息与业务ID等关联起来。这时候，就需要设置一些上下文。
 
-下面提供两种上下文设置方式：
 
-### 3.1、调用logback提供的工具类：`org.slf4j.MDC`
+### 3.1、先设置上下文
+
+**下面提供两种上下文设置方式：**
+
+<!-- tabs:start -->
+
+<!-- tab:**slf4j提供的MDC** -->
+
+可调用调用 slf4j-api 提供的工具类来设置上下文：`org.slf4j.MDC`
 
 ```java
 package icu.easyj.spring.boot.test;
@@ -133,27 +140,29 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TestELK {
 
     @Test
-    public void testContextToELK() {
+    public void testContextRelationLog() {
         Logger log = LoggerFactory.getLogger(Test.class);
         try {
             // 设置上下文
             MDC.put("id", "1234567890");
+            // 记录日志，上下文会与这些日志一起被上传到ELK中
             log.info("测试info日志信息");
             log.error("测试error日志信息", new RuntimeException("模拟异常"));
         } finally {
             // 清理单个上下文
             MDC.remove("id");
+
+            // 在部分程序结束的地方可以清空所有上下文
+            //MDC.clear();
         }
-
-
-        // 在部分程序结束的地方清空所有上下文
-        //MDC.clear();
     }
 
 }
 ```
 
-### 3.2、EasyJ专门提供了追踪类：`icu.easyj.core.trace.TraceUtils`
+<!-- tab:**EasyJ提供的TraceUtils** -->
+
+调用EasyJ专门提供了追踪类来设置上下文：`icu.easyj.core.trace.TraceUtils`
 
 该工具类使用了 `门面模式`，主要用于追踪请求或日志或其他更多内容；
 
@@ -174,27 +183,30 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TestELK {
 
     @Test
-    public void testContextToELK() {
+    public void testContextRelationLog() {
         Logger log = LoggerFactory.getLogger(Test.class);
         try {
             // 设置上下文
             TraceUtils.put("id", "1234567890");
+            // 记录日志，上下文会与这些日志一起被上传到ELK中
             log.info("测试info日志信息");
             log.error("测试error日志信息", new RuntimeException("模拟异常"));
         } finally {
             // 清理单个上下文
             TraceUtils.remove("id");
+
+            // 在部分程序结束的地方可以清空所有上下文
+            //TraceUtils.clear();
         }
-
-
-        // 在部分程序结束的地方清空所有上下文
-        //TraceUtils.clear();
     }
 
 }
 ```
 
-### 3.3、根据上下文查询关联的日志
+<!-- tabs:end -->
+
+
+### 3.2、再筛选出关联的日志
 
 设置了上下文后，在上下文作用范围内，进行写日志时，上下文也会和日志一起被上传到 `ELK` 中。
 
