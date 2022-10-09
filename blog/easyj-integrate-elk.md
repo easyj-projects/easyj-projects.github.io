@@ -123,7 +123,7 @@ easyj.logging.logback:
 
 <!-- tabs:start -->
 
-<!-- tab:**slf4j提供的MDC** -->
+<!-- tab:**调用slf4j提供的MDC设置** -->
 
 可调用调用 slf4j-api 提供的工具类来设置上下文：`org.slf4j.MDC`
 
@@ -160,7 +160,7 @@ public class TestELK {
 }
 ```
 
-<!-- tab:**EasyJ提供的TraceUtils** -->
+<!-- tab:**调用EasyJ提供的TraceUtils设置** -->
 
 调用EasyJ专门提供了追踪类来设置上下文：`icu.easyj.core.trace.TraceUtils`
 

@@ -25,7 +25,5 @@
 - **&nbsp;Maven插件：** `simplify`（代替 `org.codehaus.mojo:flatten-maven-plugin` 插件）、`spring-boot-extend`（支持 `includeGroupIds`）
 
 <a href="./docs">文档</a> &emsp;
-[GitHub](https://github.com/easyj-projects) &emsp;
-[Gitee](https://gitee.com/easyj-projects)
-
-https://easyj.icu 域名太卡了？ 尝试访问 https://easyj-projects.gitee.io/easyj-projects.github.io 吧！
+[GitHub仓库](https://github.com/easyj-projects) &emsp;
+[Gitee仓库](https://gitee.com/easyj-projects)
