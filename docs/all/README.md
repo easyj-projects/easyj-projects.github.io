@@ -6,7 +6,7 @@
 <dependency>
     <groupId>icu.easyj</groupId>
     <artifactId>easyj-all</artifactId>
-    <version>0.7.5</version>
+    <version>${easyj.version}</version>
 </dependency>
 ```
 

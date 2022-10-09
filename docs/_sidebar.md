@@ -1,5 +1,6 @@
 * [快速开始](/)
 * [all：含10个基础模块](all/)
+  * [poi：Office文档处理](all/easyj-poi.md)
 * [sdk：云服务SDK封装](sdk/)
   * [dwz-sdk：短链接服务SDK封装](sdk/easyj-dwz-sdk.md)
   * [ocr-sdk：文字识别服务SDK封装](sdk/easyj-ocr-sdk.md)

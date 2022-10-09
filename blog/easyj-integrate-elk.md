@@ -80,7 +80,7 @@ docker logs -f elk
 <dependency>
     <groupId>icu.easyj.boot</groupId>
     <artifactId>easyj-spring-boot-starter-logging</artifactId>
-    <version>0.7.5</version>
+    <version>${easyj.version}</version>
 </dependency>
 ```
 
