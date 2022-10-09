@@ -1,8 +1,9 @@
 # easyj-poi
 
-## 一、Excel相关功能
+目前该组件只包含了Excel相关功能
 
-### 1.1、引用依赖：
+
+## 1、引用依赖
 
 ```xml
 <dependency>
@@ -12,7 +13,7 @@
 </dependency>
 ```
 
-### 1.2、在类及其属性上添加映射注解 `@Excel` 和 `@ExcelCell`
+## 2、在类及其属性上添加映射注解 `@Excel` 和 `@ExcelCell`
 
 ```java
 import lombok.Data;
@@ -34,7 +35,7 @@ public class UserInfo {
 }
 ```
 
-### 1.3、在Controller上添加Excel导出功能注解 `@ExcelExport`
+## 3、在Controller方法上添加Excel导出功能的注解 `@ExcelExport`
 
 ```java
 import icu.easyj.web.poi.excel.ExcelExport;
@@ -57,7 +58,8 @@ public class UserController {
      * @return userList 用户信息列表
      */
     @ExcelExport(fileNamePre = "用户列表", dataType = MyEntity.class)
-    //@ApiImplicitParam(name = "doExport", dataType = "Boolean", dataTypeClass = Boolean.class, defaultValue = "false", paramType = "query") // 添加swagger的该注解在swagger界面中显示出该隐式参数
+    // 添加swagger的该注解在swagger界面中显示出该隐式参数
+    //@ApiImplicitParam(name = "doExport", dataType = "Boolean", dataTypeClass = Boolean.class, defaultValue = "false", paramType = "query")
     @GetMapping(value = "/list")
     public List<UserInfo> queryUserList(QueryParam param) {
         //region 重要：当此次请求为excel导出请求时，将分页参数清除（这段代码是此功能唯一的代码入侵）
@@ -78,7 +80,8 @@ public class UserController {
     @ExcelExport(fileNamePre = "用户列表", dataType = MyEntity.class,
         listFieldName = "list" // 重要：因为列表数据在出参的属性里，listFieldName设置列表数据的属性名即可（TODO: 以后再补充说明如何全局配置该属性名，而无需各注解上去配置。）
     )
-    //@ApiImplicitParam(name = "doExport", dataType = "Boolean", dataTypeClass = Boolean.class, defaultValue = "false", paramType = "query") // 添加swagger的该注解在swagger界面中显示出该隐式参数
+    // 添加swagger的该注解在swagger界面中显示出该隐式参数
+    //@ApiImplicitParam(name = "doExport", dataType = "Boolean", dataTypeClass = Boolean.class, defaultValue = "false", paramType = "query")
     @GetMapping(value = "/paging")
     public PageResult<UserInfo> queryUserPaging(QueryParam param) {
         //region 重要：当此次请求为excel导出请求时，将分页参数清除（这段代码是此功能唯一的代码入侵）
@@ -141,11 +144,13 @@ public class PageResult<T> {
 ```
 
 
-### 1.4、发起普通请求 和 下载Excel请求
+## 4、发起普通请求 和 下载Excel请求
 
-* 普通请求：http://ip:port/japi/v1/user/list?searchKey=xxxxx
-* 下载请求：http://ip:port/japi/v1/user/list?searchKey=xxxxx&doExport=true
+* 普通的列表查询请求：http://ip:port/japi/v1/user/list?searchKey=xxxxx
+* 查询并导出文件请求：http://ip:port/japi/v1/user/list?searchKey=xxxxx&doExport=true _// 即：额外添加一个GET参数 `doExport=true` 即可_
 
----
 
-## 二、暂无其他类型文档相关功能...
+## 5、示例代码仓库 `easyj-samples` 传送门
+
+* [GitHub仓库](https://github.com/easyj-projects/easyj-samples/tree/master/spring-boot-samples-parent/spring-boot-samples-poi-parent/spring-boot-sample-poi-excel)
+* [Gitee仓库  ](https://gitee.com/easyj-projects/easyj-samples/tree/master/spring-boot-samples-parent/spring-boot-samples-poi-parent/spring-boot-sample-poi-excel)

@@ -10,7 +10,7 @@
 
 ## 一、部署ELK（如已部署，请跳过该步骤）
 
-### 1.1、下载ELK镜像：
+### 1.1、下载ELK镜像
 
 EasyJ社区在 `sebp/elk:7.12.1` 镜像的基础上，调整了部分内容，并上传了 `easyj/elk:7.12.1` 镜像，用于快速集成。
 
@@ -22,7 +22,7 @@ docker pull easyj/elk:7.12.1
 
 ```
 
-### 1.2、启用ELK容器：
+### 1.2、启用ELK容器
 
 ```bash
 #创建并启动容器
@@ -45,11 +45,11 @@ docker logs -f elk
 
 ```
 
-### 1.3、验证容器：
+### 1.3、验证容器
 
 在浏览器中访问： http://xxx.xxx.xxx.xxx:5601 ，并展示出 `Kibana` 的界面，就说明部署成功。
 
-### 1.4、添加 `Index patterns` （索引模式配置）：
+### 1.4、添加 `Index patterns` （索引模式配置）
 
 点击 `菜单栏` ➝ `Stack Management` ➝ `Index Patterns`
 
@@ -59,7 +59,7 @@ docker logs -f elk
 > 2. Step 1: 填写 Index pattern name 输入框: `logs*` （可在界面下方实时查看到关联到的索引），点击 `Next step` 按钮；
 > 3. Step 2: Time field 选择 `@timestamp`，点击 `Create index pattern` 按钮，完成添加。
 
-### 1.5、配置 `Index Lifecycle Policies`（索引生命周期策略）：
+### 1.5、配置 `Index Lifecycle Policies`（索引生命周期策略）
 
 点击 `菜单栏` ➝ `Stack Management` ➝ `Index Lifecycle Policies`
 
@@ -74,7 +74,7 @@ docker logs -f elk
 
 ## 二、使用 `easyj-spring-boot-starter-logging` 快速集成 `ELK`
 
-### 2.1、引用依赖：
+### 2.1、引用依赖
 
 ```xml
 <dependency>
@@ -84,7 +84,7 @@ docker logs -f elk
 </dependency>
 ```
 
-### 2.2、添加配置：
+### 2.2、添加配置
 
 在 yaml 配置文件中，添加以下配置：
 
@@ -104,7 +104,7 @@ easyj.logging.logback:
     #destination: "xxx.xxx.xxx.xxx:4560,xxx.xxx.xxx.xxx:4560" #可配置多个地址，用逗号隔开
 ```
 
-### 2.3、验证配置是否正确：
+### 2.3、验证配置是否正确
 
 启动应用，产生日志。然后进入 `Kibana` 页面，点击 `菜单栏` ➝ `Discover` 进入日志查看界面，查看是否成功将日志上传了。
 
@@ -220,13 +220,13 @@ public class TestELK {
 
 ### 问题1：内存权限太小导致ELK启动失败
 
-#### 4.1.1、错误日志：
+#### 4.1.1、错误日志
 
 ```log
 [ERROR] max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
 ```
 
-#### 4.1.2、解决方法：
+#### 4.1.2、解决方法
 
 （引用自 https://blog.csdn.net/qq_43655835/article/details/104633359 ）
 
@@ -262,5 +262,5 @@ sysctl -p
 
 ```
 
-#### 4.1.3、补充说明：
+#### 4.1.3、补充说明
 在 `easyj/elk:7.12.1` 镜像中，其实已设置过 `vm.max_map_count=262144` 参数，不会碰到该问题。
