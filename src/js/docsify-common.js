@@ -86,9 +86,9 @@
 	// 插件：全文检索
 	d.writeln('<script src="' + jsRootPath + 'optimize/docsify-plugins-search.min.js"></script>'); // 重写过上面的文件：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
 
-	// 插件：评论系统 GITalk
-	d.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
-	d.writeln('<script src="' + jsRootPath + 'optimize/docsify-plugins-gitalk.min.js"></script>'); // 重写过上面的文件：自定义规则动态生成ID
+//	// 插件：评论系统 GITalk
+//	d.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
+//	d.writeln('<script src="' + jsRootPath + 'optimize/docsify-plugins-gitalk.min.js"></script>'); // 重写过上面的文件：自定义规则动态生成ID
 
 	// 百度统计
 	d.writeln('<script src="' + jsRootPath + 'baidu-statistics.min.js"></script>');
