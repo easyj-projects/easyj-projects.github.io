@@ -14,7 +14,7 @@
 
 EasyJ社区在 `sebp/elk:7.12.1` 镜像的基础上，调整了部分内容，并上传了 `easyj/elk:7.12.1` 镜像，用于快速集成。
 
-（ 具体调整内容请查看：https://hub.docker.com/repository/docker/easyj/elk ）
+（ 具体调整内容请查看：https://hub.docker.com/r/easyj/elk ）
 
 ```bash
 #拉取镜像
