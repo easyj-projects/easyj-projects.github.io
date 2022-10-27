@@ -15,7 +15,7 @@
 
 ##### 优化
 
-* 【maven-plugin】 源码迁移到独立的仓库中：https://github.com/easyj-projects/easyj-maven-plugin
+* 【maven-plugin】 源码迁移到独立的仓库中：[Github](https://github.com/easyj-projects/easyj-maven-plugin) | [Gitee](https://gitee.com/easyj-projects/easyj-maven-plugin)
 
 ---------------------------------------------------------------------------------------------------------------------------
 

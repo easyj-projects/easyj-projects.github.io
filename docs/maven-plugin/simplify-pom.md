@@ -19,11 +19,6 @@
 </a>
 
 
-### 使用方法：
-
-请参照 [easyj-projects/easyj](https://github.com/easyj-projects/easyj) 项目源码中的pom的配置。 
-
-
 ### plugin配置：
 
 ```xml
