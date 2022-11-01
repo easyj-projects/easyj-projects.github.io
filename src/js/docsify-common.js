@@ -69,7 +69,7 @@
 				editOnGithubUrl,
 				null,
 				function () {
-					return '内容有问题？立即提交修改！'
+					return '帮助我们改善此文档'
 				}
 			)
 		]
