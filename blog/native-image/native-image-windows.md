@@ -38,7 +38,7 @@ PATH=%VS_MSVC_PATH%\bin\HostX64\x64;
 # 这三项为上面配置中的3个变量，根据实际情况进行配置
 KIT_PATH=C:\Program Files (x86)\Windows Kits\10
 KIT_VERSION=10.0.22000.0
-VS_MSVC_PATH=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933
+VS_MSVC_PATH=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.34.31933
 ```
 
 ---------------------------
