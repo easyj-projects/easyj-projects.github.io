@@ -238,7 +238,7 @@ args: [--server.port=8081]
 2022-12-28T16:14:34.372-05:00  INFO 3471 --- [           main] StudyNativeImageBySpringBoot3Application : Started StudyNativeImageBySpringBoot3Application in 0.061 seconds (process running for 0.08)
 ```
 
-可以看到启动时间只用了 `0.061` 秒，比传统的SpringBoot应用快20、30多倍，甚至40倍。
+可以看到启动时间只用了 `0.061` 秒，比传统的SpringBoot应用快30~40多倍。
 
 <!-- tab:**SpringBoot2** -->
 
@@ -486,7 +486,7 @@ args: [--server.port=8081]
 2022-12-28 16:15:51.814  INFO 3500 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
 2022-12-28 16:15:51.815  INFO 3500 --- [           main] StudyNativeImageBySpringBoot2Application : Started StudyNativeImageBySpringBoot2Application in 0.05 seconds (JVM running for 0.068)
 ```
-可以看到启动时间只用了 `0.05` 秒，比传统的SpringBoot应用快20、30多倍，甚至40倍。
+可以看到启动时间只用了 `0.05` 秒，比传统的SpringBoot应用快30~40多倍。
 
 
 <!-- tabs:end -->
