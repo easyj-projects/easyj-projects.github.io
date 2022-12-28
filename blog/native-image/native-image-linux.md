@@ -8,37 +8,53 @@
 ### 1.1、安装GraalVM
 
 访问 https://www.graalvm.org/downloads/ 下载、解压、配置环境变量：
-```properties
-JAVA_HOME=C:\Program Files\Java\graalvm-ce-java17-22.3.0
-PATH=%JAVA_HOME%\bin;
+
+```shell
+#解压 tar.gz 文件
+tar -zxvf graalvm-ce-java17-linux-amd64-22.3.0.tar.gz
+
+#编辑环境变量
+vim /etc/profile
+
+#修改环境变量
+export JAVA_HOME=/usr/java/graalvm-ce-java17-22.3.0
+export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+export PATH=$PATH:$JAVA_HOME/bin
 ```
 
 ### 1.2、安装Maven
 
 访问 https://maven.apache.org/download.cgi 下载、解压、配置环境变量：
 
-```properties
-MAVEN_HOME=C:\Program Files\apache\maven\apache-maven-3.8.6
-PATH=%JAVA_HOME%\bin;
+```shell
+#解压 tar.gz 文件
+tar -zxvf apache-maven-3.8.6-bin.tar.gz
+
+#编辑环境变量
+vim /etc/profile
+
+#修改环境变量
+export MAVEN_HOME=/usr/maven/apache-maven-3.8.6/
+export PATH=$PATH:$MAVEN_HOME/bin
 ```
 
-### 1.3、安装Visual Studio
+### 1.3、安装gcc
 
-访问 https://visualstudio.microsoft.com/zh-hans/downloads/ 下载。<br/>
-本人下载的是 Enterprise 版本：`Visual Studio Enterprise 2022 - 17.4.3` <br/>
-在安装前勾选 `.NET 桌面开发` 或 `使用 C++ 的桌面开发`，在安装详情信息里勾选 `MSVC v143 - VS 2022 C++ x64/x86 生成工具` 和 `Windows 11 SDK`，再开始安装。<br/>
-环境变量配置：
+```shell
+yum install gcc
+```
 
-```properties
-# 这三项直接复制
-LIB=%KIT_PATH%\Lib\%KIT_VERSION%\um\x64;%KIT_PATH%\Lib\%KIT_VERSION%\ucrt\x64;%VS_MSVC_PATH%\lib\x64
-INCLUDE=%KIT_PATH%\Include\%KIT_VERSION%\ucrt;%KIT_PATH%\Include\%KIT_VERSION%\um;%KIT_PATH%\Include\%KIT_VERSION%\shared;%VS_MSVC_PATH%\include
-PATH=%VS_MSVC_PATH%\bin\HostX64\x64;
+### 1.4、使环境变量生效
 
-# 这三项为上面配置中的3个变量，根据实际情况进行配置
-KIT_PATH=C:\Program Files (x86)\Windows Kits\10
-KIT_VERSION=10.0.22000.0
-VS_MSVC_PATH=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933
+```shell
+#使环境变量立即生效
+source /etc/profile
+```
+
+执行完命令，最好重启系统一下，保证环境变量已经生效。
+```shell
+#重启系统命令
+reboot
 ```
 
 ---------------------------
@@ -184,19 +200,19 @@ public class TestController {
 mvn clean package -Pnative -e
 ```
 
-**打包完成后，会在target目录下生成一个可执行文件：**
+**打包完成后，会在 `./target/` 目录下生成一个可执行文件：**
 ```
-/target/test-native-image-springboot3.exe # native-image（即：本机镜像，可以直接双击运行，不依赖于JVM）
-/target/test-native-image-springboot3.jar # spring-boot的fatJar包（依赖于JVM）
+./target/test-native-image-springboot3     # native-image（即：本机镜像，可以直接运行，不依赖于JVM，该文件只能在linux系统下运行。）
+./target/test-native-image-springboot3.jar # spring-boot的fatJar包（依赖于JVM）
 ```
 
 #### 2.1.5、运行native-image
 
 直接双击exe文件运行，或者在命令行中执行（可在命令中添加参数）：
 ```bash
-start test-native-image-springboot3.exe --server.port=8081
+./test-native-image-springboot3 --server.port=8081
 或
-start test-native-image-springboot3.exe -Dserver.port=8081
+./test-native-image-springboot3 -Dserver.port=8081
 ```
 > 注意：如果不指定端口号，会默认使用8080端口，因为应用未在 `application.yml` 配置端口号。
 
@@ -211,18 +227,18 @@ args: [--server.port=8081]
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.0.1)
 
-2022-12-28T18:53:00.824+08:00  INFO 18420 --- [           main] co.TestNativeImageSpringBoot3Application : Starting AOT-processed StudyNativeImageBySpringBoot3Application using Java 17.0.5 with PID 18420 (E:\Workspace_Java\wangliang181230\study-spring-boot\study-native-image\study-native-image-with-springboot3\target\study-native-image-with-springboot3.exe started by new in E:\Workspace_Java\wangliang181230\study-spring-boot\study-native-image\study-native-image-with-springboot3\target)
-2022-12-28T18:53:00.824+08:00  INFO 18420 --- [           main] co.TestNativeImageSpringBoot3Application : No active profile set, falling back to 1 default profile: "default"
-2022-12-28T18:53:00.896+08:00  INFO 18420 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2022-12-28T18:53:00.911+08:00  INFO 18420 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-12-28T18:53:00.911+08:00  INFO 18420 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.4]
-2022-12-28T18:53:00.920+08:00  INFO 18420 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-12-28T18:53:00.920+08:00  INFO 18420 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 96 ms
-2022-12-28T18:53:00.941+08:00  INFO 18420 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2022-12-28T18:53:00.942+08:00  INFO 18420 --- [           main] StudyNativeImageBySpringBoot3Application : Started StudyNativeImageBySpringBoot3Application in 0.127 seconds (process running for 0.131)
+2022-12-28T16:14:34.320-05:00  INFO 3471 --- [           main] StudyNativeImageBySpringBoot3Application : Starting AOT-processed StudyNativeImageBySpringBoot3Application using Java 17.0.5 with PID 3471 (/usr/test-native/study-spring-boot/study-native-image/study-native-image-with-springboot3/target/study-native-image-with-springboot3 started by root in /usr/test-native/study-spring-boot/study-native-image/study-native-image-with-springboot3/target)
+2022-12-28T16:14:34.320-05:00  INFO 3471 --- [           main] StudyNativeImageBySpringBoot3Application : No active profile set, falling back to 1 default profile: "default"
+2022-12-28T16:14:34.337-05:00  INFO 3471 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2022-12-28T16:14:34.339-05:00  INFO 3471 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-28T16:14:34.339-05:00  INFO 3471 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.4]
+2022-12-28T16:14:34.344-05:00  INFO 3471 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-28T16:14:34.344-05:00  INFO 3471 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 24 ms
+2022-12-28T16:14:34.371-05:00  INFO 3471 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2022-12-28T16:14:34.372-05:00  INFO 3471 --- [           main] StudyNativeImageBySpringBoot3Application : Started StudyNativeImageBySpringBoot3Application in 0.061 seconds (process running for 0.08)
 ```
 
-可以看到启动时间只用了 `0.127` 秒，比传统的SpringBoot应用快10多倍。
+可以看到启动时间只用了 `0.061` 秒，比传统的SpringBoot应用快20、30多倍，甚至40倍。
 
 <!-- tab:**SpringBoot2** -->
 
@@ -431,26 +447,26 @@ public class TestController {
 mvn clean package -Pnative -e
 ```
 
-**打包完成后，会在target目录下生成一个可执行文件：**
+**打包完成后，会在 `./target/` 目录下生成一个可执行文件：**
 ```
-/target/test-native-image-springboot2.exe # native-image（即：本机镜像，可以直接双击运行，不依赖于JVM）
-/target/test-native-image-springboot2.jar # spring-boot的fatJar包（依赖于JVM）
+./target/test-native-image-springboot2     # native-image（即：本机镜像，可以直接运行，不依赖于JVM，该文件只能在linux系统下运行。）
+./target/test-native-image-springboot2.jar # spring-boot的fatJar包（依赖于JVM）
 ```
 
 #### 2.2.5、运行native-image
 
 直接双击exe文件运行，或者在命令行中执行（可在命令中添加参数）：
 ```bash
-start test-native-image-springboot2.exe --server.port=8081
+./test-native-image-springboot2 --server.port=8081
 或
-start test-native-image-springboot2.exe -Dserver.port=8081
+./test-native-image-springboot2 -Dserver.port=8081
 ```
 > 注意：如果不指定端口号，会默认使用8080端口，因为应用未在 `application.yml` 配置端口号。
 
 ```log
 args: [--server.port=8081]
 
-2022-12-28 20:03:16.819  INFO 19280 --- [           main] o.s.nativex.NativeListener               : AOT mode enabled
+2022-12-28 16:15:51.775  INFO 3500 --- [           main] o.s.nativex.NativeListener               : AOT mode enabled
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -460,17 +476,17 @@ args: [--server.port=8081]
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v2.7.5)
 
-2022-12-28 20:03:16.821  INFO 19280 --- [           main] StudyNativeImageBySpringBoot2Application : Starting StudyNativeImageBySpringBoot2Application using Java 17.0.5 on LAPTOP-WangLiang with PID 19280 (E:\Workspace_Java\wangliang181230\study-spring-boot\study-native-image\study-native-image-with-springboot2\target\study-native-image-with-springboot2.exe started by new in E:\Workspace_Java\wangliang181230\study-spring-boot\study-native-image\study-native-image-with-springboot2\target)
-2022-12-28 20:03:16.821  INFO 19280 --- [           main] StudyNativeImageBySpringBoot2Application : No active profile set, falling back to 1 default profile: "default"
-2022-12-28 20:03:16.892  INFO 19280 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2022-12-28 20:03:16.892  INFO 19280 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-12-28 20:03:16.892  INFO 19280 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
-2022-12-28 20:03:16.902  INFO 19280 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-12-28 20:03:16.902  INFO 19280 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 81 ms
-2022-12-28 20:03:16.936  INFO 19280 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2022-12-28 20:03:16.936  INFO 19280 --- [           main] StudyNativeImageBySpringBoot2Application : Started StudyNativeImageBySpringBoot2Application in 0.135 seconds (JVM running for 0.136)
+2022-12-28 16:15:51.776  INFO 3500 --- [           main] StudyNativeImageBySpringBoot2Application : Starting StudyNativeImageBySpringBoot2Application using Java 17.0.5 on localhost.localdomain with PID 3500 (/usr/test-native/study-spring-boot/study-native-image/study-native-image-with-springboot2/target/study-native-image-with-springboot2 started by root in /usr/test-native/study-spring-boot/study-native-image/study-native-image-with-springboot2/target)
+2022-12-28 16:15:51.776  INFO 3500 --- [           main] StudyNativeImageBySpringBoot2Application : No active profile set, falling back to 1 default profile: "default"
+2022-12-28 16:15:51.791  INFO 3500 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2022-12-28 16:15:51.791  INFO 3500 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-28 16:15:51.791  INFO 3500 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-28 16:15:51.795  INFO 3500 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-28 16:15:51.795  INFO 3500 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 18 ms
+2022-12-28 16:15:51.814  INFO 3500 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2022-12-28 16:15:51.815  INFO 3500 --- [           main] StudyNativeImageBySpringBoot2Application : Started StudyNativeImageBySpringBoot2Application in 0.05 seconds (JVM running for 0.068)
 ```
-可以看到启动时间只用了 `0.135` 秒，比传统的SpringBoot应用快10多倍。
+可以看到启动时间只用了 `0.05` 秒，比传统的SpringBoot应用快20、30多倍，甚至40倍。
 
 
 <!-- tabs:end -->
@@ -485,7 +501,7 @@ args: [--server.port=8081]
 #### 3.1.1、错误日志：
 ```log
 ......省略其他日志
-C:\Users\administrator> gu install native-image
+[root]# gu install native-image
 ......省略其他日志
 Downloading: Component catalog from www.graalvm.org
 Processing Component: Native Image
@@ -495,7 +511,7 @@ I/O error occurred: PKIX path building failed: sun.security.provider.certpath.Su
 ```
 
 #### 3.1.2、解决方案：
-执行下面附件1的java程序，生成证书文件：
+执行 <a href="#/native-image/native-image-linux?id=_41、附件1：installcertjava">第四章节附件1</a> 的java程序，生成证书文件：
 ```shell
 #javac 生成InstallCert.class
 javac InstallCert.java
@@ -503,42 +519,25 @@ javac InstallCert.java
 #java 执行InstallCert.class，生成证书文件
 java InstallCert www.graalvm.org
 ```
-然后将生成的 `jssecacerts` 证书文件复制到 `%JAVA_HOME%/lib/security` 目录下即可。
+然后将生成的 `jssecacerts` 证书文件移动或复制到 `%JAVA_HOME%/lib/security` 目录下即可。
+```shell
+mv jssecacerts /usr/java/graalvm-ce-java17-22.3.0/lib/security/jssecacerts
+或
+cp jssecacerts /usr/java/graalvm-ce-java17-22.3.0/lib/security/jssecacerts
+```
 
 
-
-### 3.2、问题2：打包时抛异常 `java.lang.NoClassDefFoundError: org/springframework/boot/ApplicationServletEnvironment`
+### 3.2、问题2：Image build request failed with exit status 137
 #### 3.2.1、错误日志：
 ```log
 ......省略其他日志
-Exception in thread "main" java.lang.NoClassDefFoundError: org/springframework/boot/ApplicationServletEnvironment
-    at org.springframework.boot.AotApplicationContextFactory.getOrCreateEnvironment(AotApplicationContextFactory.java:80)
-    at org.springframework.boot.AotApplicationContextFactory.loadEnvironment(AotApplicationContextFactory.java:61)
-    at org.springframework.boot.AotApplicationContextFactory.createApplicationContext(AotApplicationContextFactory.java:52)
-    at org.springframework.aot.build.ContextBootstrapContributor.contribute(ContextBootstrapContributor.java:76)
-    at org.springframework.aot.build.BootstrapCodeGenerator.generate(BootstrapCodeGenerator.java:91)
-    at org.springframework.aot.build.BootstrapCodeGenerator.generate(BootstrapCodeGenerator.java:71)
-    at org.springframework.aot.build.GenerateBootstrapCommand.call(GenerateBootstrapCommand.java:107)
-    at org.springframework.aot.build.GenerateBootstrapCommand.call(GenerateBootstrapCommand.java:42)
-    at picocli.CommandLine.executeUserObject(CommandLine.java:1953)
-    at picocli.CommandLine.access$1300(CommandLine.java:145)
-    at picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2352)
-    at picocli.CommandLine$RunLast.handle(CommandLine.java:2346)
-    at picocli.CommandLine$RunLast.handle(CommandLine.java:2311)
-    at picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:2179)
-    at picocli.CommandLine.execute(CommandLine.java:2078)
-    at org.springframework.aot.build.GenerateBootstrapCommand.main(GenerateBootstrapCommand.java:112)
-Caused by: java.lang.ClassNotFoundException: org.springframework.boot.ApplicationServletEnvironment
-    at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
-    at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
-    at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:520)
-    ... 16 more
+[2/7] Performing analysis...  [******Error: Image build request failed with exit status 137
 ......省略其他日志
 ```
 
 #### 3.2.2、解决方案：
-这个就是上面提到的 `springboot2.7.6` 及以上版本与 `spring-native:0.12.1` 不兼容导致的，将 `springboot` 版本降低到 `2.7.5` 即可。
-
+内存不足导致，加大内存即可。<br>
+关注issue：https://github.com/graalvm/native-build-tools/issues/317
 
 
 ---------------------------
@@ -547,6 +546,7 @@ Caused by: java.lang.ClassNotFoundException: org.springframework.boot.Applicatio
 ## 四、附件
 
 ### 4.1、附件1：`InstallCert.java`
+解决 <a href="#/native-image/native-image-linux?id=_31、问题1：native-maven-plugin-打包插件自动执行-gu-install-native-image-时报错：">问题1</a> 时使用。
 ```java
 import java.io.*;
 import java.security.*;

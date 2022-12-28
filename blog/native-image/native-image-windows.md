@@ -184,10 +184,10 @@ public class TestController {
 mvn clean package -Pnative -e
 ```
 
-**打包完成后，会在target目录下生成一个可执行文件：**
+**打包完成后，会在 `./target/` 目录下生成一个可执行文件：**
 ```
-/target/test-native-image-springboot3.exe # native-image（即：本机镜像，可以直接双击运行，不依赖于JVM）
-/target/test-native-image-springboot3.jar # spring-boot的fatJar包（依赖于JVM）
+./target/test-native-image-springboot3.exe # native-image（即：本机镜像，可以直接双击运行，不依赖于JVM，该文件只能在windows系统下运行。）
+./target/test-native-image-springboot3.jar # spring-boot的fatJar包（依赖于JVM）
 ```
 
 #### 2.1.5、运行native-image
@@ -431,10 +431,10 @@ public class TestController {
 mvn clean package -Pnative -e
 ```
 
-**打包完成后，会在target目录下生成一个可执行文件：**
+**打包完成后，会在 `./target` 目录下生成一个可执行文件：**
 ```
-/target/test-native-image-springboot2.exe # native-image（即：本机镜像，可以直接双击运行，不依赖于JVM）
-/target/test-native-image-springboot2.jar # spring-boot的fatJar包（依赖于JVM）
+./target/test-native-image-springboot2.exe # native-image（即：本机镜像，可以直接双击运行，不依赖于JVM，该文件只能在windows系统下运行。）
+./target/test-native-image-springboot2.jar # spring-boot的fatJar包（依赖于JVM）
 ```
 
 #### 2.2.5、运行native-image
@@ -495,7 +495,7 @@ I/O error occurred: PKIX path building failed: sun.security.provider.certpath.Su
 ```
 
 #### 3.1.2、解决方案：
-执行下面附件1的java程序，生成证书文件：
+执行 <a href="#/native-image/native-image-windows?id=_41、附件1：installcertjava">第四章节附件1</a> 的java程序，生成证书文件：
 ```shell
 #javac 生成InstallCert.class
 javac InstallCert.java
@@ -547,6 +547,7 @@ Caused by: java.lang.ClassNotFoundException: org.springframework.boot.Applicatio
 ## 四、附件
 
 ### 4.1、附件1：`InstallCert.java`
+解决 <a href="#/native-image/native-image-windows?id=_31、问题1：native-maven-plugin-打包插件自动执行-gu-install-native-image-时报错：">问题1</a> 时使用。
 ```java
 import java.io.*;
 import java.security.*;
