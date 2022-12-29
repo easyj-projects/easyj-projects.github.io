@@ -33,14 +33,14 @@
 
 ------------------
 
-### 五、SpringBoot自动装配相关问题：
+### 五、SpringBoot的Bean装配相关问题：
 
 1. 问题描述：`@ConditionalOnProperty` 配置值条件装配注解不生效。 <br>
    解决方案：`native-image` 是在打包时，读取配置值判断是否装配，并生成机器码。所以，先修改好配置值，再开始打包，然后发布运行。不能先打包好再修改配置后运行。 <br>
 
 ------------------
 
-### 六、打包时，出现解析类异常问题：
+### 六、打包时，出现解析异常问题：
 
 1. 异常信息：`Fatal error: com.oracle.graal.pointsto.util.AnalysisError$ParsingError: Error encountered while parsing reactor.netty.http.client.HttpClientConnect$$Lambda$acc7a0c687f2afec7708a4742f9f900f329034c5.get()` <br>
    解决方案：暂无 <br>
