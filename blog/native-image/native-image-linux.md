@@ -202,13 +202,16 @@ mvn clean package -Pnative -e
 
 **打包完成后，会在 `./target/` 目录下生成一个可执行文件：**
 ```
-./target/test-native-image-springboot3     # native-image（即：本机镜像，可以直接运行，不依赖于JVM，该文件只能在linux系统下运行。）
-./target/test-native-image-springboot3.jar # spring-boot的fatJar包（依赖于JVM）
+# native-image：即本机镜像，可以直接运行，不依赖于JVM，该文件只能在linux系统下运行，不支持跨平台。
+./target/test-native-image-springboot3
+
+# 传统的spring-boot的fatJar包，依赖于JVM，支持跨平台。
+./target/test-native-image-springboot3.jar
 ```
 
 #### 2.1.5、运行native-image
 
-直接双击exe文件运行，或者在命令行中执行（可在命令中添加参数）：
+直接执行该镜像文件（可在命令中添加参数）：
 ```bash
 ./test-native-image-springboot3 --server.port=8081
 或
@@ -449,13 +452,16 @@ mvn clean package -Pnative -e
 
 **打包完成后，会在 `./target/` 目录下生成一个可执行文件：**
 ```
-./target/test-native-image-springboot2     # native-image（即：本机镜像，可以直接运行，不依赖于JVM，该文件只能在linux系统下运行。）
-./target/test-native-image-springboot2.jar # spring-boot的fatJar包（依赖于JVM）
+# native-image：即本机镜像，可以直接运行，不依赖于JVM，该文件只能在linux系统下运行，不支持跨平台。
+./target/test-native-image-springboot2
+
+# 传统的spring-boot的fatJar包，依赖于JVM，支持跨平台。
+./target/test-native-image-springboot2.jar
 ```
 
 #### 2.2.5、运行native-image
 
-直接双击exe文件运行，或者在命令行中执行（可在命令中添加参数）：
+直接执行该镜像文件（可在命令中添加参数）：
 ```bash
 ./test-native-image-springboot2 --server.port=8081
 或
