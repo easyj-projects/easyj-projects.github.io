@@ -14,6 +14,6 @@
 
 #### 参考资料：Java AOT
 
-本人在学习Java AOT时偶然发现了一偏写的比较不错的文章，推荐给大家。
+本人在学习Java AOT时偶然发现了一偏写的非常不错的文章，推荐给大家。
 
 1. Java在云原生的破局利器——AOT(JIT与AOT)：https://huaweicloud.csdn.net/63311d00d3efff3090b52913.html
