@@ -282,7 +282,7 @@ mvn clean package -Pnative -e
 
 **打包完成后，会在 `./target/` 目录下生成一个可执行文件：**
 ```
-# native-image：即本机镜像，可以直接运行，不依赖于JVM，该文件只能在linux系统下运行，不支持跨平台。
+# native-image：即本地镜像，可以直接运行，不依赖于JVM，该文件只能在linux系统下运行，不支持跨平台。
 ./target/test-native-image-springboot2
 
 # 传统的spring-boot的fatJar包，依赖于JVM，支持跨平台。
@@ -456,7 +456,7 @@ mvn clean package -Pnative -e
 
 **打包完成后，会在 `./target/` 目录下生成一个可执行文件：**
 ```
-# native-image：即本机镜像，可以直接运行，不依赖于JVM，该文件只能在linux系统下运行，不支持跨平台。
+# native-image：即本地镜像，可以直接运行，不依赖于JVM，该文件只能在linux系统下运行，不支持跨平台。
 ./target/test-native-image-springboot3
 
 # 传统的spring-boot的fatJar包，依赖于JVM，支持跨平台。
