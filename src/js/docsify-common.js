@@ -90,7 +90,9 @@
 	d.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>'); // 插件：代码复制
 	d.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-count/dist/countable.min.js"></script>'); // 插件：字数统计
 	d.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>'); // 插件：分页导航
-	d.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>'); // 插件：侧边栏扩展与折叠
+	if (!window.location.pathname.endsWith("/blog/")) { // 博客页面暂时不需要侧边栏折叠
+		d.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>'); // 插件：侧边栏折叠
+	}
 	d.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>'); // 插件：返回顶部
 	d.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-tabs"></script>'); // 插件：Tabs
 	// 插件：全文检索
