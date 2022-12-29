@@ -545,7 +545,7 @@ Caused by: java.lang.ClassNotFoundException: org.springframework.boot.Applicatio
 ```
 
 #### 3.2.2、解决方案：
-这个就是上面提到的 `springboot2.7.6` 及以上版本与 `spring-native:0.12.1` 不兼容导致的，将 `springboot` 版本降低到 `2.7.5` 即可。
+这个就是上面提到的 `springboot:2.7.6` 及以上版本与 `spring-native:0.12.1` 不兼容导致的，将 `springboot` 版本降低到 `2.7.5` 即可。
 
 
 ### 3.3、问题3：`Exception during JVMCI compiler initialization`
