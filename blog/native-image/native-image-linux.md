@@ -62,7 +62,7 @@ reboot
 
 ## 二、创建SpringBoot应用
 
-### 2.0、下载示例代码：
+### 2.1、示例代码：
 可以先下载本人的示例代码，进行尝试：<br>
 https://gitee.com/wangliang181230/study-spring-boot.git <br>
 或<br>
@@ -70,178 +70,6 @@ https://github.com/wangliang181230/study-spring-boot.git <br>
 
 
 <!-- tabs:start -->
-
-<!-- tab:**SpringBoot3** -->
-
-### 2.1、基于 springboot3：
-
-| 名称                  |     版本号     | 说明  |
-|:--------------------|:-----------:|:----|
-| springboot          | 3.0.1或3.0.0 |     |
-| native-maven-plugin |   0.9.19    |     |
-
-#### 2.1.1、配置pom.xml
-
-> 注意：以下配置仅适用于简单应用，复杂应用可能还需要更多的配置，这里不详细说明。
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.1</version>
-        <relativePath/>
-    </parent>
-
-    <groupId>xxx.yyy</groupId>
-    <artifactId>test-native-image-springboot3</artifactId>
-    <version>x.x.x-SNAPSHOT</version>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <finalName>${project.artifactId}</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
-    <profiles>
-        <!--
-            org.springframework.boot:spring-boot-starter-parent:3.0.x.pom 中，
-            已经添加了一个id=native的profile，包含了很多插件配置，所以自建项目中，需要配置的内容会比较少。
-            在springboot2项目中，需要手动配置的内容会更多一些。
-        -->
-        <profile>
-            <id>native</id><!-- 此ID和parent中的profile的ID保持一致，执行打包时，maven命令会更加简短一些。 -->
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.graalvm.buildtools</groupId>
-                        <artifactId>native-maven-plugin</artifactId><!-- springboot3.0.1时，此插件为0.9.19版本 -->
-                        <extensions>true</extensions>
-                        <executions>
-                            <execution>
-                                <id>build-native</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>compile-no-fork</goal>
-                                    <!--<goal>build</goal>--><!-- 该插件低版本时使用的是这个goal，高版本时已过时，改为使用compile-no-fork -->
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-</project>
-```
-
-#### 2.1.2、添加 Application 启动类
-
-```java
-import java.util.Arrays;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
-public class TestNativeImageSpringBoot3Application {
-
-    public static String[] ARGS;
-
-    public static void main(String[] args) {
-        ARGS = args;
-        System.out.println("\r\n\r\n\r\nargs: " + Arrays.toString(args) + "\r\n");
-        SpringApplication.run(TestNativeImageSpringBoot3Application.class, args);
-    }
-}
-```
-
-#### 2.1.3、添加测试用的 Controller
-
-```java
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
-public class TestController {
-
-    @GetMapping("/")
-    public Object test() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("args", TestNativeImageSpringBoot3Application.ARGS);
-        map.put("env", System.getenv());
-        map.put("properties", System.getProperties());
-        return map;
-    }
-}
-```
-
-#### 2.1.4、开始打包
-
-**执行打包命令:**
-> 这个过程会消耗几分钟时间，不同性能的PC耗时也不同：
-```bash
-mvn clean package -Pnative -e
-```
-
-**打包完成后，会在 `./target/` 目录下生成一个可执行文件：**
-```
-# native-image：即本机镜像，可以直接运行，不依赖于JVM，该文件只能在linux系统下运行，不支持跨平台。
-./target/test-native-image-springboot3
-
-# 传统的spring-boot的fatJar包，依赖于JVM，支持跨平台。
-./target/test-native-image-springboot3.jar
-```
-
-#### 2.1.5、运行native-image
-
-直接执行该镜像文件（可在命令中添加参数）：
-```bash
-./test-native-image-springboot3 --server.port=8081
-或
-./test-native-image-springboot3 -Dserver.port=8081
-```
-> 注意：如果不指定端口号，会默认使用8080端口，因为应用未在 `application.yml` 配置端口号。
-
-```log
-args: [--server.port=8081]
-
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::                (v3.0.1)
-
-2022-12-28T16:14:34.320-05:00  INFO 3471 --- [           main] StudyNativeImageBySpringBoot3Application : Starting AOT-processed StudyNativeImageBySpringBoot3Application using Java 17.0.5 with PID 3471 (/usr/test-native/study-spring-boot/study-native-image/study-native-image-with-springboot3/target/study-native-image-with-springboot3 started by root in /usr/test-native/study-spring-boot/study-native-image/study-native-image-with-springboot3/target)
-2022-12-28T16:14:34.320-05:00  INFO 3471 --- [           main] StudyNativeImageBySpringBoot3Application : No active profile set, falling back to 1 default profile: "default"
-2022-12-28T16:14:34.337-05:00  INFO 3471 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2022-12-28T16:14:34.339-05:00  INFO 3471 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2022-12-28T16:14:34.339-05:00  INFO 3471 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.4]
-2022-12-28T16:14:34.344-05:00  INFO 3471 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2022-12-28T16:14:34.344-05:00  INFO 3471 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 24 ms
-2022-12-28T16:14:34.371-05:00  INFO 3471 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2022-12-28T16:14:34.372-05:00  INFO 3471 --- [           main] StudyNativeImageBySpringBoot3Application : Started StudyNativeImageBySpringBoot3Application in 0.061 seconds (process running for 0.08)
-```
-
-可以看到启动时间只用了 `0.061` 秒，比传统的SpringBoot应用快30~40多倍。
 
 <!-- tab:**SpringBoot2** -->
 
@@ -467,7 +295,7 @@ mvn clean package -Pnative -e
 或
 ./test-native-image-springboot2 -Dserver.port=8081
 ```
-> 注意：如果不指定端口号，会默认使用8080端口，因为应用未在 `application.yml` 配置端口号。
+> 如果不指定端口号，会默认使用8080端口，因为应用未在 `application.yml` 配置端口号。
 
 ```log
 args: [--server.port=8081]
@@ -494,6 +322,178 @@ args: [--server.port=8081]
 ```
 可以看到启动时间只用了 `0.05` 秒，比传统的SpringBoot应用快30~40多倍。
 
+
+<!-- tab:**SpringBoot3** -->
+
+### 2.3、基于 springboot3：
+
+| 名称                  |     版本号     | 说明  |
+|:--------------------|:-----------:|:----|
+| springboot          | 3.0.1或3.0.0 |     |
+| native-maven-plugin |   0.9.19    |     |
+
+#### 2.3.1、配置pom.xml
+
+> 注意：以下配置仅适用于简单应用，复杂应用可能还需要更多的配置，这里不详细说明。
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.0.1</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>xxx.yyy</groupId>
+    <artifactId>test-native-image-springboot3</artifactId>
+    <version>x.x.x-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <!--
+            org.springframework.boot:spring-boot-starter-parent:3.0.x.pom 中，
+            已经添加了一个id=native的profile，包含了很多插件配置，所以自建项目中，需要配置的内容会比较少。
+            在springboot2项目中，需要手动配置的内容会更多一些。
+        -->
+        <profile>
+            <id>native</id><!-- 此ID和parent中的profile的ID保持一致，执行打包时，maven命令会更加简短一些。 -->
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.graalvm.buildtools</groupId>
+                        <artifactId>native-maven-plugin</artifactId><!-- springboot3.0.1时，此插件为0.9.19版本 -->
+                        <extensions>true</extensions>
+                        <executions>
+                            <execution>
+                                <id>build-native</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>compile-no-fork</goal>
+                                    <!--<goal>build</goal>--><!-- 该插件低版本时使用的是这个goal，高版本时已过时，改为使用compile-no-fork -->
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
+```
+
+#### 2.3.2、添加 Application 启动类
+
+```java
+import java.util.Arrays;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class TestNativeImageSpringBoot3Application {
+
+    public static String[] ARGS;
+
+    public static void main(String[] args) {
+        ARGS = args;
+        System.out.println("\r\n\r\n\r\nargs: " + Arrays.toString(args) + "\r\n");
+        SpringApplication.run(TestNativeImageSpringBoot3Application.class, args);
+    }
+}
+```
+
+#### 2.3.3、添加测试用的 Controller
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class TestController {
+
+    @GetMapping("/")
+    public Object test() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("args", TestNativeImageSpringBoot3Application.ARGS);
+        map.put("env", System.getenv());
+        map.put("properties", System.getProperties());
+        return map;
+    }
+}
+```
+
+#### 2.3.4、开始打包
+
+**执行打包命令:**
+> 这个过程会消耗几分钟时间，不同性能的PC耗时也不同：
+```bash
+mvn clean package -Pnative -e
+```
+
+**打包完成后，会在 `./target/` 目录下生成一个可执行文件：**
+```
+# native-image：即本机镜像，可以直接运行，不依赖于JVM，该文件只能在linux系统下运行，不支持跨平台。
+./target/test-native-image-springboot3
+
+# 传统的spring-boot的fatJar包，依赖于JVM，支持跨平台。
+./target/test-native-image-springboot3.jar
+```
+
+#### 2.3.5、运行native-image
+
+直接执行该镜像文件（可在命令中添加参数）：
+```bash
+./test-native-image-springboot3 --server.port=8081
+或
+./test-native-image-springboot3 -Dserver.port=8081
+```
+> 如果不指定端口号，会默认使用8080端口，因为应用未在 `application.yml` 配置端口号。
+
+```log
+args: [--server.port=8081]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.0.1)
+
+2022-12-28T16:14:34.320-05:00  INFO 3471 --- [           main] StudyNativeImageBySpringBoot3Application : Starting AOT-processed StudyNativeImageBySpringBoot3Application using Java 17.0.5 with PID 3471 (/usr/test-native/study-spring-boot/study-native-image/study-native-image-with-springboot3/target/study-native-image-with-springboot3 started by root in /usr/test-native/study-spring-boot/study-native-image/study-native-image-with-springboot3/target)
+2022-12-28T16:14:34.320-05:00  INFO 3471 --- [           main] StudyNativeImageBySpringBoot3Application : No active profile set, falling back to 1 default profile: "default"
+2022-12-28T16:14:34.337-05:00  INFO 3471 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2022-12-28T16:14:34.339-05:00  INFO 3471 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-28T16:14:34.339-05:00  INFO 3471 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.4]
+2022-12-28T16:14:34.344-05:00  INFO 3471 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-28T16:14:34.344-05:00  INFO 3471 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 24 ms
+2022-12-28T16:14:34.371-05:00  INFO 3471 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2022-12-28T16:14:34.372-05:00  INFO 3471 --- [           main] StudyNativeImageBySpringBoot3Application : Started StudyNativeImageBySpringBoot3Application in 0.061 seconds (process running for 0.08)
+```
+
+可以看到启动时间只用了 `0.061` 秒，比传统的SpringBoot应用快30~40多倍。
 
 <!-- tabs:end -->
 
