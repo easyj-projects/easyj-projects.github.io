@@ -59,12 +59,12 @@ https://github.com/wangliang181230/study-spring-boot.git <br>
 
 ### 2.2、基于 springboot2：
 
-| 名称                      |  版本号   | 说明                                                                                                                           |
-|:------------------------|:------:|:-----------------------------------------------------------------------------------------------------------------------------|
-| springboot              | 2.7.5  | 2.7.6、2.7.7版本，与spring-native:0.12.1不兼容。<br>关注issue：https://github.com/spring-projects-experimental/spring-native/issues/1740 |
-| native-maven-plugin     | 0.9.19 |                                                                                                                              |
-| spring-native           | 0.12.1 | 需要添加 Spring Releases 的 Repositories                                                                                          |
-| spring-aot-maven-plugin | 0.12.1 | 需要添加 Spring Releases 的 Repositories                                                                                          |
+| 名称                      |  版本号   | 说明                                                                                                                        |
+|:------------------------|:------:|:--------------------------------------------------------------------------------------------------------------------------|
+| springboot              | 2.7.5  | 2.7.6及以上版本，与spring-native:0.12.1不兼容。<br>关注issue：https://github.com/spring-projects-experimental/spring-native/issues/1740 |
+| native-maven-plugin     | 0.9.19 |                                                                                                                           |
+| spring-native           | 0.12.1 | 需要添加 Spring Releases 的 Repositories                                                                                       |
+| spring-aot-maven-plugin | 0.12.1 | 需要添加 Spring Releases 的 Repositories                                                                                       |
 
 
 #### 2.2.1、配置pom.xml
@@ -485,7 +485,7 @@ args: [--server.port=8081]
 ---------------------------
 
 
-## 三、打包失败问题处理
+## 三、打包失败问题处理（踩过的坑）
 
 ### 3.1、问题1：`native-maven-plugin` 打包插件自动执行 `gu install native-image` 时报错：
 #### 3.1.1、错误日志：
