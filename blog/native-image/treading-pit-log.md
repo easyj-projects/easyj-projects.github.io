@@ -46,32 +46,4 @@
    解决方案：暂无 <br>
    关注issue：https://github.com/oracle/graal/issues/5678 （已被标记为BUG） <br>
 
-------------------
 
-### 七、偶发的问题：
-
-1. 异常信息：`Exception during JVMCI compiler initialization` <br>
-```log
-......省略部分日志
-[1/7] Initializing...                                                                                    (9.1s @ 0.20GB)
-......省略部分日志
-Exception during JVMCI compiler initialization
-#
-# A fatal error has been detected by the Java Runtime Environment:
-#
-#  Internal Error (jvmciRuntime.cpp:1609), pid=20092, tid=3344
-#  fatal error: Fatal exception in JVMCI: Exception during JVMCI compiler initialization
-#
-# JRE version: OpenJDK Runtime Environment GraalVM CE 22.3.0 (17.0.5+8) (build 17.0.5+8-jvmci-22.3-b08)
-# Java VM: OpenJDK 64-Bit Server VM GraalVM CE 22.3.0 (17.0.5+8-jvmci-22.3-b08, mixed mode, tiered, jvmci, jvmci compiler, compressed oops, compressed class ptrs, parallel gc, windows-amd64)
-# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
-#
-# An error report file with more information is saved as:
-# E:\Workspace_Java\wangliang181230\study-spring-boot\study-native-image\study-native-image-with-springboot3\hs_err_pid20092.log
-#
-# If you would like to submit a bug report, please visit:
-#   https://github.com/oracle/graal/issues
-#
-Error: Image build request failed with exit status 1
-```
-   解决方案：猜测是内存不足导致，将不用的软件或进程关关掉，尽量空出内存，再重试就可以了。 <br>
