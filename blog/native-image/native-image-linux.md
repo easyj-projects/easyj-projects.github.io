@@ -1,4 +1,6 @@
-# Linux环境下打包Native Image（含SpringBoot2和SpringBoot3）
+# Linux环境下打包Native Image
+
+> 声明：目前仅适用于简单应用，主要是先把环境搭建出来。
 
 ---------------------------
 

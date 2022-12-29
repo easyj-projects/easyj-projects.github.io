@@ -1,4 +1,6 @@
-# Windows环境下打包Native Image（含SpringBoot2和SpringBoot3）
+# Windows环境下打包Native Image
+
+> 声明：目前仅适用于简单应用，主要是先把环境搭建出来。
 
 ---------------------------
 
@@ -19,7 +21,7 @@ PATH=%JAVA_HOME%\bin;
 
 ```properties
 MAVEN_HOME=C:\Program Files\apache\maven\apache-maven-3.8.6
-PATH=%JAVA_HOME%\bin;
+PATH=%MAVEN_HOME%\bin;
 ```
 
 ### 1.3、安装Visual Studio

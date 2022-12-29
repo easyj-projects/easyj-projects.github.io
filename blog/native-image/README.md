@@ -3,8 +3,8 @@
 #### 不同平台的打包方式
 
 由于 `Native-Image` 不支持跨平台，每个平台打包出来的镜像，基本上只能在该平台上运行，所以这里提供了 `Windows` 和 `Linux` 两个平台的打包方法：
-1. [Windows环境](native-image/native-image-windows.md)
-2. [Linux环境](native-image/native-image-linux.md)
+1. [Windows环境打包简单应用](native-image/native-image-windows.md)
+2. [Linux环境打包简单应用](native-image/native-image-linux.md)
 
 
 #### 复杂应用待踩坑
