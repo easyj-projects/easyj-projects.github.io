@@ -10,9 +10,20 @@
    ~~解决方案：暂无，先绕过处理。~~<br>
    <font color="red">经过测试，本人并未出现该问题。</font><br>
 
-2. 问题描述：`Charset.forName("BIG5")` 在 `native-image` 抛异常。 <br>
-   解决方案：暂无 <br>
-   关注issue：https://github.com/spring-projects/spring-framework/issues/29769
+2. 问题描述：`Charset.forName(String charsetName)` 在 `native-image` 抛异常。 <br>
+   解决方案：添加一项插件配置`<buildArg>-H:+AddAllCharsets</buildArg>` 即可。 <br>
+   示例配置：
+   ```xml
+   <plugin>
+       <groupId>org.graalvm.buildtools</groupId>
+       <artifactId>native-maven-plugin</artifactId>
+       <configuration>
+           <buildArgs>
+               <buildArg>-H:+AddAllCharsets</buildArg>
+           </buildArgs>
+       </configuration>
+   </plugin>
+   ```
 
 ------------------
 
