@@ -10,6 +10,10 @@
    ~~解决方案：暂无，先绕过处理。~~<br>
    <font color="red">经过测试，本人并未出现该问题。</font><br>
 
+2. 问题描述：`Charset.forName("BIG5")` 在 `native-image` 抛异常。 <br>
+   解决方案：暂无 <br>
+   关注issue：https://github.com/spring-projects/spring-framework/issues/29769
+
 ------------------
 
 ### 资源文件相关问题：（如：配置文件）
