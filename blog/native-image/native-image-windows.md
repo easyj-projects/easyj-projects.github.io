@@ -61,12 +61,12 @@ https://github.com/wangliang181230/study-spring-boot.git <br>
 
 ### 2.2、基于 springboot2：
 
-| 名称                      |  版本号   | 说明                                                                             |
-|:------------------------|:------:|:-------------------------------------------------------------------------------|
-| springboot              | 2.7.5  | 2.7.6+，与spring-native:0.12.1不兼容，要么降低springboot到2.7.5，要么升级spring-native到0.12.2+ |
-| native-maven-plugin     | 0.9.19 |                                                                                |
-| spring-native           | 0.12.1 | 需要添加 Spring Releases 的 Repositories                                            |
-| spring-aot-maven-plugin | 0.12.1 | 需要添加 Spring Releases 的 Repositories                                            |
+| 名称                      |  版本号   | 说明                                                                                      |
+|:------------------------|:------:|:----------------------------------------------------------------------------------------|
+| springboot              | 2.7.5  | 问题：2.7.6+，与spring-native:0.12.1不兼容<br>解决：要么降低springboot到2.7.5，要么升级spring-native到0.12.2+ |
+| native-maven-plugin     | 0.9.19 |                                                                                         |
+| spring-native           | 0.12.1 | 需要添加 Spring Releases 的 Repositories                                                     |
+| spring-aot-maven-plugin | 0.12.1 | 需要添加 Spring Releases 的 Repositories                                                     |
 
 
 #### 2.2.1、配置pom.xml
