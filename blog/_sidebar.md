@@ -2,10 +2,10 @@
 * ————————————————
 * [GraalVM Native Image](native-image/)
   * [原理及应用](native-image/native-image.md)
-  * 打包简单应用
+  * <i>打包简单应用</i>
     * [Windows环境打包简单应用](native-image/native-image-windows.md)
     * [ Linux 环境打包简单应用](native-image/native-image-linux.md)
-  * 踩坑记录
+  * <i>踩坑记录</i>
     * [打包环境踩坑记录](native-image/environment-treading-pit-log.md)
     * [复杂应用踩坑记录](native-image/treading-pit-log.md)
 * ————————————————

@@ -4,7 +4,7 @@
 
 并且，将logback的xml配置，转换为yaml配置，使大家更方便的启停各种appender。
 
----
+---------------------------------------------------------------------------------------------------------------------------
 
 #### 博文：
 EasyJ集成ELK的博文：<a href="../blog/#/easyj-integrate-elk" target="_blank">/blog/#/easyj-integrate-elk</a>
