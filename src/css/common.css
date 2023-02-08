@@ -8,5 +8,5 @@
 .lang-java .token.annotation{color:#bfb352;font-family:"微软雅黑",serif}
 .token.string {color:var(--theme-color,#2b9c69)}
 
-.markdown-section pre > code {font-size:.7rem !important;line-height:1.3rem}
+.markdown-section pre > code {line-height:1.3rem}
 .markdown-section hr {border-bottom-width:3px}
