@@ -97,4 +97,11 @@
    解决方案：暂无 <br>
    关注issue：https://github.com/oracle/graal/issues/5678 （已被标记为BUG） <br>
 
+---------------------------------------------------------------------------------------------------------------------------
+
+### Java Agent相关问题：
+
+1. 问题描述：在 `native-image` 中，无法使用 `-javaagent` <br>
+   解决方案：非常遗憾，目前还不支持。<br>
+   关注issue：https://github.com/oracle/graal/issues/1065 <br>
 
