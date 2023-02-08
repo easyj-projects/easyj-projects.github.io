@@ -6,9 +6,9 @@
 
 ### Java语法相关问题：
 
-1. ~~问题描述：包含 `Lambda` 语法的类代码，默认不会被本地化。~~<br>
-   ~~解决方案：暂无，先绕过处理。~~<br>
-   <font color="red">经过测试，本人并未出现该问题。</font><br>
+1. 问题描述：包含 `Lambda` 语法的类代码，默认不会被本地化。<br>
+   解决方案：暂无，先绕过处理。<br>
+   <font color="red">经测试，本人并未出现该问题。据说一些复杂情况，会存在该问题。</font><br>
 
 2. 问题描述：`Charset.forName(String charsetName)` 在 `native-image` 中抛异常。 <br>
    解决方案：添加一项插件配置`<buildArg>-H:+AddAllCharsets</buildArg>` 即可。 <br>
@@ -39,7 +39,7 @@
 1. ~~问题描述：`@Value("${xxx.yyy.zzz:0}")` 注解无法注入配置值。~~<br>
    ~~解决方案：暂无~~ <br>
    ~~关注issue：https://github.com/spring-projects/spring-boot/issues/33637~~ <br>
-   <font color="red">经过测试，本人并未出现该问题。</font><br>
+   <font color="red">经测试，本人并未出现该问题，上面的issue也暂时被关闭了。</font><br>
 
 ------------------
 
@@ -47,6 +47,7 @@
 
 1. 问题描述：`@ConditionalOnProperty` 配置值条件装配注解不生效。 <br>
    解决方案：`native-image` 是在打包时，读取配置值判断是否装配，并生成机器码。所以，先修改好配置值，再开始打包，然后发布运行。不能先打包好再修改配置后运行。 <br>
+   规避方案：虽然注解失效了，但配置值是可以读取到的，可以通过SPI的方式，根据配置的值加载对应的实现并返回，作为SpringBean。<br>
 
 ------------------
 

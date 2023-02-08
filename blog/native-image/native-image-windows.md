@@ -511,7 +511,7 @@ javac InstallCert.java
 #java 执行InstallCert.class，生成证书文件
 java InstallCert www.graalvm.org
 ```
-_注意：如果生成失败了，请尝试直接下载我生成好的：<a href="native-image/jssecacerts">下载证书文件</a>_
+_注意：如果生成失败了，请尝试直接下载我生成好的：<a href="native-image/files/jssecacerts">下载证书文件</a>_
 
 然后将生成或下载的 `jssecacerts` 证书文件复制到 `%JAVA_HOME%/lib/security` 目录下即可。
 
