@@ -1,7 +1,7 @@
 * [博客主页](/)
 * ————————————————
 * [GraalVM Native Image](native-image/)
-  * [原理及应用](native-image/theory-practice.md)
+  * [理论与实践](native-image/theory-practice.md)
   * <i>打包简单应用</i>
     * [Windows环境打包简单应用](native-image/native-image-windows.md)
     * [ Linux 环境打包简单应用](native-image/native-image-linux.md)
