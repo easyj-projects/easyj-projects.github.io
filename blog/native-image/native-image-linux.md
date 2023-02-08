@@ -79,10 +79,10 @@ https://github.com/wangliang181230/study-spring-boot.git <br>
 
 | 名称                      |  版本号   | 说明                                                                                      |
 |:------------------------|:------:|:----------------------------------------------------------------------------------------|
-| springboot              | 2.7.5  | 问题：2.7.6+，与spring-native:0.12.1不兼容<br>解决：要么降低springboot到2.7.5，要么升级spring-native到0.12.2+ |
+| springboot              | 2.7.7  | 问题：2.7.6+，与spring-native:0.12.1不兼容<br>解决：要么降低springboot到2.7.5，要么升级spring-native到0.12.2+ |
 | native-maven-plugin     | 0.9.19 |                                                                                         |
-| spring-native           | 0.12.1 | 需要添加 Spring Releases 的 Repositories                                                     |
-| spring-aot-maven-plugin | 0.12.1 | 需要添加 Spring Releases 的 Repositories                                                     |
+| spring-native           | 0.12.2 | 因为是实验阶段产物，所以需要添加 Spring Releases 的 Repositories（见下面的pom.xml）                            |
+| spring-aot-maven-plugin | 0.12.2 | 因为是实验阶段产物，所以需要添加 Spring Releases 的 Repositories（见下面的pom.xml）                            |
 
 
 #### 2.2.1、配置pom.xml
@@ -96,7 +96,7 @@ https://github.com/wangliang181230/study-spring-boot.git <br>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.5</version>
+        <version>2.7.7</version>
         <relativePath/>
     </parent>
 
@@ -105,7 +105,7 @@ https://github.com/wangliang181230/study-spring-boot.git <br>
     <version>x.x.x-SNAPSHOT</version>
 
     <properties>
-        <spring-native.version>0.12.1</spring-native.version>
+        <spring-native.version>0.12.2</spring-native.version>
         <native-build-tools-plugin.version>0.9.19</native-build-tools-plugin.version>
     </properties>
 
@@ -310,7 +310,7 @@ args: [--server.port=8081]
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::                (v2.7.5)
+ :: Spring Boot ::                (v2.7.7)
 
 2022-12-28 16:15:51.776  INFO 3500 --- [           main] StudyNativeImageBySpringBoot2Application : Starting StudyNativeImageBySpringBoot2Application using Java 17.0.5 on localhost.localdomain with PID 3500 (/usr/test-native/study-spring-boot/study-native-image/study-native-image-with-springboot2/target/study-native-image-with-springboot2 started by root in /usr/test-native/study-spring-boot/study-native-image/study-native-image-with-springboot2/target)
 2022-12-28 16:15:51.776  INFO 3500 --- [           main] StudyNativeImageBySpringBoot2Application : No active profile set, falling back to 1 default profile: "default"
