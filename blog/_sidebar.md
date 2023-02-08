@@ -9,4 +9,4 @@
     * [打包环境踩坑记录](native-image/environment-treading-pit-log.md)
     * [复杂应用踩坑记录](native-image/treading-pit-log.md)
 * ————————————————
-* [EasyJ集成分布式日志ELK](easyj/easyj-integrate-elk.md)
+* [SpringBoot集成分布式日志ELK](easyj/easyj-integrate-elk.md)
