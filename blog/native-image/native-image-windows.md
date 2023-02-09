@@ -329,7 +329,7 @@ args: [--server.port=8081]
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.1</version>
+        <version>3.0.2</version>
         <relativePath/>
     </parent>
 
@@ -366,7 +366,7 @@ args: [--server.port=8081]
                 <plugins>
                     <plugin>
                         <groupId>org.graalvm.buildtools</groupId>
-                        <artifactId>native-maven-plugin</artifactId><!-- springboot3.0.1时，此插件为0.9.19版本 -->
+                        <artifactId>native-maven-plugin</artifactId><!-- springboot3.0.2时，此插件为0.9.19版本 -->
                         <extensions>true</extensions>
                         <executions>
                             <execution>
@@ -466,7 +466,7 @@ args: [--server.port=8081]
  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
   '  |____| .__|_| |_|_| |_\__, | / / / /
  =========|_|==============|___/=/_/_/_/
- :: Spring Boot ::                (v3.0.1)
+ :: Spring Boot ::                (v3.0.2)
 
 2022-12-28T18:53:00.824+08:00  INFO 18420 --- [           main] co.TestNativeImageSpringBoot3Application : Starting AOT-processed StudyNativeImageBySpringBoot3Application using Java 17.0.5 with PID 18420 (E:\Workspace_Java\wangliang181230\study-spring-boot\study-native-image\study-native-image-with-springboot3\target\study-native-image-with-springboot3.exe started by new in E:\Workspace_Java\wangliang181230\study-spring-boot\study-native-image\study-native-image-with-springboot3\target)
 2022-12-28T18:53:00.824+08:00  INFO 18420 --- [           main] co.TestNativeImageSpringBoot3Application : No active profile set, falling back to 1 default profile: "default"
