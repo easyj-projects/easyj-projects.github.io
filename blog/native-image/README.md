@@ -42,6 +42,6 @@ Java在云原生的破局利器——AOT：https://huaweicloud.csdn.net/63311d00
 
 ##### 5.2、官方参考资料
 
-1. Spring Boot官方文档：https://docs.spring.io/spring-boot/docs/current/reference/html/native-image.html#native-image.developing-your-first-application.buildpacks.maven
-2. GraalVM官方文档：https://www.graalvm.org/22.3/reference-manual/native-image/metadata/AutomaticMetadataCollection/#tracing-agent
+1. Spring Boot官方文档：https://docs.spring.io/spring-boot/docs/current/reference/html/native-image.html
+2. GraalVM官方文档：https://www.graalvm.org/latest/reference-manual/native-image/
 3. GraalVM官方示例：https://github.com/graalvm/native-build-tools/blob/master/samples/java-application-with-reflection/pom.xml
