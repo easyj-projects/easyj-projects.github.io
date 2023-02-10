@@ -2,8 +2,11 @@
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-请下载Word文档进行查看：<a href="../downloads/native-image/GraalVM Native Image的理论与实践_2023-02-08.docx">GraalVM Native Image的理论与实践.docx</a><br>
-另外，准备了文章中提到的示例代码及相关脚本：<a href="../downloads/native-image/native-image示例代码_2023-02-08.zip">native-image示例代码.zip</a><br>
-以上资料最近更新时间：`2023-02-08`
+### 查看文档：
+1. 直接打开链接：[【金山文档】 GraalVM Native Image的理论与实践](https://kdocs.cn/l/cnUsaUyTDiW2)
+2. 或者下载Word文档：<a href="../downloads/native-image/GraalVM Native Image的理论与实践_2023-02-10.docx">GraalVM Native Image的理论与实践.docx</a><br>
 
-_后面有时间，再将内容直接写在这个页面吧。_
+### 示例代码：
+1. 文章中提到的示例代码及相关脚本：<a href="../downloads/native-image/native-image示例代码_2023-02-10.zip">native-image示例代码.zip</a><br>
+
+以上资料最近更新时间：`2023-02-10`
