@@ -20,7 +20,7 @@ I/O error occurred: PKIX path building failed: sun.security.provider.certpath.Su
 ```
 
 ##### 解决方案：
-执行 <a href="#/native-image/environment-treading-pit-log?id=_41、附件1：installcertjava">第四章节附件1</a> 的java程序，生成证书文件：
+执行 <a href="#/native-image/environment-treading-pit-log?id=附件41、installcertjava">附件4.1</a> 的java程序，生成证书文件：
 ```shell
 #javac 生成InstallCert.class
 javac InstallCert.java
@@ -91,7 +91,7 @@ Error: Image build request failed with exit status 1
 
 #### 附件4.1、`InstallCert.java`
 
-解决 <a href="#/native-image/environment-treading-pit-log?id=_11、native-maven-plugin-打包插件自动执行-gu-install-native-image-时报错：">问题1.1</a> 时使用。
+解决 <a href="#/native-image/environment-treading-pit-log?id=问题11、native-maven-plugin-打包插件自动执行-gu-install-native-image-时报错：">问题1.1</a> 时使用。
 ```java
 import java.io.*;
 import java.security.*;
