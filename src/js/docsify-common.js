@@ -111,7 +111,7 @@
 		if (pathName.startsWith('/docs')) {
 			return '📝EasyJ文档';
 		} else if (pathName.startsWith('/blog')) {
-			return '📚EasyJ博客';
+			return '📚博客';
 		} else {
 			return 'EasyJ开源社区';
 		}
