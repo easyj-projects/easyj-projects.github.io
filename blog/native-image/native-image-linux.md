@@ -80,7 +80,7 @@ https://github.com/wangliang181230/study-spring-boot.git <br>
 | 名称                      |  版本号   | 说明                                                                                      |
 |:------------------------|:------:|:----------------------------------------------------------------------------------------|
 | springboot              | 2.7.7  | 问题：2.7.6+，与spring-native:0.12.1不兼容<br>解决：要么降低springboot到2.7.5，要么升级spring-native到0.12.2+ |
-| native-maven-plugin     | 0.9.19 |                                                                                         |
+| native-maven-plugin     | 0.9.20 | 推荐使用最新版本，关注：https://github.com/graalvm/native-build-tools/releases                      |
 | spring-native           | 0.12.2 | 因为是实验阶段产物，所以需要添加 Spring Releases 的 Repositories（见下面的pom.xml）                            |
 | spring-aot-maven-plugin | 0.12.2 | 因为是实验阶段产物，所以需要添加 Spring Releases 的 Repositories（见下面的pom.xml）                            |
 
@@ -106,7 +106,9 @@ https://github.com/wangliang181230/study-spring-boot.git <br>
 
     <properties>
         <spring-native.version>0.12.2</spring-native.version>
-        <native-build-tools-plugin.version>0.9.19</native-build-tools-plugin.version>
+
+        <!-- 推荐使用最新版本 -->
+        <native-build-tools-plugin.version>0.9.20</native-build-tools-plugin.version>
     </properties>
 
     <dependencies>
@@ -329,10 +331,10 @@ args: [--server.port=8081]
 
 ### 2.3、基于 springboot3：
 
-| 名称                  |  版本号   | 说明  |
-|:--------------------|:------:|:----|
-| springboot          | 3.0.0+ |     |
-| native-maven-plugin | 0.9.19 |     |
+| 名称                  |  版本号   | 说明                                                                  |
+|:--------------------|:------:|:--------------------------------------------------------------------|
+| springboot          | 3.0.0+ |                                                                     |
+| native-maven-plugin | 0.9.20 | 推荐使用最新版本，关注：https://github.com/graalvm/native-build-tools/releases  |
 
 #### 2.3.1、配置pom.xml
 
@@ -352,6 +354,11 @@ args: [--server.port=8081]
     <groupId>xxx.yyy</groupId>
     <artifactId>test-native-image-springboot3</artifactId>
     <version>x.x.x-SNAPSHOT</version>
+
+    <properties>
+        <!-- 推荐使用最新版本 -->
+        <native-build-tools-plugin.version>0.9.20</native-build-tools-plugin.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -382,7 +389,7 @@ args: [--server.port=8081]
                 <plugins>
                     <plugin>
                         <groupId>org.graalvm.buildtools</groupId>
-                        <artifactId>native-maven-plugin</artifactId><!-- springboot3.0.2时，此插件为0.9.19版本 -->
+                        <artifactId>native-maven-plugin</artifactId>
                         <extensions>true</extensions>
                         <executions>
                             <execution>
