@@ -86,9 +86,9 @@
    **问题原因：** `springboot:2.7.6` 及以上版本与 `spring-native:0.12.1` 不兼容导致的；<br>
    **解决方案：** 将 `springboot` 版本降低到 `2.7.5`，或升级 `spring-native` 到 `0.12.2` 或更高版本。<br>
 
-5. **问题描述：** `RootBeanDefinition.getSource()` 在 `spring-aot-mode` 模式下运行时，为 `null` <br>
+5. **问题描述：** `RootBeanDefinition.getSource()` 在 `native-image` 或 `spring-aot模式` 下运行时，为 `null` <br>
    **解决方案：** 暂无 <br>
-   **规避方案：** 如果你是想获取注解，当source为空时，可直接从类或方法上获取注解。 <br>
+   **规避方案：** 如果你是想解析Bean的注解，当source为空时，可直接从类、方法或属性上获取注解。 <br>
    **关注issue：** https://github.com/spring-projects/spring-framework/issues/30017 <br>
 
 
