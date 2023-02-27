@@ -25,6 +25,12 @@
    </plugin>
    ```
 
+3. **问题描述：** JDK代理对象的类型，调用 `getMethod` 方法会抛出 `NoSuchMethodException`，即使被代理的接口有该方法。 <br>
+   **示例代码：** `proxyObj.getClass().getMethod(methodName)` 在 `native-image` 中，将抛出异常。 <br>
+   **解决方案：** 暂无 <br>
+   **关注issue：** https://github.com/oracle/graal/issues/6079 <br>
+
+
 ---------------------------------------------------------------------------------------------------------------------------
 
 ### 资源文件相关问题：（如：配置文件）
@@ -34,22 +40,22 @@
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-### Spring配置相关问题：
+### Spring或SpringBoot相关问题：
 
-1. ~~问题描述：`@Value("${xxx.yyy.zzz:0}")` 注解无法注入配置值。~~<br>
-   ~~解决方案：暂无~~ <br>
-   ~~关注issue：https://github.com/spring-projects/spring-boot/issues/33637~~ <br>
+1. ~~**问题描述：**`@Value("${xxx.yyy.zzz:0}")` 注解无法注入配置值。~~<br>
+   ~~**解决方案：**暂无~~ <br>
+   ~~**关注issue：**https://github.com/spring-projects/spring-boot/issues/33637~~ <br>
    <font color="red">经测试，本人并未出现该问题，上面的issue也暂时被关闭了。</font><br>
 
----------------------------------------------------------------------------------------------------------------------------
+2. **问题描述：** `@Aspect` 部分情况下，在 `native-image` 中不工作。 <br>
+   **解决方案：** 暂无 <br>
+   **关注issue：** https://github.com/spring-projects/spring-framework/issues/28711 <br>
 
-### SpringBoot相关问题：
-
-1. **问题描述：** `@ConditionalOnProperty` 配置值条件装配注解不生效。 <br>
+3. **问题描述：** `@ConditionalOnProperty` 配置值条件装配注解不生效。 <br>
    **解决方案：** `native-image` 是在打包时，读取配置值判断是否装配，并生成机器码。所以，先修改好配置值，再开始打包，然后发布运行。不能先打包好再修改配置后运行。 <br>
    **规避方案：** 要想继续在运行时，也能根据配置切换功能，可以通过SPI的方式，根据配置的值加载对应的实现，作为`SpringBean`，但需要添加更多可达性元数据配置，这会导致打出来的native-image包会更大。<br>
 
-2. **问题描述：** 基于 `springboot2.7.x` 打包时抛异常 `java.lang.NoClassDefFoundError: org/springframework/boot/ApplicationServletEnvironment`<br>
+4. **问题描述：** 基于 `springboot2.7.x` 打包时抛异常 `java.lang.NoClassDefFoundError: org/springframework/boot/ApplicationServletEnvironment`<br>
    **错误日志：**
    ```log
    ......省略其他日志
@@ -80,14 +86,21 @@
    **问题原因：** `springboot:2.7.6` 及以上版本与 `spring-native:0.12.1` 不兼容导致的；<br>
    **解决方案：** 将 `springboot` 版本降低到 `2.7.5`，或升级 `spring-native` 到 `0.12.2` 或更高版本。<br>
 
+5. **问题描述：** `RootBeanDefinition.getSource()` 在 `spring-aot-mode` 模式下运行时，为 `null` <br>
+   **解决方案：** 暂无 <br>
+   **规避方案：** 如果你是想获取注解，当source为空时，可直接从类或方法上获取注解。 <br>
+   **关注issue：** https://github.com/spring-projects/spring-framework/issues/30017 <br>
+
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-### Spring各组件相关问题：
+### SpringCloud相关问题：
 
-1. **问题描述：** `@Aspect` 在 `native-image` 中不工作。 <br>
+1. **问题描述：** 当项目中同时存在 `@FeignClient` 和 `@Aspect` 时，项目启动会抛异常。 <br>
    **解决方案：** 暂无 <br>
-   **关注issue：** https://github.com/spring-projects/spring-framework/issues/28711 <br>
+   **关注issue：** https://github.com/spring-projects/spring-boot/issues/34388 <br>
+   **关注issue：** https://github.com/oracle/graal/issues/6079 <br>
+
 
 ---------------------------------------------------------------------------------------------------------------------------
 
@@ -96,6 +109,7 @@
 1. **异常信息：** `Fatal error: com.oracle.graal.pointsto.util.AnalysisError$ParsingError: Error encountered while parsing reactor.netty.http.client.HttpClientConnect$$Lambda$acc7a0c687f2afec7708a4742f9f900f329034c5.get()` <br>
    **解决方案：** 暂无 <br>
    **关注issue：** https://github.com/oracle/graal/issues/5678 （已被标记为BUG） <br>
+
 
 ---------------------------------------------------------------------------------------------------------------------------
 
