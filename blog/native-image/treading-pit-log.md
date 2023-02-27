@@ -97,9 +97,8 @@
 ### SpringCloud相关问题：
 
 1. **问题描述：** 当项目中同时存在 `@FeignClient` 和 `@Aspect` 时，项目启动会抛异常。 <br>
-   **解决方案：** 暂无 <br>
-   **关注issue：** https://github.com/spring-projects/spring-boot/issues/34388 <br>
-   **关注issue：** https://github.com/oracle/graal/issues/6079 <br>
+   **解决方案：** 升级 `spring-boot` 到 `3.0.2` 或更高版本，或升级 `spring-aop` 到 `6.0.4` 或更高版本，即可解决该问题。 <br>
+   ~~**关注issue：** https://github.com/spring-projects/spring-boot/issues/34388 （已关闭）~~ <br>
 
 
 ---------------------------------------------------------------------------------------------------------------------------
