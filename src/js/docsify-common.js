@@ -102,10 +102,6 @@
 //	d.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
 //	d.writeln('<script src="' + jsRootPath + 'optimize/docsify-plugins-gitalk.min.js"></script>'); // 重写过上面的文件：自定义规则动态生成ID
 
-	// 百度统计
-	d.writeln('<script src="' + jsRootPath + 'baidu-statistics.min.js"></script>');
-
-
 	// 获取页面标题
 	function pageTitle() {
 		if (pathName.startsWith('/docs')) {
