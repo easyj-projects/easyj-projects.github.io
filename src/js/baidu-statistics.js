@@ -1,5 +1,5 @@
 // 百度统计
-if (!window.config || window.config.env !== "local") {
+if ("localhost" !== location.hostname && "127.0.0.1" !== location.hostname) {
 	(function (w, d) {
 		w._hmt = w._hmt || [];
 		const hm = d.createElement("script");
