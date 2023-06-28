@@ -4,7 +4,7 @@
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-### Java语法相关问题：
+### Java原生功能相关问题：
 
 1. **问题描述：** 包含 `Lambda` 语法的类代码，默认不会被本地化。<br>
    **解决方案：** 暂无，先绕过处理。<br>
@@ -48,8 +48,8 @@
    <font color="red">经测试，本人并未出现该问题，上面的issue也暂时被关闭了。</font><br>
 
 2. **问题描述：** `@Aspect` 部分情况下，在 `native-image` 中不工作。 <br>
-   **解决方案：** 暂无 <br>
-   **关注issue：** https://github.com/spring-projects/spring-framework/issues/28711 <br>
+   **解决方案：** 升级 `spring-aop` 到 `6.0.11` 及以上版本。 <br>
+   **关注issue：** https://github.com/spring-projects/spring-framework/issues/28711 （Closed this as completed in [03420f8](https://github.com/spring-projects/spring-framework/commit/03420f811be4a71e9ce4af78f0b86d5c956c3065)） <br>
 
 3. **问题描述：** `@ConditionalOnProperty` 配置值条件装配注解不生效。 <br>
    **解决方案：** `native-image` 是在打包时，读取配置值判断是否装配，并生成机器码。所以，先修改好配置值，再开始打包，然后发布运行。不能先打包好再修改配置后运行。 <br>
