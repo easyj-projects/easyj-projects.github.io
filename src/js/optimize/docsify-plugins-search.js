@@ -45,6 +45,15 @@
 		return {str: str, config: config};
 	}
 
+	function removeDocsifyIgnoreTag(str) {
+		return str
+			.replace(/<!-- {docsify-ignore} -->/, '')
+			.replace(/{docsify-ignore}/, '')
+			.replace(/<!-- {docsify-ignore-all} -->/, '')
+			.replace(/{docsify-ignore-all}/, '')
+			.trim();
+	}
+
 	/* eslint-disable no-unused-vars */
 
 	let INDEXS = {};
@@ -126,6 +135,23 @@
 		localStorage.setItem(indexKey, JSON.stringify(INDEXS));
 	}
 
+	//@Override：handle slug for fix 404
+	function concatSlugAndPathname(slug) {
+		let pathname = location.pathname;
+		let flag = false;
+		while (slug.startsWith("#/../") && pathname.lastIndexOf("/") > 1) {
+			flag = true;
+			if (pathname.endsWith("/")) {
+				pathname = pathname.substring(0, pathname.length - 1);
+			}
+			pathname = pathname.substring(0, pathname.lastIndexOf("/"));
+
+			slug = "#/" + slug.substring(5);
+		}
+		slug = pathname + (flag ? "/" : "") + slug;
+		return slug;
+	}
+
 	function genIndex(path, content, router, depth) {
 		if (content === void 0) content = '';
 
@@ -144,37 +170,26 @@
 				if (config.id) {
 					slug = router.toURL(path, {id: slugify(config.id)});
 				} else {
-					slug = router.toURL(path, {id: slugify(escapeHtml(token.text))});
+					slug = router.toURL(path, {id: slugify(escapeHtml(removeDocsifyIgnoreTag(token.text)))});
 				}
 
-				//region @Override：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
-				let pathname = location.pathname;
-				let flag = false;
-				while (slug.startsWith("#/../") && pathname.lastIndexOf("/") > 1) {
-					flag = true;
-					if (pathname.endsWith("/")) {
-						pathname = pathname.substring(0, pathname.length - 1);
-					}
-					pathname = pathname.substring(0, pathname.lastIndexOf("/"));
-
-					slug = "#/" + slug.substring(5);
-				}
-				slug = pathname + (flag ? "/" : "") + slug;
+				//@Override：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
+				slug = concatSlugAndPathname(slug);
 				//endregion
 
 				if (str) {
-					title = str
-						.replace(/<!-- {docsify-ignore} -->/, '')
-						.replace(/{docsify-ignore}/, '')
-						.replace(/<!-- {docsify-ignore-all} -->/, '')
-						.replace(/{docsify-ignore-all}/, '')
-						.trim();
+					title = removeDocsifyIgnoreTag(str);
 				}
 
 				index[slug] = {slug: slug, title: title, body: ''};
 			} else {
 				if (tokenIndex === 0) {
 					slug = router.toURL(path);
+
+					//@Override：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
+					slug = concatSlugAndPathname(slug);
+					//endregion
+
 					index[slug] = {
 						slug: slug,
 						title: path !== '/' ? path.slice(1) : 'Home Page',
@@ -197,10 +212,7 @@
 					token.text = getTableData(token);
 					token.text = getListData(token);
 
-					//region @Override：修复搜索时报 'handlePostContent is undefined' 的错误
-					//index[slug].body = index[slug].body ? index[slug].body + token.text : token.text;
-					index[slug].body = token.text || ''; // 上面这行代码导致的错误，修改成此行代码
-					//endregion
+					index[slug].body = token.text || '';
 				}
 			}
 		});
@@ -278,6 +290,7 @@
 						}
 
 						const matchContent =
+							handlePostContent &&
 							'...' +
 							handlePostContent
 								.substring(start, end)
@@ -363,7 +376,8 @@
 		let count = 0;
 
 		paths.forEach(function (path) {
-			let key = path === "/../issues" ? "/issues" : path; // 特殊处理一下
+			//@Override: 特殊处理一下
+			let key = path === "/../issues" ? "/issues" : path;
 
 			if (INDEXS[key]) {
 				return count++;
