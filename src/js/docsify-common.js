@@ -13,9 +13,6 @@
 		}, 100);
 	}
 
-	// 创建Gitalk实例
-	//w.gitalk = new Gitalk(c.gitalkConfig); // 因为在重写的 `docsify-plugins-gitalk.js` 文件中有创建对象，所以这里无需创建对象
-
 	// 生成 EditOnGithubPlugin 的url
 	const editOnGithubUrl = c.vcsRoot + c.communityName + '/' + c.projectName + '/blob/' + c.branchName + pathName;
 	c.debug && console.info('editOnGithubUrl = "' + editOnGithubUrl + '";');
@@ -78,7 +75,7 @@
 				editOnGithubUrl,
 				null,
 				function () {
-					return '帮助我们改善此文档'
+					return '帮助我们完善此页内容'
 				}
 			)
 		]
@@ -97,10 +94,6 @@
 	d.writeln('<script src="//cdn.jsdelivr.net/npm/docsify-tabs"></script>'); // 插件：Tabs
 	// 插件：全文检索
 	d.writeln('<script src="' + jsRootPath + 'optimize/docsify-plugins-search.min.js"></script>'); // 重写过上面的文件：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
-
-//	// 插件：评论系统 GITalk
-//	d.writeln('<script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>');
-//	d.writeln('<script src="' + jsRootPath + 'optimize/docsify-plugins-gitalk.min.js"></script>'); // 重写过上面的文件：自定义规则动态生成ID
 
 	// 获取页面标题
 	function pageTitle() {
