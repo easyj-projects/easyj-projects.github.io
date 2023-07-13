@@ -18,4 +18,4 @@
   * [spring-boot-extend：spring-boot扩展](maven-plugin/spring-boot-extend.md)
   * [spring-boot-release：辅助spring-boot发布](maven-plugin/spring-boot-release.md)
 * ————————————————
-* [反馈问题或提新需求](../issues.md)
+* [反馈问题或提需求](../issues.md)
