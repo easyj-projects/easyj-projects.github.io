@@ -83,15 +83,15 @@
 
 
 	// 常用插件
-	d.writeln('<script src="//wangliang1024.cn/npm/docsify/lib/plugins/zoom-image.min.js"></script>'); // 插件：图片缩放
-	d.writeln('<script src="//wangliang1024.cn/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>'); // 插件：代码复制
-	d.writeln('<script src="//wangliang1024.cn/npm/docsify-count/dist/countable.min.js"></script>'); // 插件：字数统计
-	d.writeln('<script src="//wangliang1024.cn/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>'); // 插件：分页导航
+	d.writeln('<script src="https://wangliang1024.cn/npm/docsify/lib/plugins/zoom-image.min.js"></script>'); // 插件：图片缩放
+	d.writeln('<script src="https://wangliang1024.cn/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>'); // 插件：代码复制
+	d.writeln('<script src="https://wangliang1024.cn/npm/docsify-count/dist/countable.min.js"></script>'); // 插件：字数统计
+	d.writeln('<script src="https://wangliang1024.cn/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>'); // 插件：分页导航
 	if (!window.location.pathname.endsWith("/blog/")) { // 博客页面暂时不需要侧边栏折叠
-		d.writeln('<script src="//wangliang1024.cn/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>'); // 插件：侧边栏折叠
+		d.writeln('<script src="https://wangliang1024.cn/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>'); // 插件：侧边栏折叠
 	}
-	d.writeln('<script src="//wangliang1024.cn/npm/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>'); // 插件：返回顶部
-	d.writeln('<script src="//wangliang1024.cn/npm/docsify-tabs/dist/docsify-tabs.min.js"></script>'); // 插件：Tabs
+	d.writeln('<script src="https://wangliang1024.cn/npm/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>'); // 插件：返回顶部
+	d.writeln('<script src="https://wangliang1024.cn/npm/docsify-tabs/dist/docsify-tabs.min.js"></script>'); // 插件：Tabs
 	// 插件：全文检索
 	d.writeln('<script src="' + jsRootPath + 'optimize/docsify-plugins-search.min.js"></script>'); // 重写过上面的文件：修复多目录情况下，搜索结果为另一个目录时，链接有误导致404的问题
 
