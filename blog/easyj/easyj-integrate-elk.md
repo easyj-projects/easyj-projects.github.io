@@ -22,7 +22,7 @@ EasyJ社区在 `sebp/elk:7.12.1` 镜像的基础上，调整了部分内容，�
 <!-- tab:**ELK拆分部署（推荐）** -->
 
 > #### 拆分部署的好处：
-> 1. 可以精细控制三个服务：如限制内存使用等；
+> 1. 可以精细控制三个服务：如限制内存使用等等；
 > 2. ELK中的其中一个出现故障时，更加容易恢复；
 > 3. 部分公司可能已经部署过elasticsearch，可以直接拿来使用。
 
@@ -199,8 +199,7 @@ easyj.logging.logback:
 
 <!-- tab:**调用slf4j提供的MDC设置** -->
 
-可调用调用 slf4j-api 提供的工具类来设置上下文：`org.slf4j.MDC`
-
+可调用 `org.slf4j:slf4j-api` 依赖中所提供的工具类来设置上下文：`org.slf4j.MDC`，示例代码如下：
 ```java
 package icu.easyj.spring.boot.test;
 
@@ -240,7 +239,7 @@ public class TestELK {
 
 默认情况下，该工具类实现了 `zipkin` 和 `slf4j` 上下文追踪内容，开发者可通过 `SPI机制` 自定义增加实现类；
 
-推荐使用该工具类代替`org.slf4j.MDC`，代码如下：
+推荐使用该工具类代替`org.slf4j.MDC`，示例代码如下：
 
 ```java
 package icu.easyj.spring.boot.test;
