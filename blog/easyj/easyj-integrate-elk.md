@@ -10,22 +10,30 @@
 
 ## 一、部署ELK（如已部署，请跳过该步骤）
 
-### 1.1、下载ELK镜像
+### 1.1、安装ELK
 
 EasyJ社区在 `sebp/elk:7.12.1` 镜像的基础上，调整了部分内容，并上传了 `easyj/elk:7.12.1` 镜像，用于快速集成。
 
 （ 具体调整内容请查看：https://hub.docker.com/r/easyj/elk ）
+
+
+<!-- tabs:start -->
+
+<!-- tab:**ELK合并部署** -->
+
+#### 1）下载ELK镜像
 
 ```bash
 #拉取镜像
 docker pull easyj/elk:7.12.1
 ```
 
-### 1.2、启用ELK容器
+#### 2）启用ELK容器
 
 ```bash
 #创建并启动容器
-docker run --name elk \
+docker run \
+    --name elk \
     -p 5601:5601 \
     -p 9200:9200 \
     -p 9300:9300 \
@@ -36,18 +44,81 @@ docker run --name elk \
     -dit \
     easyj/elk:7.12.1
 
-#启动容器
-docker start elk
-
 #查看启动日志
 docker logs -f elk
 ```
 
-### 1.3、验证容器
+<!-- tab:**ELK拆分部署** -->
+
+#### 1）下载ELK镜像
+
+```bash
+#拉取下面3个镜像
+docker pull easyj/elasticsearch:7.12.1
+docker pull easyj/logstash:7.12.1
+docker pull easyj/kibana:7.12.1
+```
+
+#### 2）启用ELK容器
+
+##### 2.1）安装ES
+```bash
+#创建并启动ES容器，并限制使用内存：2G
+docker run \
+    --name es \
+    -m 2G \
+    -p 9200:9200 \
+    -p 9300:9300 \
+    --restart=always \
+    --privileged \
+    -dit \
+    easyj/elasticsearch:7.12.1
+
+#查看ES启动日志
+docker logs -f es
+```
+
+##### 2.2）安装logstash
+```bash
+#创建并启动logstash容器
+docker run \
+    --name logstash \
+    -p 5044:5044 \
+    -p 4560:4560 \
+    --link es:elasticsearch \
+    --restart=always \
+    --privileged \
+    -dit \
+    easyj/logstash:7.12.1
+
+#查看logstash日志
+docker logs -f logstash
+```
+
+##### 2.3）安装kibana
+```bash
+#创建并启动kibana容器
+docker run \
+    --name kibana \
+    -p 5601:5601 \
+    --link es:elasticsearch \
+    --restart=always \
+    --privileged \
+    -dit \
+    easyj/kibana:7.12.1
+
+#查看kibana日志
+docker logs -f kibana
+```
+
+<!-- tabs:end -->
+
+
+### 1.2、验证容器
 
 在浏览器中访问： http://xxx.xxx.xxx.xxx:5601 ，并展示出 `Kibana` 的界面，就说明部署成功。
 
-### 1.4、添加 `Index patterns` （索引模式配置）
+### 1.3、添加 `Index patterns` （索引模式配置）
 
 点击 `菜单栏` ➝ `Stack Management` ➝ `Index Patterns`
 
@@ -57,7 +128,7 @@ docker logs -f elk
 > 2. Step 1: 填写 Index pattern name 输入框: `logs*` （可在界面下方实时查看到关联到的索引），点击 `Next step` 按钮；
 > 3. Step 2: Time field 选择 `@timestamp`，点击 `Create index pattern` 按钮，完成添加。
 
-### 1.5、配置 `Index Lifecycle Policies`（索引生命周期策略）
+### 1.4、配置 `Index Lifecycle Policies`（索引生命周期策略）
 
 点击 `菜单栏` ➝ `Stack Management` ➝ `Index Lifecycle Policies`
 
