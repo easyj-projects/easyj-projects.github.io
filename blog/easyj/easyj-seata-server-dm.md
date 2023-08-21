@@ -113,7 +113,12 @@ docker pull easyj/seata-server:1.7.1-DM-SNAPSHOT.jre17-slim
 
 ```bash
 # 创建并启动seata容器
-# 根据实际情况，设置四个环境变量参数：DM_HOST、DM_PORT、DM_USER、DM_PASSWORD
+# 根据实际情况，设置五个环境变量参数：
+#   DM_HOST: 达梦数据库主机名或IP
+#   DM_PORT: 达梦数据库端口号
+#   DM_SCHEMA: 达梦数据库模式名
+#   DM_USER: 达梦数据库用户名
+#   DM_PASSWORD: 达梦数据库密码
 docker run \
     --name seata-for-dm \
     -e DM_HOST=127.0.0.1 \
