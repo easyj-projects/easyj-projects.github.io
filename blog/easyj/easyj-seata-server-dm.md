@@ -151,8 +151,8 @@ docker logs -f seata-for-dm
 
 #### 1）下载发布包
 
-1. <a href="../downloads/seata-server/1.7.1-DM-SNAPSHOT/seata-server-1.7.1-DM-SNAPSHOT.tar.gz">seata-server-1.7.1-DM-SNAPSHOT.tar.gz</a>
-2. <a href="../downloads/seata-server/1.7.1-DM-SNAPSHOT/seata-server-1.7.1-DM-SNAPSHOT.zip">seata-server-1.7.1-DM-SNAPSHOT.zip</a>
+1. <a href="https://gitee.com/wangliang181230/seata/releases/download/1.7.1-DM-SNAPSHOT/seata-server-1.7.1-DM-SNAPSHOT.tar.gz">seata-server-1.7.1-DM-SNAPSHOT.tar.gz</a>
+2. <a href="https://gitee.com/wangliang181230/seata/releases/download/1.7.1-DM-SNAPSHOT/seata-server-1.7.1-DM-SNAPSHOT.zip">seata-server-1.7.1-DM-SNAPSHOT.zip</a>
 
 > 注：
 > 如果以上链接无法下载，请进入百度云盘进行下载：<br/>
