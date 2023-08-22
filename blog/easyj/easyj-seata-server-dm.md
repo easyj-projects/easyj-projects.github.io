@@ -1,8 +1,6 @@
-# 试用支持达梦的seata-server版本
+# 试用支持达梦的seata-server版本（[#3672](https://github.com/seata/seata/pull/3672)）
 
-为了方便大家更早的试用 `Seata` 官方未发布的功能，EasyJ社区发布了 PR [#3672：feature: support Dameng database](https://github.com/seata/seata/pull/3672) 中的seata-server版本的镜像。
-
-具体使用方式见下文。
+为了方便大家更早的试用 `Seata` 官方未发布的功能，EasyJ社区发布了 PR [#3672：feature: support Dameng database](https://github.com/seata/seata/pull/3672) 中的seata-server版本的 发布包 及 docker镜像。
 
 ---------------------------------------------------------------------------------------------------------------------------
 
@@ -10,7 +8,7 @@
 
 ### 1.1、创建模式
 
-登录达梦数据库，并创建名为 `SEATA` 的模式。
+登录达梦数据库，并创建名为 `SEATA` 的模式（schema）。
 
 > 注：当然也可以自定义为其他模式名，但相应的要修改建表SQL中的模式名、及环境变量 `DM_SCHEMA` 值）。
 
@@ -93,7 +91,16 @@ INSERT INTO "SEATA"."DISTRIBUTED_LOCK" ("LOCK_KEY", "LOCK_VALUE", "EXPIRE") VALU
 INSERT INTO "SEATA"."DISTRIBUTED_LOCK" ("LOCK_KEY", "LOCK_VALUE", "EXPIRE") VALUES ('TxTimeoutCheck', ' ', 0);
 ```
 
-## 2、拉取镜像
+
+## 2、部署 `seata-server`
+
+<!-- tabs:start -->
+
+<!-- tab:**Docker部署** -->
+
+### 2.1、Docker部署
+
+#### 1）拉取镜像
 
 以下提供4个基于不同java版本的镜像，根据需求拉取对应的镜像吧：
 
@@ -109,11 +116,11 @@ docker pull easyj/seata-server:1.7.1-DM-SNAPSHOT.jre17-slim
 
 <!-- 查看EasyJ发布的所有seata-server镜像：https://hub.docker.com/r/easyj/seata-server/tags -->
 
-## 3、启用容器
+#### 2）启用容器
 
 ```bash
 # 创建并启动seata容器
-# 根据实际情况，设置五个环境变量参数：
+# 根据实际情况，设置五个环境变量：
 #   DM_HOST: 达梦数据库主机名或IP
 #   DM_PORT: 达梦数据库端口号
 #   DM_SCHEMA: 达梦数据库模式名
@@ -136,3 +143,58 @@ docker run \
 #查看seata日志
 docker logs -f seata-for-dm
 ```
+
+
+<!-- tab:**发布包部署** -->
+
+### 2.2、发布包部署
+
+#### 1）下载发布包
+
+1. <a href="../downloads/seata-server/1.7.1-DM-SNAPSHOT/seata-server-1.7.1-DM-SNAPSHOT.tar.gz">seata-server-1.7.1-DM-SNAPSHOT.tar.gz</a>
+2. <a href="../downloads/seata-server/1.7.1-DM-SNAPSHOT/seata-server-1.7.1-DM-SNAPSHOT.zip">seata-server-1.7.1-DM-SNAPSHOT.zip</a>
+
+#### 2）解压缩发布包
+
+```bash
+# 解压 *.tar.gz
+tar -zxvf seata-server-1.7.1-DM-SNAPSHOT.tar.gz
+
+# 解压 *.zip
+unzip seata-server-1.7.1-DM-SNAPSHOT.zip
+```
+
+#### 3）修改 `seata-server` 的达梦数据库配置
+
+修改 `seata/conf/application.yml` 配置文件：
+
+> _注：这里仅介绍达梦数据库的配置，其他配置见 [seata官网：参数配置](https://seata.io/zh-cn/docs/user/configurations.html)。_
+
+```yml
+#......前面省略
+
+seata:
+  store:
+    mode: db
+    db:
+      datasource: druid #数据库连接池，可选：druid、hikari、dbcp
+      db-type: dm #数据库类型，支持：mysql、oracle、dm、h2、等等
+      driver-class-name: dm.jdbc.driver.DmDriver #达梦数据库-驱动类
+      url: jdbc:dm://xxx.xxx.xxx.xxx:5236?schema=SEATA #达梦数据库-URL
+      user: SYSDBA # 达梦数据库-用户名
+      password: xxxxxx # 达梦数据库-密码
+
+#......后面省略
+```
+
+#### 4）启动 `seata-server`
+
+1. windows下，运行 `seata/bin/seata-server.bat` 
+2. linux下，运行 `seata/bin/seata-server.sh`
+
+<!-- tabs:end -->
+
+
+## 3、校验是否部署成功
+
+访问 http://xxx.xxx.xxx.xxx:7091 ，如果可以访问，则说明部署成功。
