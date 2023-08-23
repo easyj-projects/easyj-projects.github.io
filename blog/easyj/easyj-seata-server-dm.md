@@ -1,6 +1,12 @@
-# 试用支持达梦的seata-server版本（[#3672](https://github.com/seata/seata/pull/3672)）
+# 试用支持达梦的 `seata-server`
 
-为了方便大家更早的试用 `Seata` 官方未发布的功能，EasyJ社区发布了 PR [#3672：feature: support Dameng database](https://github.com/seata/seata/pull/3672) 中的seata-server版本的 发布包 及 docker镜像。
+> 说明：由于 `Seata社区` 发版较慢，但很多新特性可能是用户急需的。
+> 为了方便大家更早更便捷的试用到 `Seata` 官方未发布的新特性，EasyJ社区会根据需求提前发布一些功能，让大家试用起来。
+
+这次，我们发布了 Seata PR 
+[#3672：feature: support Dameng database](https://github.com/seata/seata/pull/3672)
+中的 兼容达梦数据库的 `seata-server` docker镜像 及 发布包，供大家提前试用。
+如在试用过程中发现问题，欢迎在Seata各交流群中将问题反馈给 `wangliang181230`。
 
 ---------------------------------------------------------------------------------------------------------------------------
 
@@ -8,7 +14,7 @@
 
 ### 1.1、创建模式
 
-登录达梦数据库，并创建名为 `SEATA` 的模式（schema）。
+登录达梦数据库，并创建名为 `SEATA` 的模式（即：`schema`）。
 
 > 注：当然也可以自定义为其他模式名，但相应的要修改建表SQL中的模式名、及环境变量 `DM_SCHEMA` 值）。
 
@@ -119,7 +125,7 @@ docker pull easyj/seata-server:1.7.1-DM-SNAPSHOT.jre17-slim
 #### 2）启用容器
 
 ```bash
-# 创建并启动seata容器
+# 创建并启动 seata-server 容器
 # 根据实际情况，设置五个环境变量：
 #   DM_HOST: 达梦数据库主机名或IP
 #   DM_PORT: 达梦数据库端口号
@@ -140,7 +146,7 @@ docker run \
     -dit \
     easyj/seata-server:1.7.1-DM-SNAPSHOT
 
-#查看seata日志
+#查看 seata-server 日志
 docker logs -f seata-for-dm
 ```
 
@@ -202,4 +208,9 @@ seata:
 
 ## 3、校验是否部署成功
 
-访问 http://xxx.xxx.xxx.xxx:7091 ，如果可以访问，则说明部署成功。
+通过以下几种方式都可以校验是否部署成功：
+1. 直接在浏览器上访问 http://xxx.xxx.xxx.xxx:7091，如果显示登录页面，说明部署成功。
+2. 使用命令 `curl http://xxx.xxx.xxx.xxx:7091`，如果有正常的HTML响应，并可以看到 `Copyright 1999-2019 Seata.io Group.` 的，则说明部署成功。
+3. 使用 `telnet xxx.xxx.xxx.xxx 8091`，如果成功，说明部署成功。
+
+> 注：`7091` 为控制台端口，`8091` 为gRPC端口。
