@@ -121,13 +121,13 @@ docker logs -f elk
 
 ### 1.2、验证容器
 
-在浏览器中访问： http://xxx.xxx.xxx.xxx:5601 ，并展示出 `Kibana` 的界面，就说明部署成功。
+在浏览器中访问： http://127.0.0.1:5601 ，并展示出 `Kibana` 的界面，就说明部署成功。
 
 ### 1.3、添加 `Index patterns` （索引模式配置）
 
 点击 `菜单栏` ➝ `Stack Management` ➝ `Index Patterns`
 
-进入 http://xxx.xxx.xxx.xxx:5601/app/management/kibana/indexPatterns 界面
+进入 http://127.0.0.1:5601/app/management/kibana/indexPatterns 界面
 
 > 1. 点击进入 `Create index pattern` 界面
 > 2. Step 1: 填写 Index pattern name 输入框: `logs*` （可在界面下方实时查看到关联到的索引），点击 `Next step` 按钮；
@@ -137,7 +137,7 @@ docker logs -f elk
 
 点击 `菜单栏` ➝ `Stack Management` ➝ `Index Lifecycle Policies`
 
-进入 http://xxx.xxx.xxx.xxx:5601/app/management/data/index_lifecycle_management/policies 界面
+进入 http://127.0.0.1:5601/app/management/data/index_lifecycle_management/policies 界面
 
 > 1. 选择 `logstash-policy`
 > 2. 根据自己的需求调整 `Hot phase`、`Warm phase`、`Cold phase`、`Delete phase` 的配置，最主要配置的是过时自动删除。
@@ -174,8 +174,8 @@ logging:
 easyj.logging.logback:
   logstash-appender:
     enabled: true #启用logstash-appender，用于将日志上传到logstash
-    destination: "xxx.xxx.xxx.xxx:4560" #部署的ELK中，logstash开放的TCP通道地址
-    #destination: "xxx.xxx.xxx.xxx:4560,xxx.xxx.xxx.xxx:4560" #可配置多个地址，用逗号隔开
+    destination: "127.0.0.1:4560" #部署的ELK中，logstash开放的TCP通道地址
+    #destination: "192.168.1.101:4560,192.168.1.102:4560" #可配置多个地址，用逗号隔开
 ```
 
 ### 2.3、验证配置是否正确

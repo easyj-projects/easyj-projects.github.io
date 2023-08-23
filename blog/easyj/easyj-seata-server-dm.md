@@ -191,7 +191,7 @@ seata:
       datasource: druid #数据库连接池，可选：druid、hikari、dbcp
       db-type: dm #数据库类型，支持：mysql、oracle、dm、h2、等等
       driver-class-name: dm.jdbc.driver.DmDriver #达梦数据库-驱动类
-      url: jdbc:dm://xxx.xxx.xxx.xxx:5236?schema=SEATA #达梦数据库-URL
+      url: jdbc:dm://127.0.0.1:5236?schema=SEATA #达梦数据库-URL
       user: SYSDBA # 达梦数据库-用户名
       password: xxxxxx # 达梦数据库-密码
 
@@ -209,8 +209,8 @@ seata:
 ## 3、校验是否部署成功
 
 通过以下几种方式都可以校验是否部署成功：
-1. 直接在浏览器上访问 http://xxx.xxx.xxx.xxx:7091，如果显示登录页面，说明部署成功。
-2. 使用命令 `curl http://xxx.xxx.xxx.xxx:7091`，如果有正常的HTML响应，并可以看到 `Copyright 1999-2019 Seata.io Group.` 的，则说明部署成功。
-3. 使用 `telnet xxx.xxx.xxx.xxx 8091`，如果成功，说明部署成功。
+1. 直接在浏览器上访问 http://127.0.0.1:7091 ，如果显示登录页面，说明部署成功。
+2. 使用命令 `curl http://127.0.0.1:7091`，如果有正常的HTML响应，并可以看到 `Copyright 1999-2019 Seata.io Group.` 的，则说明部署成功。
+3. 使用 `telnet 127.0.0.1 8091`，如果成功，说明部署成功。
 
 > 注：`7091` 为控制台HTTP端口，`8091` 为分布式事务接口的gRPC端口。
