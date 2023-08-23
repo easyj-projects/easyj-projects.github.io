@@ -19,6 +19,16 @@
 	};
 	w.config = c;
 
+	// 设置title
+	c.titleSuffix = " - EasyJ开源社区";
+	c.titleName = "主页";
+	if (l.pathname.endsWith("/blog/") || l.pathname.endsWith("/blog") || l.pathname.endsWith("/blog/index.html")) {
+		c.titleName = "博客";
+	} else if (l.pathname.endsWith("/blog/") || l.pathname.endsWith("/blog") || l.pathname.endsWith("/blog/index.html")) {
+		c.titleName = "文档";
+	}
+	c.title = " - " + c.titleName + c.titleSuffix;
+
 
 	// 根据环境名，加载环境配置（以下配置请进入 https://github.com/settings/developers 添加）
 	//d.writeln('<script src="' + c.jsRootPath + 'config-' + env + '.min.js"></script>');
@@ -36,6 +46,17 @@
 
 	// 打印配置值日志
 	c.debug && console.info("window.config:", c);
+
+	// 保持title后面拼接上 c.title
+	setInterval(function () {
+		if (!d.title.endsWith(c.titleSuffix)) {
+			if (c.titleName === "主页" || d.title.indexOf(c.titleName) >= 0) {
+				d.title = d.title + c.titleSuffix;
+			} else {
+				d.title = d.title + c.title;
+			}
+		}
+	}, 50);
 
 
 	//region 自动生成部分配置的方法

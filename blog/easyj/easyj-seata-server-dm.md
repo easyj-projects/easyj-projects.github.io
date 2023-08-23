@@ -213,4 +213,4 @@ seata:
 2. 使用命令 `curl http://xxx.xxx.xxx.xxx:7091`，如果有正常的HTML响应，并可以看到 `Copyright 1999-2019 Seata.io Group.` 的，则说明部署成功。
 3. 使用 `telnet xxx.xxx.xxx.xxx 8091`，如果成功，说明部署成功。
 
-> 注：`7091` 为控制台端口，`8091` 为gRPC端口。
+> 注：`7091` 为控制台HTTP端口，`8091` 为分布式事务接口的gRPC端口。
