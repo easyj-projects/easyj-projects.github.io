@@ -109,6 +109,7 @@ INSERT INTO "SEATA"."DISTRIBUTED_LOCK" ("LOCK_KEY", "LOCK_VALUE", "EXPIRE") VALU
 #### 1）拉取镜像
 
 以下提供4个基于不同java版本的镜像，根据需求拉取对应的镜像吧：
+> 注：以下镜像更新时间为：`2023-08-29 17:17`
 
 ```bash
 # 基于java8
@@ -157,6 +158,8 @@ docker logs -f seata-for-dm
 
 #### 1）下载发布包
 
+> 注：以下发布包更新时间为：`2023-08-30 16:52`
+
 1. <a href="https://gitee.com/wangliang181230/seata/releases/download/1.7.1-DM-SNAPSHOT/seata-server-1.7.1-DM-SNAPSHOT.tar.gz">seata-server-1.7.1-DM-SNAPSHOT.tar.gz</a>
 2. <a href="https://gitee.com/wangliang181230/seata/releases/download/1.7.1-DM-SNAPSHOT/seata-server-1.7.1-DM-SNAPSHOT.zip">seata-server-1.7.1-DM-SNAPSHOT.zip</a>
 
@@ -167,12 +170,19 @@ docker logs -f seata-for-dm
 
 #### 2）解压缩发布包
 
+windows下就不多说了，一般都有解压软件，下面提供linux下的解压命令：
+
 ```bash
 # 解压 *.tar.gz
 tar -zxvf seata-server-1.7.1-DM-SNAPSHOT.tar.gz
-
+# 或
 # 解压 *.zip
 unzip seata-server-1.7.1-DM-SNAPSHOT.zip
+
+# 由于以上两个发布包是在windows下打包出来的，需要将'\r'（回车符）移除掉，否则，运行时会报 “$'\r': 未找到命令” 的错误。
+# 运行以下两个命令，将两个 sh 文件的回车符都移除掉
+sed -i 's/\r//' seata/bin/seata-server.sh
+sed -i 's/\r//' seata/bin/seata-setup.sh
 ```
 
 #### 3）修改 `seata-server` 的达梦数据库配置
@@ -182,9 +192,9 @@ unzip seata-server-1.7.1-DM-SNAPSHOT.zip
 > _注：这里仅介绍达梦数据库的配置，其他配置见 [seata官网：参数配置](https://seata.io/zh-cn/docs/user/configurations.html)。_
 
 ```yml
-#......前面省略
-
+#...前面省略
 seata:
+  #...中间省略
   store:
     mode: db
     db:
@@ -194,8 +204,7 @@ seata:
       url: jdbc:dm://127.0.0.1:5236?schema=SEATA #达梦数据库-URL
       user: SYSDBA # 达梦数据库-用户名
       password: xxxxxx # 达梦数据库-密码
-
-#......后面省略
+#...后面省略
 ```
 
 #### 4）启动 `seata-server`
