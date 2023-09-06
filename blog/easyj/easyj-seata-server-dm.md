@@ -113,12 +113,12 @@ INSERT INTO "SEATA"."DISTRIBUTED_LOCK" ("LOCK_KEY", "LOCK_VALUE", "EXPIRE") VALU
 
 ```bash
 # 基于java8
-docker pull easyj/seata-server:1.7.1-DM-SNAPSHOT
-docker pull easyj/seata-server:1.7.1-DM-SNAPSHOT-slim
+docker pull easyj/seata-server:1.8.0-DM-SNAPSHOT
+docker pull easyj/seata-server:1.8.0-DM-SNAPSHOT-slim
 
 # 基于java17
-docker pull easyj/seata-server:1.7.1-DM-SNAPSHOT.jre17
-docker pull easyj/seata-server:1.7.1-DM-SNAPSHOT.jre17-slim
+docker pull easyj/seata-server:1.8.0-DM-SNAPSHOT.jre17
+docker pull easyj/seata-server:1.8.0-DM-SNAPSHOT.jre17-slim
 ```
 
 <!-- 查看EasyJ发布的所有seata-server镜像：https://hub.docker.com/r/easyj/seata-server/tags -->
@@ -145,7 +145,7 @@ docker run \
     --restart=always \
     --privileged \
     -dit \
-    easyj/seata-server:1.7.1-DM-SNAPSHOT
+    easyj/seata-server:1.8.0-DM-SNAPSHOT
 
 #查看 seata-server 日志
 docker logs -f seata-for-dm
@@ -160,8 +160,8 @@ docker logs -f seata-for-dm
 
 > 注：以下发布包更新时间为：`2023-08-30 16:52`
 
-1. <a href="https://gitee.com/wangliang181230/seata/releases/download/1.7.1-DM-SNAPSHOT/seata-server-1.7.1-DM-SNAPSHOT.tar.gz">seata-server-1.7.1-DM-SNAPSHOT.tar.gz</a>
-2. <a href="https://gitee.com/wangliang181230/seata/releases/download/1.7.1-DM-SNAPSHOT/seata-server-1.7.1-DM-SNAPSHOT.zip">seata-server-1.7.1-DM-SNAPSHOT.zip</a>
+1. <a href="https://gitee.com/wangliang181230/seata/releases/download/1.8.0-DM-SNAPSHOT/seata-server-1.8.0-DM-SNAPSHOT.tar.gz">seata-server-1.8.0-DM-SNAPSHOT.tar.gz</a>
+2. <a href="https://gitee.com/wangliang181230/seata/releases/download/1.8.0-DM-SNAPSHOT/seata-server-1.8.0-DM-SNAPSHOT.zip">seata-server-1.8.0-DM-SNAPSHOT.zip</a>
 
 > 注：
 > 如果以上链接无法下载，请进入百度网盘进行下载：<br/>
@@ -174,10 +174,10 @@ windows下就不多说了，一般都有解压软件，下面提供linux下的�
 
 ```bash
 # 解压 *.tar.gz
-tar -zxvf seata-server-1.7.1-DM-SNAPSHOT.tar.gz
+tar -zxvf seata-server-1.8.0-DM-SNAPSHOT.tar.gz
 # 或
 # 解压 *.zip
-unzip seata-server-1.7.1-DM-SNAPSHOT.zip
+unzip seata-server-1.8.0-DM-SNAPSHOT.zip
 
 # 由于以上两个发布包是在windows下打包出来的，需要将'\r'（回车符）移除掉，否则，运行时会报 “$'\r': 未找到命令” 的错误。
 # 运行以下两个命令，将两个 sh 文件的回车符都移除掉
