@@ -111,7 +111,7 @@ INSERT INTO "SEATA"."DISTRIBUTED_LOCK" ("LOCK_KEY", "LOCK_VALUE", "EXPIRE") VALU
 点击链接查看所有可用镜像：https://hub.docker.com/r/easyj/seata-server/tags
 
 以下提供4个基于不同java版本的镜像，根据需求拉取对应的镜像吧：
-> 注：以下镜像更新时间为：`2023-09-06 14:40`
+> 注：以下镜像更新时间为：`2023-10-09 17:30`
 
 ```bash
 # 基于java8
@@ -142,6 +142,9 @@ docker run \
     -e DM_SCHEMA=SEATA \
     -e DM_USER=SYSDBA \
     -e DM_PASSWORD=xxx \
+    -e SEATA_IP=127.0.0.1 \
+    -e SEATA_HTTP_PORT=7091 \
+    -e SEATA_PORT=8091 \
     -p 7091:7091 \
     -p 8091:8091 \
     --restart=always \
@@ -160,7 +163,7 @@ docker logs -f seata-for-dm
 
 #### 1）下载发布包
 
-> 注：以下发布包更新时间为：`2023-09-06 14:40`
+> 注：以下发布包更新时间为：`2023-10-09 17:50`
 
 1. <a href="https://gitee.com/wangliang181230/seata/releases/download/1.8.0-DM-SNAPSHOT/seata-server-1.8.0-DM-SNAPSHOT.tar.gz">seata-server-1.8.0-DM-SNAPSHOT.tar.gz</a>
 2. <a href="https://gitee.com/wangliang181230/seata/releases/download/1.8.0-DM-SNAPSHOT/seata-server-1.8.0-DM-SNAPSHOT.zip">seata-server-1.8.0-DM-SNAPSHOT.zip</a>
