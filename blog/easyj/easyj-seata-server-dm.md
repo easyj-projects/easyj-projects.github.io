@@ -100,6 +100,8 @@ INSERT INTO "SEATA"."DISTRIBUTED_LOCK" ("LOCK_KEY", "LOCK_VALUE", "EXPIRE") VALU
 
 ## 2、部署 `seata-server`
 
+> 注：以下用于部署的 `seata-server` 的镜像及发布包，源码为 https://github.com/wangliang181230/seata/tree/release-image-for-dm 。
+
 <!-- tabs:start -->
 
 <!-- tab:**Docker部署** -->
