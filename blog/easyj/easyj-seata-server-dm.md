@@ -137,18 +137,18 @@ docker pull easyj/seata-server:1.8.0-DM-PUYUAN-SNAPSHOT.jre17-slim
 
 ```bash
 # 创建并启动 seata-server 容器
-# 根据实际情况，设置以下环境变量：
+# 根据实际情况，设置以下环境变量：（注：标有星号的必须手动配置）
 #   STORE_MODE：数据存储模式，可选值：db(默认)、file、redis
 #   DB_DATASOURCE：数据源类型，可选值：druid(默认)、dbcp、hikari
 #   DB_TYPE：数据库类型，可选值：dm(默认)、mysql、oracle、h2、postgresql、polardb-x、oceanbase、mariadb
 #         注意：oracle、mariadb部分数据库需要自行添加驱动JAR包
 #   DB_DRIVER_CLASS_NAME：数据库驱动类名，根据配置的DB_TYPE，设置对应的数据库驱动类
 #   DB_URL：数据库连接URL，如果DB_TYPE配置为dm，也可以单独配置以下3个环境变量：
-#     DM_HOST：达梦数据库主机名或IP
-#     DM_PORT：达梦数据库端口号
-#     DM_SCHEMA：达梦数据库模式名
-#   DB_USER：达梦数据库用户名
-#   DB_PASSWORD：达梦数据库密码
+#     DM_HOST：达梦数据库主机名或IP，默认值：127.0.0.1
+#     DM_PORT：达梦数据库端口号，默认值：5236
+#     DM_SCHEMA：达梦数据库模式名，默认值：SEATA
+#   *DB_USER：达梦数据库用户名
+#   *DB_PASSWORD：达梦数据库密码
 docker run \
     --name seata-for-dm \
     -e STORE_MODE=db \
