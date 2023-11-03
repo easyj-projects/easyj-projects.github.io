@@ -137,7 +137,7 @@ docker pull easyj/seata-server:1.8.0-DM-PUYUAN-SNAPSHOT.jre17-slim
 
 ```bash
 # 创建并启动 seata-server 容器
-# 根据实际情况，设置五个环境变量：
+# 根据实际情况，设置以下环境变量：
 #   STORE_MODE：数据存储模式，可选值：db(默认)、file、redis
 #   DB_DATASOURCE：数据源类型，可选值：druid(默认)、dbcp、hikari
 #   DB_TYPE：数据库类型，可选值：dm(默认)、mysql、oracle、h2、postgresql、polardb-x、oceanbase、mariadb
