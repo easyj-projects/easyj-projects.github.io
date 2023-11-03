@@ -112,17 +112,23 @@ INSERT INTO "SEATA"."DISTRIBUTED_LOCK" ("LOCK_KEY", "LOCK_VALUE", "EXPIRE") VALU
 
 点击链接查看所有可用镜像：https://hub.docker.com/r/easyj/seata-server/tags
 
-以下提供4个基于不同java版本的镜像，根据需求拉取对应的镜像吧：
-> 注：以下镜像更新时间为：`2023-10-09 17:30`
+以下提供8个基于不同java版本和Web容器的镜像，根据需求拉取对应的镜像吧：
+> 注：以下镜像更新时间为：`2023-11-03 19:30`
 
 ```bash
 # 基于java8
 docker pull easyj/seata-server:1.8.0-DM-SNAPSHOT
 docker pull easyj/seata-server:1.8.0-DM-SNAPSHOT-slim
+# 基于java8，Web容器为普元
+docker pull easyj/seata-server:1.8.0-DM-PUYUAN-SNAPSHOT
+docker pull easyj/seata-server:1.8.0-DM-PUYUAN-SNAPSHOT-slim
 
 # 基于java17
 docker pull easyj/seata-server:1.8.0-DM-SNAPSHOT.jre17
 docker pull easyj/seata-server:1.8.0-DM-SNAPSHOT.jre17-slim
+# 基于java17，Web容器为普元
+docker pull easyj/seata-server:1.8.0-DM-PUYUAN-SNAPSHOT.jre17
+docker pull easyj/seata-server:1.8.0-DM-PUYUAN-SNAPSHOT.jre17-slim
 ```
 
 <!-- 查看EasyJ发布的所有seata-server镜像：https://hub.docker.com/r/easyj/seata-server/tags -->
@@ -132,18 +138,28 @@ docker pull easyj/seata-server:1.8.0-DM-SNAPSHOT.jre17-slim
 ```bash
 # 创建并启动 seata-server 容器
 # 根据实际情况，设置五个环境变量：
-#   DM_HOST: 达梦数据库主机名或IP
-#   DM_PORT: 达梦数据库端口号
-#   DM_SCHEMA: 达梦数据库模式名
-#   DM_USER: 达梦数据库用户名
-#   DM_PASSWORD: 达梦数据库密码
+#   STORE_MODE：数据存储模式，可选值：db(默认)、file、redis
+#   DB_DATASOURCE：数据源类型，可选值：druid(默认)、dbcp、hikari
+#   DB_TYPE：数据库类型，可选值：dm(默认)、mysql、oracle、h2、postgresql、polardb-x、oceanbase、mariadb
+#         注意：oracle、mariadb部分数据库需要自行添加驱动JAR包
+#   DB_DRIVER_CLASS_NAME：数据库驱动类名，根据配置的DB_TYPE，设置对应的数据库驱动类
+#   DB_URL：数据库连接URL，如果DB_TYPE配置为dm，也可以单独配置以下3个环境变量：
+#     DM_HOST：达梦数据库主机名或IP
+#     DM_PORT：达梦数据库端口号
+#     DM_SCHEMA：达梦数据库模式名
+#   DB_USER：达梦数据库用户名
+#   DB_PASSWORD：达梦数据库密码
 docker run \
     --name seata-for-dm \
+    -e STORE_MODE=db \
+    -e DB_DATASOURCE=druid \
+    -e DB_TYPE=dm \
+    -e DB_DRIVER_CLASS_NAME=dm.jdbc.driver.DmDriver \
     -e DM_HOST=127.0.0.1 \
     -e DM_PORT=5236 \
     -e DM_SCHEMA=SEATA \
-    -e DM_USER=SYSDBA \
-    -e DM_PASSWORD=xxx \
+    -e DB_USER=SYSDBA \
+    -e DB_PASSWORD=xxx \
     -e SEATA_IP=127.0.0.1 \
     -e SEATA_HTTP_PORT=7091 \
     -e SEATA_PORT=8091 \
