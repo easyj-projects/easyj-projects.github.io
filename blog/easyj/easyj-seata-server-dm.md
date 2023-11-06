@@ -147,8 +147,8 @@ docker pull easyj/seata-server:1.8.0-DM-PUYUAN-SNAPSHOT.jre17-slim
 #     DM_HOST：达梦数据库主机名或IP，默认值：127.0.0.1
 #     DM_PORT：达梦数据库端口号，默认值：5236
 #     DM_SCHEMA：达梦数据库模式名，默认值：SEATA
-#   *DB_USER：达梦数据库用户名
-#   *DB_PASSWORD：达梦数据库密码
+#   *DB_USER：数据库用户名
+#   *DB_PASSWORD：数据库密码
 docker run \
     --name seata-for-dm \
     -e STORE_MODE=db \
