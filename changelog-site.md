@@ -16,4 +16,4 @@
 
 ##### 博客
 
-* <a href="blog/#/easyj-integrate-elk" target="easyj-integrate-elk">EasyJ集成分布式日志ELK</a> 页面：部分内容调整。
+* <a href="blog/#/easyj/easyj-integrate-elk" target="easyj-integrate-elk">EasyJ集成分布式日志ELK</a> 页面：部分内容调整。

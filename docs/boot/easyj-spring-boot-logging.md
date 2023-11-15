@@ -7,4 +7,4 @@
 ---------------------------------------------------------------------------------------------------------------------------
 
 #### 博文：
-EasyJ集成ELK的博文：<a href="../blog/#/easyj-integrate-elk" target="_blank">/blog/#/easyj-integrate-elk</a>
+EasyJ集成ELK的博文：<a href="../blog/#/easyj/easyj-integrate-elk" target="_blank">/blog/#/easyj/easyj-integrate-elk</a>
