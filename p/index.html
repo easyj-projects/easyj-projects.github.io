@@ -55,7 +55,7 @@
 		clearPid();
 	}
 
-	if (pid.value !== '') {
+	if (pid.value === '') {
 		pid.value = localStorage.getItem('pid') || '116000000';
 	}
 
@@ -137,6 +137,9 @@
 			if (id !== curPid) {
 				return;
 			}
+
+			img.title += `  ${img.naturalWidth}✖️${img.naturalHeight}`;
+
 			count.innerHTML = n;
 			createImage(id, n + 1);
 		};
