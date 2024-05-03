@@ -65,11 +65,13 @@
 	});
 	// 监听获取焦点
 	pid.addEventListener('focus', function () {
+		clearPid();
 		inFocus = true;
 		pid.selectionStart = pid.selectionEnd = pid.value.length; // 光标移到最后面
 	});
 	// 监听失去焦点
 	pid.addEventListener('blur', function () {
+		clearPid();
 		inFocus = false;
 	});
 
@@ -99,6 +101,7 @@
 		}
 
 		// 监听左右键
+		clearPid();
 		if (pid.value === '') {
 			return;
 		}
