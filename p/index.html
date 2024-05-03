@@ -116,6 +116,10 @@
 	}
 
 	function createImage (id, n) {
+		if (id !== curPid) {
+			return;
+		}
+
 		if (!(id > 0)) {
 			return;
 		}
