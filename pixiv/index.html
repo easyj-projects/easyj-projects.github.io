@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Pixiv工具</title>
+	<style type="text/css">
+        div {margin-bottom:5px}
+        img {margin-bottom:20px}
+	</style>
+</head>
+<body>
+<div>
+	<label for="pid">PID：</label>
+	<input id="pid" type="text"/>
+
+	<label for="count" style="margin-left:20px">图片数：</label>
+	<span id="count">0</span>
+</div>
+<div id="loading" style="display:none">loading...</div>
+<div id="imgs"></div>
+
+<script type="application/javascript">
+	const pid = document.getElementById("pid");
+	const count = document.getElementById("count");
+	const loading = document.getElementById("loading");
+	const imgs = document.getElementById("imgs");
+
+	// 监听回车键
+	pid.addEventListener('keypress', function (e) {
+		clearPid();
+
+		if (pid.value === '') {
+			return;
+		}
+
+		pid.focus(); // 自动获取焦点
+		pid.selectionStart = pid.selectionEnd = pid.value.length; // 光标移到最后面
+
+		if (e.key === 'Enter') {
+			enter();
+		}
+	});
+
+	if (location.hash) {
+		pid.value = location.hash.substring(1);
+		clearPid();
+	}
+
+	if (pid.value !== '') {
+		loading.style.display = 'block';
+		createImage(pid.value, 1);
+	}
+
+	pid.focus(); // 自动获取焦点
+	pid.selectionStart = pid.selectionEnd = pid.value.length; // 光标移到最后面
+
+	// 监听全局键盘左右键
+	window.addEventListener('keyup', function (e) {
+		if (pid.value === '') {
+			pid.focus();
+			pid.selectionStart = pid.selectionEnd = pid.value.length;
+			return;
+		}
+
+		if (e.key === 'ArrowLeft') {
+			pid.value = pid.value - 1;
+			enter();
+		}
+		if (e.key === 'ArrowRight') {
+			pid.value = pid.value - 0 + 1;
+			enter();
+		}
+
+		pid.focus();
+		pid.selectionStart = pid.selectionEnd = pid.value.length;
+	});
+
+	function clearPid () {
+		if (pid.value !== '') {
+			pid.value = pid.value.replace(/[^0-9]/g, '');
+		}
+		pid.focus();
+		pid.selectionStart = pid.selectionEnd = pid.value.length;
+	}
+
+	function createImage (pid, n) {
+		count.innerHTML = n || 1;
+
+		const img = document.createElement("img");
+		if (n > 0) {
+			img.src = `https://pixiv.nl/${pid}-${n}.jpg`;
+			img.title = `${pid}-${n}`;
+		} else {
+			img.src = `https://pixiv.nl/${pid}.jpg`;
+			img.title = pid;
+		}
+		img.height = 400;
+		img.style.cursor = 'pointer';
+		img.style.display = 'block';
+		img.onclick = function () {
+			window.open(img.src);
+		};
+		img.onload = function () {
+			if (n >= 1) {
+				createImage(pid, n + 1);
+			} else {
+				loading.style.display = 'none';
+				count.innerHTML = 1;
+			}
+		};
+		img.onerror = function () {
+			if (n > 1) {
+				imgs.removeChild(img);
+				loading.style.display = 'none';
+				count.innerHTML = n - 1;
+			} else if (n === 1) {
+				imgs.removeChild(img);
+				createImage(pid);
+			} else {
+				loading.style.display = 'none';
+				imgs.innerHTML = '图片不存在';
+				count.innerHTML = 0;
+			}
+		};
+		imgs.appendChild(img);
+	}
+
+	function enter () {
+		location.hash = pid.value;
+
+		imgs.innerHTML = ''; // 清空图片
+
+		// 显示loading
+		loading.style.display = 'block';
+
+		createImage(pid.value, 1);
+	}
+</script>
+</body>
+</html>
