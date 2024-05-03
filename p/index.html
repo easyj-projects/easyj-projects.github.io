@@ -7,7 +7,7 @@
 	<title>Pixiv工具</title>
 	<style type="text/css">
         body{padding:0;margin:0}
-        div{padding:5px;font-size:16px}
+        div{padding:5px 5px 0 5px;font-size:20px}
         img{margin-bottom:20px}
 	</style>
 </head>
@@ -23,8 +23,8 @@
 <div>
 	<input id="prev" type="button" value="上一张"/>
 	<input id="next" type="button" value="下一张"/>
+	<span id="loading" style="display:none">loading...</span>
 </div>
-<div id="loading" style="display:none">loading...</div>
 <div id="imgs"></div>
 
 <script type="application/javascript">
@@ -185,7 +185,7 @@
 		imgs.innerHTML = ''; // 清空图片
 
 		// 显示loading
-		loading.style.display = 'block';
+		loading.style.display = 'inline-block';
 
 		setTimeout(function () {
 			createImage(pid.value - 0, 1);
