@@ -18,6 +18,10 @@
 	<label for="count" style="margin-left:20px">图片数：</label>
 	<span id="count">0</span>
 </div>
+<div>
+	<input id="prev" type="button" value="上一张"/>
+	<input id="next" type="button" value="下一张"/>
+</div>
 <div id="loading" style="display:none">loading...</div>
 <div id="imgs"></div>
 
@@ -76,6 +80,26 @@
 		pid.focus();
 		pid.selectionStart = pid.selectionEnd = pid.value.length;
 	});
+	// 上一张
+	document.getElementById("prev").onclick = function () {
+		if (pid.value === '') {
+			pid.focus();
+			pid.selectionStart = pid.selectionEnd = pid.value.length;
+			return;
+		}
+		pid.value = pid.value - 1;
+		enter();
+	};
+	// 下一张
+	document.getElementById("next").onclick = function () {
+		if (pid.value === '') {
+			pid.focus();
+			pid.selectionStart = pid.selectionEnd = pid.value.length;
+			return;
+		}
+		pid.value = pid.value - 0 + 1;
+		enter();
+	};
 
 	function clearPid () {
 		if (pid.value !== '') {
