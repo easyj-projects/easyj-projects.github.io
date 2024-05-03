@@ -12,22 +12,22 @@
 		#form div{padding-bottom:5px}
 		#imgs{margin-top:72px}
 		img{background-color:#efefef}
+		.mobile #form{top:auto;bottom:0}
+		.mobile #bottons{text-align:right;padding-right:20px}
 	</style>
 </head>
 <body>
 <div id="form">
-	<div>
+	<div id="inputs">
 		<label for="pid">PID：</label>
-		<input id="pid" type="text" style="width:120px"/>
+		<input id="pid" type="text" style="width:100px"/>
 		<input id="enter" type="button" value="确定"/>
-
-		<label for="count" style="margin-left:20px">图片数：</label>
-		<span id="count">0</span>
+		<label for="count" style="margin-left:10px">图片数：</label><span id="count">0</span>
+		<span id="loading" style="display:none;margin-left:15px">...</span>
 	</div>
-	<div>
+	<div id="bottons">
 		<input id="prev" type="button" value="上一张"/>
 		<input id="next" type="button" value="下一张"/>
-		<span id="loading" style="display:none;margin-left:40px">loading...</span>
 	</div>
 </div>
 
@@ -35,6 +35,10 @@
 </div>
 
 <script type="application/javascript">
+	if (isMobileBrowser()) {
+		document.body.classList.add("mobile");
+	}
+
 	const pid = document.getElementById("pid");
 	const count = document.getElementById("count");
 	const loading = document.getElementById("loading");
