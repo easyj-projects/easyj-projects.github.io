@@ -92,10 +92,16 @@
 			return;
 		}
 
-		if (pid.value === '') {
+		// 按F2获取输入框焦点
+		if (e.key === 'F2') {
+			pid.focus();
 			return;
 		}
 
+		// 监听左右键
+		if (pid.value === '') {
+			return;
+		}
 		if (e.key === 'ArrowLeft') {
 			pid.value = pid.value - 1;
 			enter();
