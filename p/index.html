@@ -142,6 +142,9 @@
 	}
 
 	function createImage (id, n) {
+		if (id !== curPid) {
+			return;
+		}
 		if (!(id > 0)) {
 			return;
 		}
@@ -153,6 +156,7 @@
 			img.src = `https://pixiv.nl/${id}.jpg`;
 		}
 		img.title = `${id}-${n}`;
+		img.alt = img.title;
 		img.style.height = "400px";
 		img.style.cursor = 'pointer';
 		img.style.display = 'block';
@@ -192,32 +196,32 @@
 	}
 
 	function enter () {
+		clearPid();
+
 		if (pid.value === '') {
 			return;
 		}
 
 		clearTimeout(timeout);
 
-		// 设置参数
-		location.hash = pid.value;
-		localStorage.setItem('pid', pid.value);
-		curPid = pid.value - 0;
-
-		// 初始化参数
-		count.innerHTML = "0"; // 重置图片数
+		// 清空图片
 		imgs.childNodes.forEach(function (img) {
 			img.src = '';
 		});
 
-		// 显示loading
-		loading.style.display = 'inline-block';
+		// 设置参数
+		location.hash = pid.value;
+		localStorage.setItem('pid', pid.value);
+		curPid = 0;
+
+		// 初始化参数
+		count.innerHTML = "0"; // 重置图片数
 
 		timeout = setTimeout(function () {
 			const id = pid.value - 0;
-			if (id !== curPid) {
-				return;
-			}
+			curPid = id;
 			imgs.innerHTML = ''; // 清空图片
+			loading.style.display = 'inline-block'; // 显示loading
 			createImage(id, 1);
 		}, 100);
 	}
