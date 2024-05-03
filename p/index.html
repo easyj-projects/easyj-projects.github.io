@@ -174,7 +174,9 @@
 		// 显示loading
 		loading.style.display = 'block';
 
-		createImage(pid.value - 0, 1);
+		setTimeout(function () {
+			createImage(pid.value - 0, 1);
+		}, 100);
 	}
 </script>
 </body>
