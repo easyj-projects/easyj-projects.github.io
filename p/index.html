@@ -56,10 +56,10 @@
 	}
 
 	if (pid.value !== '') {
-		enter();
-	} else {
 		pid.value = localStorage.getItem('pid') || '116000000';
 	}
+
+	enter();
 
 	pid.focus(); // 自动获取焦点
 	pid.selectionStart = pid.selectionEnd = pid.value.length; // 光标移到最后面
