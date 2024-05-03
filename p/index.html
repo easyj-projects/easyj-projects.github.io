@@ -7,25 +7,29 @@
 	<title>Pixiv工具</title>
 	<style type="text/css">
         body{padding:0;margin:0}
-        div{padding:5px 5px 0 5px;font-size:19px}
+        div{padding:5px 5px 0 5px;font-size:20px}
         img{margin-bottom:20px}
 	</style>
 </head>
 <body>
-<div>
-	<label for="pid">PID：</label>
-	<input id="pid" type="text"/>
-	<input id="enter" type="button" value="确定"/>
+<div id="form">
+	<div>
+		<label for="pid">PID：</label>
+		<input id="pid" type="text" style="width:120px"/>
+		<input id="enter" type="button" value="确定"/>
 
-	<label for="count" style="margin-left:20px">图片数：</label>
-	<span id="count">0</span>
+		<label for="count" style="margin-left:20px">图片数：</label>
+		<span id="count">0</span>
+	</div>
+	<div>
+		<input id="prev" type="button" value="上一张"/>
+		<input id="next" type="button" value="下一张"/>
+		<span id="loading" style="display:none;margin-left:40px">loading...</span>
+	</div>
 </div>
-<div>
-	<input id="prev" type="button" value="上一张"/>
-	<input id="next" type="button" value="下一张"/>
-	<span id="loading" style="display:none">loading...</span>
+
+<div id="imgs">
 </div>
-<div id="imgs"></div>
 
 <script type="application/javascript">
 	const pid = document.getElementById("pid");
