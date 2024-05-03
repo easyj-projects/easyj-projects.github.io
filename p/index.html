@@ -6,8 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pixiv工具</title>
 	<style type="text/css">
-        div {margin-bottom:5px}
-        img {margin-bottom:20px}
+        body{padding:0;margin:0}
+        div{padding:5px;font-size:16px}
+        img{margin-bottom:20px}
 	</style>
 </head>
 <body>
@@ -131,7 +132,7 @@
 			img.src = `https://pixiv.nl/${id}.jpg`;
 		}
 		img.title = `${id}-${n}`;
-		img.height = 400;
+		img.style.height = "400px";
 		img.style.cursor = 'pointer';
 		img.style.display = 'block';
 		img.onclick = function () {
@@ -143,6 +144,12 @@
 			}
 
 			img.title += `  ${img.naturalWidth}✖️${img.naturalHeight}`;
+
+			// 宽度超过页面时，缩小显示
+			if (img.width > window.innerWidth - 10) {
+				img.style.width = (window.innerWidth - 16) + "px";
+				img.style.height = "auto";
+			}
 
 			count.innerHTML = n;
 			createImage(id, n + 1);
