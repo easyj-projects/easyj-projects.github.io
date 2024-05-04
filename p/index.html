@@ -43,6 +43,7 @@
 	const imgs = document.getElementById("imgs");
 
 	const windowWidth = window.innerWidth - 10 < 200 ? 200 : window.innerWidth - 10;
+	console.log("windowWidth:", windowWidth);
 
 	let curPid = 0;
 	let timeout;
@@ -186,7 +187,7 @@
 
 			img.title += `  ${img.naturalWidth}✖️${img.naturalHeight}`;
 
-			reduceImg(); // 如果图片太宽，则缩小图片
+			reduceImg(img); // 如果图片太宽，则缩小图片
 
 			count.innerHTML = n;
 			createImage(id, n + 1);
