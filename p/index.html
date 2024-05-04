@@ -168,7 +168,7 @@
 	}
 
 	function createImage (id, n) {
-		if (cache.value !== '开启' && id !== curPid) {
+		if (id !== curPid) {
 			return;
 		}
 		if (!(id > 0)) {
@@ -192,7 +192,7 @@
 		};
 		img.onload = function () {
 			clearInterval(img.interval);
-			if (cache.value !== '开启' && id !== curPid) {
+			if (id !== curPid) {
 				return;
 			}
 
@@ -208,6 +208,7 @@
 			clearInterval(img.interval);
 
 			if (cache.value === '开启') {
+				curPid = id + 1;
 				imgs.innerHTML = '';
 				count.innerHTML = '0';
 				createImage(id + 1, 1);
