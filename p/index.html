@@ -191,7 +191,8 @@
 			count.innerHTML = n;
 			createImage(id, n + 1);
 		};
-		img.onerror = function () {
+		img.onerror = function (e) {
+			console.log(`加载图片 '${img.id}' 失败:`, e);
 			clearInterval(img.interval);
 			if (id !== curPid) {
 				return;
