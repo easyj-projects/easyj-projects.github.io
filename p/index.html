@@ -75,11 +75,6 @@
 		inFocus = false;
 	});
 
-	if (location.hash) {
-		pid.value = location.hash.substring(1);
-		clearPid();
-	}
-
 	if (pid.value === '') {
 		pid.value = localStorage.getItem('pid') || '116000000';
 	}
@@ -210,7 +205,6 @@
 		});
 
 		// 设置参数
-		location.hash = pid.value;
 		localStorage.setItem('pid', pid.value);
 		curPid = 0;
 
