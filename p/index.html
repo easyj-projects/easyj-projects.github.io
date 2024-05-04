@@ -226,9 +226,11 @@
 
 		// 清空图片
 		imgs.childNodes.forEach(function (img) {
-			img.src = '';
-			img.style.height = 'auto';
-			img.style.width = windowWidth + "px";
+			if (img && img.src) {
+				img.src = '';
+				img.style.height = 'auto';
+				img.style.width = windowWidth + "px";
+			}
 		});
 		if (imgs.innerHTML.includes("404 Not Found")) {
 			imgs.innerHTML = '';
