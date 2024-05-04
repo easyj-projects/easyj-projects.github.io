@@ -237,6 +237,13 @@
 		}
 
 		imgs.appendChild(img);
+
+		// 开启连续缓存时，将页面滚动到底部
+		setTimeout(function () {
+			if (cache.value === '开启') {
+				window.scrollTo(0, document.body.scrollHeight);
+			}
+		}, 100);
 	}
 
 	function enter () {
