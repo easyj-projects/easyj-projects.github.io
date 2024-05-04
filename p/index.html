@@ -75,11 +75,16 @@
 		inFocus = false;
 	});
 
-	if (pid.value === '') {
-		pid.value = localStorage.getItem('pid') || '116000000';
+	// 初始化
+	if (localStorage.getItem('pid')) {
+		pid.value = localStorage.getItem('pid');
+		enter();
+	} else {
+		clearPid();
+		if (pid.value === '') {
+			pid.value = '116000000';
+		}
 	}
-
-	enter();
 
 	pid.focus(); // 自动获取焦点
 
@@ -136,6 +141,17 @@
 		}
 	}
 
+	function reduceImg (img) {
+		if (isMobileBrowser()) {
+			// 宽度超过页面时，缩小显示
+			if (img.width > window.innerWidth - 10) {
+				img.style.width = (window.innerWidth - 10) + "px";
+				img.style.height = "auto";
+				return true;
+			}
+		}
+	}
+
 	function createImage (id, n) {
 		if (id !== curPid) {
 			return;
@@ -143,6 +159,8 @@
 		if (!(id > 0)) {
 			return;
 		}
+
+		let interval;
 
 		const img = document.createElement("img");
 		if (n > 1) {
@@ -159,24 +177,20 @@
 			window.open(img.src);
 		};
 		img.onload = function () {
+			clearInterval(interval);
 			if (id !== curPid) {
 				return;
 			}
 
 			img.title += `  ${img.naturalWidth}✖️${img.naturalHeight}`;
 
-			if (isMobileBrowser()) {
-				// 宽度超过页面时，缩小显示
-				if (img.width > window.innerWidth - 10) {
-					img.style.width = (window.innerWidth - 10) + "px";
-					img.style.height = "auto";
-				}
-			}
+			reduceImg(); // 如果图片太宽，则缩小图片
 
 			count.innerHTML = n;
 			createImage(id, n + 1);
 		};
 		img.onerror = function () {
+			clearInterval(interval);
 			if (id !== curPid) {
 				return;
 			}
@@ -184,9 +198,18 @@
 			if (n > 1) {
 				imgs.removeChild(img);
 			} else {
-				imgs.innerHTML = '图片不存在';
+				imgs.innerHTML = '<h1>404 Not Found</h1><span>这个作品可能已被删除，或无法取得。</span>';
 			}
 		};
+
+		if (isMobileBrowser()) {
+			interval = setInterval(function () {
+				if (reduceImg(img)) {
+					clearInterval(interval);
+				}
+			}, 10);
+		}
+
 		imgs.appendChild(img);
 	}
 
@@ -203,9 +226,11 @@
 		imgs.childNodes.forEach(function (img) {
 			img.src = '';
 		});
+		if (imgs.innerHTML.includes("404 Not Found")) {
+			imgs.innerHTML = '';
+		}
 
 		// 设置参数
-		localStorage.setItem('pid', pid.value);
 		curPid = 0;
 
 		// 初始化参数
@@ -213,15 +238,23 @@
 
 		timeout = setTimeout(function () {
 			const id = pid.value - 0;
+			if (id > 999999999) {
+				imgs.innerHTML = 'PID不能超过9位';
+				return;
+			} else if (id < 10) {
+				imgs.innerHTML = 'PID不能小于10';
+				return;
+			}
+			localStorage.setItem('pid', pid.value);
 			curPid = id;
 			imgs.innerHTML = ''; // 清空图片
 			loading.style.display = 'inline-block'; // 显示loading
 			createImage(id, 1);
-		}, 1000);
+		}, 400);
 	}
 
-	function isMobileBrowser() {
-		return window.innerWidth <= 500 || /Mobile|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);;
+	function isMobileBrowser () {
+		return window.innerWidth <= 500 || /Mobile|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 	}
 </script>
 </body>
