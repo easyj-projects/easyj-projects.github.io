@@ -27,7 +27,7 @@
 	</div>
 	<div id="bottons">
 		<label for="cache">连续缓存：</label><input id="cache" type="button" value="关闭"/>
-		<input id="prev" type="button" value="上一张" style="margin-left:70px"/>
+		<input id="prev" type="button" value="上一张" style="margin-left:66px"/>
 		<input id="next" type="button" value="下一张"/>
 	</div>
 </div>
@@ -207,6 +207,10 @@
 			console.log(`加载图片 '${img.id}' 失败:`, e);
 			clearInterval(img.interval);
 
+			if (id !== curPid) {
+				return;
+			}
+
 			if (cache.value === '开启') {
 				curPid = id + 1;
 				imgs.innerHTML = '';
@@ -215,10 +219,8 @@
 				return;
 			}
 
-			if (id !== curPid) {
-				return;
-			}
 			loading.style.display = 'none';
+
 			if (n > 1) {
 				imgs.removeChild(img);
 			} else {
