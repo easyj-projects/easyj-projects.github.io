@@ -163,16 +163,15 @@
 			return;
 		}
 
-		let interval;
-
 		const img = document.createElement("img");
 		if (n > 1) {
 			img.src = `https://pixiv.nl/${id}-${n}.jpg`;
 		} else {
 			img.src = `https://pixiv.nl/${id}.jpg`;
 		}
-		img.title = `${id}-${n}`;
-		img.alt = img.title;
+		img.id = `${id}-${n}`;
+		img.title = img.id;
+		img.alt = img.id;
 		img.style.height = "400px";
 		img.style.cursor = 'pointer';
 		img.style.display = 'block';
@@ -180,7 +179,7 @@
 			window.open(img.src);
 		};
 		img.onload = function () {
-			clearInterval(interval);
+			clearInterval(img.interval);
 			if (id !== curPid) {
 				return;
 			}
@@ -193,7 +192,7 @@
 			createImage(id, n + 1);
 		};
 		img.onerror = function () {
-			clearInterval(interval);
+			clearInterval(img.interval);
 			if (id !== curPid) {
 				return;
 			}
@@ -206,9 +205,9 @@
 		};
 
 		if (isMobileBrowser()) {
-			interval = setInterval(function () {
+			img.interval = setInterval(function () {
 				if (reduceImg(img)) {
-					clearInterval(interval);
+					clearInterval(img.interval);
 				}
 			}, 10);
 		}
@@ -228,6 +227,7 @@
 		// 清空图片
 		imgs.childNodes.forEach(function (img) {
 			if (img && img.src) {
+				clearInterval(img.interval);
 				img.src = '';
 				img.style.height = 'auto';
 				img.style.width = windowWidth + "px";
