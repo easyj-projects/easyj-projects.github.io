@@ -13,7 +13,6 @@
         img{margin-bottom:20px}
 		img{background-color:#efefef}
 		.mobile #form{top:auto;bottom:0}
-		.mobile #bottons{text-align:right;padding-right:20px}
 		.mobile #imgs{margin-top:0;padding-bottom:72px}
 	</style>
 </head>
@@ -27,7 +26,8 @@
 		<span id="loading" style="display:none;margin-left:15px">...</span>
 	</div>
 	<div id="bottons">
-		<input id="prev" type="button" value="上一张"/>
+		<label for="cache">连续缓存：</label><input id="cache" type="button" value="关闭"/>
+		<input id="prev" type="button" value="上一张" style="margin-left:70px"/>
 		<input id="next" type="button" value="下一张"/>
 	</div>
 </div>
@@ -41,6 +41,7 @@
 	const count = document.getElementById("count");
 	const loading = document.getElementById("loading");
 	const imgs = document.getElementById("imgs");
+	const cache = document.getElementById("cache");
 
 	const windowWidth = window.innerWidth - 10 < 200 ? 200 : window.innerWidth - 10;
 	console.log("windowWidth:", windowWidth);
@@ -91,6 +92,14 @@
 
 	pid.focus(); // 自动获取焦点
 
+	cache.onclick = function () {
+		if (this.value === '开启') {
+			this.value = '关闭';
+		} else {
+			this.value = '开启';
+		}
+	};
+
 	// 监听全局键盘左右键
 	window.addEventListener('keyup', function (e) {
 		if (inFocus) {
@@ -118,7 +127,10 @@
 		}
 	});
 	// 确定
-	document.getElementById("enter").onclick = enter;
+	document.getElementById("enter").onclick = function () {
+		cache.value = '关闭';
+		enter();
+	};
 	// 上一张
 	document.getElementById("prev").onclick = function () {
 		if (pid.value === '') {
@@ -156,7 +168,7 @@
 	}
 
 	function createImage (id, n) {
-		if (id !== curPid) {
+		if (cache.value !== '开启' && id !== curPid) {
 			return;
 		}
 		if (!(id > 0)) {
@@ -180,7 +192,7 @@
 		};
 		img.onload = function () {
 			clearInterval(img.interval);
-			if (id !== curPid) {
+			if (cache.value !== '开启' && id !== curPid) {
 				return;
 			}
 
@@ -194,6 +206,13 @@
 		img.onerror = function (e) {
 			console.log(`加载图片 '${img.id}' 失败:`, e);
 			clearInterval(img.interval);
+
+			if (cache.value === '开启') {
+				imgs.innerHTML = '';
+				createImage(id + 1, 1);
+				return;
+			}
+
 			if (id !== curPid) {
 				return;
 			}
