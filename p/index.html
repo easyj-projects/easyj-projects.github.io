@@ -232,7 +232,7 @@
 				img.style.width = windowWidth + "px";
 			}
 		});
-		if (imgs.innerHTML.includes("404 Not Found")) {
+		if (imgs.innerHTML && !imgs.innerHTML.includes("<img ")) {
 			imgs.innerHTML = '';
 		}
 
