@@ -134,31 +134,35 @@ function reduceImg (img) {
 	}
 }
 
+function stopImgInterval (img) {
+	clearInterval(img.interval);
+	img.interval = null;
+}
+
 function createImage (pid, n) {
 	if (pid !== curPid) {
 		return;
 	}
-	if (!(pid > 0)) {
-		return;
-	}
 
+	// 创建img标签
 	const img = document.createElement("img");
-	if (n > 1) {
-		img.src = `https://pixiv.nl/${pid}-${n}.jpg`;
-	} else {
-		img.src = `https://pixiv.nl/${pid}.jpg`;
-	}
 	img.id = `${pid}-${n}`;
 	img.title = img.id;
 	img.alt = img.id;
+	if (n > 1) img.src = `https://pixiv.nl/${pid}-${n}.jpg`;
+	else img.src = `https://pixiv.nl/${pid}.jpg`;
 	img.style.height = "400px";
 	img.style.cursor = 'pointer';
 	img.style.display = 'block';
+	// 绑定图片点击事件
 	img.onclick = function () {
 		window.open(img.src);
 	};
+	// 绑定图片加载完成事件
 	img.onload = function () {
-		clearInterval(img.interval);
+		img.onerror = null; // 图片加载成功，将onerror事件移除
+		stopImgInterval(img);
+
 		if (pid !== curPid) {
 			return;
 		}
@@ -171,16 +175,16 @@ function createImage (pid, n) {
 
 		if (auto.value === '开启') {
 			setTimeout(function () {
-				if (pid !== curPid) return;
 				createImage(pid, n + 1);
-			}, 1000);
+			}, 500);
 		} else {
 			createImage(pid, n + 1);
 		}
 	};
+	// 绑定图片加载失败事件
 	img.onerror = function (e) {
 		console.log(`加载图片 '${img.id}' 失败:`, e);
-		clearInterval(img.interval);
+		stopImgInterval(img);
 
 		if (pid !== curPid) {
 			return;
@@ -203,7 +207,7 @@ function createImage (pid, n) {
 
 	img.interval = setInterval(function () {
 		if (reduceImg(img)) {
-			clearInterval(img.interval);
+			stopImgInterval(img);
 		}
 	}, 10);
 
@@ -234,7 +238,10 @@ function doEnter (pid, needSavePid) {
 	// 清空图片
 	imgs.childNodes.forEach(function (img) {
 		if (img && img.src) {
-			clearInterval(img.interval);
+			stopImgInterval(img);
+			img.onclick = null;
+			img.onload = null;
+			img.onerror = null;
 			img.src = '';
 			img.style.height = 'auto';
 			img.style.width = windowWidth + "px";
