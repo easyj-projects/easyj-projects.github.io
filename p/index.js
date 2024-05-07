@@ -140,8 +140,8 @@ function showImg (img) {
 
 function stopImgInterval (img) {
 	if (img.interval) {
-		img.interval = null;
 		clearInterval(img.interval);
+		img.interval = null;
 	}
 }
 
@@ -311,5 +311,5 @@ function doNext () {
 }
 
 function isMobileBrowser () {
-	return /Mobile|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+	return windowWidth < 500 || /Mobile|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
