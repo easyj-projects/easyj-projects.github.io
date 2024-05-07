@@ -7,17 +7,17 @@
 	<title>Pixiv工具</title>
 	<style type="text/css">
         body{padding:0;margin:0;font-size:20px}
-		#form{position:fixed;left:0;top:0;z-index:1;background-color:#efefef;width:100%;padding:5px 5px 0 5px}
-		#form div{padding-bottom:5px}
+		#tools{position:fixed;left:0;top:0;z-index:1;background-color:#efefef;width:100%;padding:5px 5px 0 5px}
+		#tools div{padding-bottom:5px}
 		#imgs{margin-top:70px;padding:5px 0 0 5px}
         img{margin-bottom:20px}
 		img{background-color:#efefef}
-		.mobile #form{top:auto;bottom:0}
+		.mobile #tools{top:auto;bottom:0}
 		.mobile #imgs{margin-top:0;padding-bottom:72px}
 	</style>
 </head>
 <body>
-<div id="form">
+<div id="tools">
 	<div id="inputs">
 		<label for="pid">PID：</label>
 		<input id="pid" type="text" style="width:100px"/>
@@ -26,274 +26,14 @@
 		<span id="loading" style="display:none;margin-left:15px">...</span>
 	</div>
 	<div id="bottons">
-		<label for="cache">连续缓存：</label><input id="cache" type="button" value="关闭"/>
-		<input id="prev" type="button" value="上一张" style="margin-left:66px"/>
+		<label for="auto">自动：</label><input id="auto" type="button" value="关闭"/>
+		<input id="prev" type="button" value="上一张" style="margin-left:105px"/>
 		<input id="next" type="button" value="下一张"/>
 	</div>
 </div>
 
-<div id="imgs">
-</div>
+<div id="imgs"></div>
 
-<script type="application/javascript">
-	const form = document.getElementById("form");
-	const pid = document.getElementById("pid");
-	const count = document.getElementById("count");
-	const loading = document.getElementById("loading");
-	const imgs = document.getElementById("imgs");
-	const cache = document.getElementById("cache");
-
-	const windowWidth = window.innerWidth - 10 < 200 ? 200 : window.innerWidth - 10;
-	console.log("windowWidth:", windowWidth);
-
-	let curPid = 0;
-	let timeout;
-	let inFocus = false;
-
-	if (isMobileBrowser()) {
-		document.body.classList.add("mobile");
-		form.style.width = windowWidth + "px";
-	}
-
-	// 监听回车键
-	pid.addEventListener('keypress', function (e) {
-		clearPid();
-
-		if (pid.value === '') {
-			return;
-		}
-
-		if (e.key === 'Enter') {
-			enter();
-		}
-	});
-	// 监听获取焦点
-	pid.addEventListener('focus', function () {
-		clearPid();
-		inFocus = true;
-		pid.selectionStart = pid.selectionEnd = pid.value.length; // 光标移到最后面
-	});
-	// 监听失去焦点
-	pid.addEventListener('blur', function () {
-		clearPid();
-		inFocus = false;
-	});
-
-	// 初始化
-	if (localStorage.getItem('pid')) {
-		pid.value = localStorage.getItem('pid');
-		enter();
-	} else {
-		clearPid();
-		if (pid.value === '') {
-			pid.value = '116000000';
-		}
-	}
-
-	pid.focus(); // 自动获取焦点
-
-	cache.onclick = function () {
-		if (this.value === '开启') {
-			this.value = '关闭';
-		} else {
-			this.value = '开启';
-		}
-	};
-
-	// 监听全局键盘左右键
-	window.addEventListener('keyup', function (e) {
-		if (inFocus) {
-			return;
-		}
-
-		// 按F2获取输入框焦点
-		if (e.key === 'F2') {
-			pid.focus();
-			return;
-		}
-
-		// 监听左右键
-		clearPid();
-		if (pid.value === '') {
-			return;
-		}
-		if (e.key === 'ArrowLeft') {
-			pid.value = pid.value - 1;
-			enter();
-		}
-		if (e.key === 'ArrowRight') {
-			pid.value = pid.value - 0 + 1;
-			enter();
-		}
-	});
-	// 确定
-	document.getElementById("enter").onclick = function () {
-		cache.value = '关闭';
-		enter();
-	};
-	// 上一张
-	document.getElementById("prev").onclick = function () {
-		if (pid.value === '') {
-			pid.focus();
-			return;
-		}
-		pid.value = pid.value - 1;
-		enter();
-	};
-	// 下一张
-	document.getElementById("next").onclick = function () {
-		if (pid.value === '') {
-			pid.focus();
-			return;
-		}
-		pid.value = pid.value - 0 + 1;
-		enter();
-	};
-
-	function clearPid () {
-		if (pid.value !== '') {
-			pid.value = pid.value.replace(/[^0-9]/g, '');
-		}
-	}
-
-	function reduceImg (img) {
-		if (isMobileBrowser()) {
-			// 宽度超过页面时，缩小显示
-			if (img.width > windowWidth) {
-				img.style.width = windowWidth + "px";
-				img.style.height = "auto";
-				return true;
-			}
-		}
-	}
-
-	function createImage (id, n) {
-		if (id !== curPid) {
-			return;
-		}
-		if (!(id > 0)) {
-			return;
-		}
-
-		const img = document.createElement("img");
-		if (n > 1) {
-			img.src = `https://pixiv.nl/${id}-${n}.jpg`;
-		} else {
-			img.src = `https://pixiv.nl/${id}.jpg`;
-		}
-		img.id = `${id}-${n}`;
-		img.title = img.id;
-		img.alt = img.id;
-		img.style.height = "400px";
-		img.style.cursor = 'pointer';
-		img.style.display = 'block';
-		img.onclick = function () {
-			window.open(img.src);
-		};
-		img.onload = function () {
-			clearInterval(img.interval);
-			if (id !== curPid) {
-				return;
-			}
-
-			img.title += `  ${img.naturalWidth}✖️${img.naturalHeight}`;
-
-			reduceImg(img); // 如果图片太宽，则缩小图片
-
-			count.innerHTML = n;
-			createImage(id, n + 1);
-		};
-		img.onerror = function (e) {
-			console.log(`加载图片 '${img.id}' 失败:`, e);
-			clearInterval(img.interval);
-
-			if (id !== curPid) {
-				return;
-			}
-
-			if (cache.value === '开启') {
-				curPid = id + 1;
-				imgs.innerHTML = '';
-				count.innerHTML = '0';
-				createImage(id + 1, 1);
-				return;
-			}
-
-			loading.style.display = 'none';
-
-			if (n > 1) {
-				imgs.removeChild(img);
-			} else {
-				imgs.innerHTML = '<h1>404 Not Found</h1><span>这个作品可能已被删除，或无法取得。</span>';
-			}
-		};
-
-		if (isMobileBrowser()) {
-			img.interval = setInterval(function () {
-				if (reduceImg(img)) {
-					clearInterval(img.interval);
-				}
-			}, 10);
-		}
-
-		imgs.appendChild(img);
-
-		// 开启连续缓存时，将页面滚动到底部
-		setTimeout(function () {
-			if (cache.value === '开启') {
-				window.scrollTo(0, document.body.scrollHeight);
-			}
-		}, 100);
-	}
-
-	function enter () {
-		clearPid();
-
-		if (pid.value === '') {
-			return;
-		}
-
-		clearTimeout(timeout);
-
-		// 清空图片
-		imgs.childNodes.forEach(function (img) {
-			if (img && img.src) {
-				clearInterval(img.interval);
-				img.src = '';
-				img.style.height = 'auto';
-				img.style.width = windowWidth + "px";
-			}
-		});
-		if (imgs.innerHTML && !imgs.innerHTML.includes("<img ")) {
-			imgs.innerHTML = '';
-		}
-
-		// 设置参数
-		curPid = 0;
-
-		// 初始化参数
-		count.innerHTML = "0"; // 重置图片数
-
-		timeout = setTimeout(function () {
-			const id = pid.value - 0;
-			if (id > 999999999) {
-				imgs.innerHTML = 'PID不能超过9位';
-				return;
-			} else if (id < 10) {
-				imgs.innerHTML = 'PID不能小于10';
-				return;
-			}
-			localStorage.setItem('pid', pid.value);
-			curPid = id;
-			imgs.innerHTML = ''; // 清空图片
-			loading.style.display = 'inline-block'; // 显示loading
-			createImage(id, 1);
-		}, 400);
-	}
-
-	function isMobileBrowser () {
-		return window.innerWidth <= 500 || /Mobile|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-	}
-</script>
+<script src="index.js" type="application/javascript"></script>
 </body>
 </html>

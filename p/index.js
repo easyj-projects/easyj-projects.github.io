@@ -1,0 +1,292 @@
+// elements
+const tools = document.getElementById("tools"); // 工具栏
+
+const input = document.getElementById("pid"); // PID输入框
+const enter = document.getElementById("enter"); // 确定
+const count = document.getElementById("count"); // 图片数
+const loading = document.getElementById("loading"); // loading效果
+
+const auto = document.getElementById("auto"); // 自动
+const prev = document.getElementById("prev"); // 上一张
+const next = document.getElementById("next"); // 下一张
+
+const imgs = document.getElementById("imgs"); // 图片列表
+
+
+// 窗口宽度
+const windowWidth = window.innerWidth - 10 < 200 ? 200 : window.innerWidth - 10;
+console.log("windowWidth:", windowWidth);
+
+
+// 一些数据
+let curPid = 0;
+let inFocus = false; // 输入框是否获取到了焦点
+
+
+// 绑定事件
+{
+	// PID输入框：监听回车键
+	input.addEventListener('keypress', function (e) {
+		if (e.key === 'Enter') {
+			doEnter();
+		}
+	});
+	// PID输入框：监听获取焦点
+	input.addEventListener('focus', function () {
+		inFocus = true;
+		clearPid();
+	});
+	// PID输入框：监听失去焦点
+	input.addEventListener('blur', function () {
+		inFocus = false;
+		clearPid();
+	});
+
+	// “确定” 按钮点击事件
+	enter.addEventListener("click", doEnter);
+
+	// “自动” 按钮点击事件
+	auto.addEventListener("click", function () {
+		if (auto.value === '开启') {
+			auto.value = '关闭';
+		} else {
+			auto.value = '开启';
+			if (loading.style.display === 'none') {
+				doNext();
+			}
+		}
+	});
+
+	// “上一张” 按钮点击事件
+	prev.addEventListener("click", doPrev);
+
+	// “下一张” 按钮点击事件
+	next.addEventListener("click", doNext);
+
+	// 监听全局键盘：F2、左键、右键
+	window.addEventListener('keyup', function (e) {
+		if (inFocus) {
+			return;
+		}
+
+		// 按F2获取输入框焦点
+		if (e.key === 'F2') {
+			input.focus();
+			return;
+		}
+
+		// 监听左右键
+		clearPid();
+		if (input.value === '') {
+			return;
+		}
+		if (e.key === 'ArrowLeft') {
+			doPrev();
+		}
+		if (e.key === 'ArrowRight') {
+			doNext();
+		}
+	});
+}
+
+
+// 初始化
+if (isMobileBrowser()) {
+	document.body.classList.add("mobile");
+	tools.style.width = windowWidth + "px";
+}
+setTimeout(function () {
+	let needSavePid = true;
+	if (location.hash && location.hash.substring(1) - 0 > 0) {
+		input.value = location.hash.substring(1) - 0; // 优先hash
+		needSavePid = false;
+	} else if (localStorage.getItem('pid')) {
+		input.value = localStorage.getItem('pid'); // 其次 localStorage
+	} else {
+		input.value = '';
+	}
+
+	const pid = clearPid();
+	if (pid) {
+		doEnter(pid, needSavePid);
+	} else {
+		input.value = '116000000';
+	}
+	input.focus(); // 自动获取焦点
+}, 100);
+
+
+// 方法
+
+function clearPid () {
+	if (input.value !== '') {
+		return input.value = input.value.replace(/[^0-9]/g, '');
+	}
+	return '';
+}
+
+function reduceImg (img) {
+	// 宽度超过页面时，缩小显示
+	if (img.width > windowWidth) {
+		img.style.width = windowWidth + "px";
+		img.style.height = (windowWidth / img.naturalWidth * img.naturalHeight) + "px";
+		return true;
+	}
+}
+
+function createImage (pid, n) {
+	if (pid !== curPid) {
+		return;
+	}
+	if (!(pid > 0)) {
+		return;
+	}
+
+	const img = document.createElement("img");
+	if (n > 1) {
+		img.src = `https://pixiv.nl/${pid}-${n}.jpg`;
+	} else {
+		img.src = `https://pixiv.nl/${pid}.jpg`;
+	}
+	img.id = `${pid}-${n}`;
+	img.title = img.id;
+	img.alt = img.id;
+	img.style.height = "400px";
+	img.style.cursor = 'pointer';
+	img.style.display = 'block';
+	img.onclick = function () {
+		window.open(img.src);
+	};
+	img.onload = function () {
+		clearInterval(img.interval);
+		if (pid !== curPid) {
+			return;
+		}
+
+		img.title += `  ${img.naturalWidth}✖️${img.naturalHeight}`;
+
+		reduceImg(img); // 如果图片太宽，则缩小图片
+
+		count.innerHTML = n;
+
+		if (auto.value === '开启') {
+			setTimeout(function () {
+				if (pid !== curPid) return;
+				createImage(pid, n + 1);
+			}, 1000);
+		} else {
+			createImage(pid, n + 1);
+		}
+	};
+	img.onerror = function (e) {
+		console.log(`加载图片 '${img.id}' 失败:`, e);
+		clearInterval(img.interval);
+
+		if (pid !== curPid) {
+			return;
+		}
+
+		loading.style.display = 'none';
+
+		if (n > 1) {
+			imgs.removeChild(img);
+		} else {
+			imgs.innerHTML = '<h1>404 Not Found</h1><span>这个作品可能已被删除，或无法取得。</span>';
+		}
+
+		setTimeout(function () {
+			if (auto.value === '开启' && pid === curPid) {
+				doNext();
+			}
+		}, 1500);
+	};
+
+	img.interval = setInterval(function () {
+		if (reduceImg(img)) {
+			clearInterval(img.interval);
+		}
+	}, 10);
+
+	imgs.appendChild(img);
+
+	// 开启连续缓存时，将页面滚动到底部
+	setTimeout(function () {
+		if (auto.value === '开启') {
+			window.scrollTo(0, document.body.scrollHeight);
+		}
+	}, 100);
+}
+
+function doEnter (pid, needSavePid) {
+	pid = pid || clearPid();
+
+	if (pid === '') {
+		return;
+	}
+
+	// 初始化
+	curPid = 0;
+	count.innerHTML = "0"; // 重置图片数
+
+	// 清除timeout事件
+	clearTimeout(window.timeout);
+
+	// 清空图片
+	imgs.childNodes.forEach(function (img) {
+		if (img && img.src) {
+			clearInterval(img.interval);
+			img.src = '';
+			img.style.height = 'auto';
+			img.style.width = windowWidth + "px";
+		}
+	});
+	if (imgs.innerHTML && !imgs.innerHTML.includes("<img ")) {
+		imgs.innerHTML = '';
+	}
+
+	// 延迟图片的加载
+	window.timeout = setTimeout(function () {
+		if (curPid > 0 && pid !== curPid) return;
+
+		if (pid > 999999999) {
+			imgs.innerHTML = 'PID不能超过9位';
+			return;
+		} else if (pid < 10) {
+			imgs.innerHTML = 'PID不能小于10';
+			return;
+		}
+
+		// 保存pid
+		if (needSavePid !== false) {
+			localStorage.setItem('pid', input.value);
+			curPid = pid;
+		}
+
+		imgs.innerHTML = ''; // 清空图片
+		loading.style.display = 'inline-block'; // 显示loading
+
+		createImage(pid, 1);
+	}, 400);
+}
+
+function doPrev () {
+	if (input.value === '') {
+		input.focus();
+		return;
+	}
+	input.value = input.value - 1;
+	doEnter();
+}
+
+function doNext () {
+	if (input.value === '') {
+		input.focus();
+		return;
+	}
+	input.value = input.value - 0 + 1;
+	doEnter();
+}
+
+function isMobileBrowser () {
+	return /Mobile|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
