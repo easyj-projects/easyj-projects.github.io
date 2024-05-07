@@ -125,19 +125,24 @@ function clearPid () {
 	return '';
 }
 
-function reduceImg (img) {
-	// 宽度超过页面时，缩小显示
-	if (img.width > windowWidth) {
+function showImg (img) {
+	img.title = `${img.id}  ${img.naturalWidth}✖️${img.naturalHeight}`;
+
+	if (400 / img.naturalHeight * img.naturalWidth > windowWidth) {
+		// 宽度超过页面时，缩小显示
 		img.style.width = windowWidth + "px";
 		img.style.height = (windowWidth / img.naturalWidth * img.naturalHeight) + "px";
-		img.style["min-width"] = "auto";
-		return true;
+	} else {
+		img.style.width = (400 / img.naturalHeight * img.naturalWidth) + "px";
+		img.style.height = "400px";
 	}
 }
 
 function stopImgInterval (img) {
-	clearInterval(img.interval);
-	img.interval = null;
+	if (img.interval) {
+		img.interval = null;
+		clearInterval(img.interval);
+	}
 }
 
 function createImage (pid, n) {
@@ -150,10 +155,18 @@ function createImage (pid, n) {
 	img.id = `${pid}-${n}`;
 	img.title = img.id;
 	img.alt = img.id;
-	if (n > 1) img.src = `https://pixiv.nl/${pid}-${n}.jpg`;
-	else img.src = `https://pixiv.nl/${pid}.jpg`;
-	img.style["min-width"] = "200px";
-	img.style.height = "400px";
+	if (n > 1) {
+		img.src = `https://pixiv.nl/${pid}-${n}.jpg`;
+	} else {
+		img.src = `https://pixiv.nl/${pid}.jpg`;
+	}
+	if (n === 1 || auto.value !== '开启') {
+		img.style.width = windowWidth + "px";
+		img.style.height = "400px";
+	} else {
+		img.style.width = "0px";
+		img.style.height = "0px";
+	}
 	img.style.cursor = 'pointer';
 	img.style.display = 'block';
 	// 绑定图片点击事件
@@ -169,9 +182,7 @@ function createImage (pid, n) {
 			return;
 		}
 
-		img.title += `  ${img.naturalWidth}✖️${img.naturalHeight}`;
-
-		reduceImg(img); // 如果图片太宽，则缩小图片
+		showImg(img);
 
 		count.innerHTML = n;
 
@@ -200,20 +211,25 @@ function createImage (pid, n) {
 			imgs.innerHTML = '<h1>404 Not Found</h1><span>这个作品可能已被删除，或无法取得。</span>';
 		}
 
+		const time = n > 1 ? 1500 : 750;
 		setTimeout(function () {
 			if (auto.value === '开启' && pid === curPid) {
 				doNext();
 			}
-		}, 1500);
+		}, time);
 	};
 
 	img.interval = setInterval(function () {
 		if (img.naturalWidth > 0) {
-			if (auto.value === '开启') {
-				window.scrollTo(0, document.body.scrollHeight);
-			}
-			reduceImg(img);
+			img.onerror = null;
 			stopImgInterval(img);
+			img.title = `${img.id}  ${img.naturalWidth}✖️${img.naturalHeight}`;
+			showImg(img);
+			if (auto.value === '开启') {
+				setTimeout(function () {
+					window.scrollTo(0, document.body.scrollHeight);
+				}, 100);
+			}
 		}
 	}, 10);
 
@@ -244,7 +260,6 @@ function doEnter (pid, needSavePid) {
 			img.src = '';
 			img.style.height = 'auto';
 			img.style.width = windowWidth + "px";
-			img.style["min-width"] = "auto";
 		}
 	});
 	if (imgs.innerHTML && !imgs.innerHTML.includes("<img ")) {
