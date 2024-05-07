@@ -127,7 +127,7 @@ function clearPid () {
 
 function showImg (img) {
 	img.title = `${img.id}  ${img.naturalWidth}✖️${img.naturalHeight}`;
-
+	img.classList.remove("hidden");
 	if (400 / img.naturalHeight * img.naturalWidth > windowWidth) {
 		// 宽度超过页面时，缩小显示
 		img.style.width = windowWidth + "px";
@@ -166,6 +166,7 @@ function createImage (pid, n) {
 	} else {
 		img.style.width = "0px";
 		img.style.height = "0px";
+		img.classList.add("hidden");
 	}
 	img.style.cursor = 'pointer';
 	img.style.display = 'block';
