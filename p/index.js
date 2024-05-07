@@ -130,6 +130,7 @@ function reduceImg (img) {
 	if (img.width > windowWidth) {
 		img.style.width = windowWidth + "px";
 		img.style.height = (windowWidth / img.naturalWidth * img.naturalHeight) + "px";
+		img.style["min-width"] = "auto";
 		return true;
 	}
 }
@@ -151,6 +152,7 @@ function createImage (pid, n) {
 	img.alt = img.id;
 	if (n > 1) img.src = `https://pixiv.nl/${pid}-${n}.jpg`;
 	else img.src = `https://pixiv.nl/${pid}.jpg`;
+	img.style["min-width"] = "200px";
 	img.style.height = "400px";
 	img.style.cursor = 'pointer';
 	img.style.display = 'block';
@@ -183,7 +185,7 @@ function createImage (pid, n) {
 	};
 	// 绑定图片加载失败事件
 	img.onerror = function (e) {
-		console.log(`加载图片 '${img.id}' 失败:`, e);
+		img.onerror = null; // 触发一次error事件，就清除
 		stopImgInterval(img);
 
 		if (pid !== curPid) {
@@ -206,19 +208,16 @@ function createImage (pid, n) {
 	};
 
 	img.interval = setInterval(function () {
-		if (reduceImg(img)) {
+		if (img.naturalWidth > 0) {
+			if (auto.value === '开启') {
+				window.scrollTo(0, document.body.scrollHeight);
+			}
+			reduceImg(img);
 			stopImgInterval(img);
 		}
 	}, 10);
 
 	imgs.appendChild(img);
-
-	// 开启连续缓存时，将页面滚动到底部
-	setTimeout(function () {
-		if (auto.value === '开启') {
-			window.scrollTo(0, document.body.scrollHeight);
-		}
-	}, 100);
 }
 
 function doEnter (pid, needSavePid) {
@@ -245,6 +244,7 @@ function doEnter (pid, needSavePid) {
 			img.src = '';
 			img.style.height = 'auto';
 			img.style.width = windowWidth + "px";
+			img.style["min-width"] = "auto";
 		}
 	});
 	if (imgs.innerHTML && !imgs.innerHTML.includes("<img ")) {
