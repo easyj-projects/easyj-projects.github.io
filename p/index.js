@@ -43,7 +43,7 @@ let inFocus = false; // 输入框是否获取到了焦点
 	});
 
 	// “确定” 按钮点击事件
-	enter.addEventListener("click", doEnter);
+	enter.addEventListener("click", () => doEnter());
 
 	// “自动” 按钮点击事件
 	auto.addEventListener("click", function () {
@@ -280,9 +280,9 @@ function doEnter (pid, needSavePid) {
 		}
 
 		// 保存pid
+		curPid = pid;
 		if (needSavePid !== false) {
 			localStorage.setItem('pid', input.value);
-			curPid = pid;
 		}
 
 		imgs.innerHTML = ''; // 清空图片
