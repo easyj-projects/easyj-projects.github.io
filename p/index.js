@@ -110,7 +110,7 @@ setTimeout(function () {
 	if (pid) {
 		doEnter(pid, needSavePid);
 	} else {
-		input.value = '116000000';
+		input.value = '116000000'; // 一个不错的PID起始值，值太小图不好看
 	}
 	input.focus(); // 自动获取焦点
 }, 500);
@@ -282,7 +282,7 @@ function doEnter (pid, needSavePid) {
 		// 保存pid
 		curPid = pid;
 		if (needSavePid !== false) {
-			localStorage.setItem('pid', input.value);
+			localStorage.setItem('pid', pid);
 		}
 
 		imgs.innerHTML = ''; // 清空图片
