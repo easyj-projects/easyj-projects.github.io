@@ -113,7 +113,7 @@ setTimeout(function () {
 		input.value = '116000000';
 	}
 	input.focus(); // 自动获取焦点
-}, 100);
+}, 500);
 
 
 // 方法
