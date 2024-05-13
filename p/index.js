@@ -7,6 +7,8 @@ const count = document.getElementById("count"); // 图片数
 const loading = document.getElementById("loading"); // loading效果
 
 const auto = document.getElementById("auto"); // 自动
+const save = document.getElementById("save"); // 保存
+const load = document.getElementById("load"); // 加载
 const prev = document.getElementById("prev"); // 上一张
 const next = document.getElementById("next"); // 下一张
 
@@ -54,6 +56,21 @@ let inFocus = false; // 输入框是否获取到了焦点
 			if (loading.style.display === 'none') {
 				doNext();
 			}
+		}
+	});
+
+	// “保存” 按钮点击事件
+	save.addEventListener("click", function () {
+		if (input.value > 0) {
+			localStorage.setItem("savePid", input.value);
+		}
+	});
+	// “加载” 按钮点击事件
+	load.addEventListener("click", function () {
+		const savePid = localStorage.getItem("savePid") - 0;
+		if (savePid > 0) {
+			input.value = savePid;
+			doEnter(savePid, false);
 		}
 	});
 
