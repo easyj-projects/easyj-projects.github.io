@@ -255,6 +255,8 @@ function createImage (pid, n) {
 	}, 10);
 
 	imgs.appendChild(img);
+
+	scrollToBottom();
 }
 
 function doEnter (pid, needSavePid) {
