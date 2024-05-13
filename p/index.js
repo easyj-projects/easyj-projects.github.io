@@ -7,8 +7,9 @@ const count = document.getElementById("count"); // 图片数
 const loading = document.getElementById("loading"); // loading效果
 
 const auto = document.getElementById("auto"); // 自动
-const save = document.getElementById("save"); // 保存
-const load = document.getElementById("load"); // 加载
+const save = document.getElementById("save"); // 收藏
+const remove = document.getElementById("remove"); // 删除
+const last = document.getElementById("last"); // 最后：加载最后一张收藏
 const prev = document.getElementById("prev"); // 上一张
 const next = document.getElementById("next"); // 下一张
 
@@ -30,7 +31,7 @@ let inFocus = false; // 输入框是否获取到了焦点
 	// PID输入框：监听回车键
 	input.addEventListener('keypress', function (e) {
 		if (e.key === 'Enter') {
-			doEnter();
+			enter.click();
 		}
 	});
 	// PID输入框：监听获取焦点
@@ -45,32 +46,62 @@ let inFocus = false; // 输入框是否获取到了焦点
 	});
 
 	// “确定” 按钮点击事件
-	enter.addEventListener("click", () => doEnter());
+	enter.addEventListener("click", () => {
+		doEnter();
+		isInSavePidList();
+	});
 
 	// “自动” 按钮点击事件
 	auto.addEventListener("click", function () {
-		if (auto.value === '开启') {
-			auto.value = '关闭';
+		if (auto.value === '自动') {
+			auto.value = '手动';
 		} else {
-			auto.value = '开启';
+			auto.value = '自动';
 			if (loading.style.display === 'none') {
 				doNext();
 			}
 		}
 	});
 
-	// “保存” 按钮点击事件
+	// “收藏” 按钮点击事件
 	save.addEventListener("click", function () {
-		if (input.value > 0) {
-			localStorage.setItem("savePid", input.value);
+		const pid = input.value - 0;
+		if (pid > 0) {
+			input.style.backgroundColor = '#f1e0b8';
+
+			const savePidList = getSavePidList();
+			for (let i = 0; i < savePidList.length; i++) {
+				if (pid === savePidList[i]) {
+					return;
+				}
+			}
+
+			savePidList.push(pid);
+			savePidList.sort();
+			localStorage.setItem("savePidList", JSON.stringify(savePidList));
 		}
 	});
-	// “加载” 按钮点击事件
-	load.addEventListener("click", function () {
-		const savePid = localStorage.getItem("savePid") - 0;
-		if (savePid > 0) {
-			input.value = savePid;
-			doEnter(savePid, false);
+	// “删除” 按钮点击事件
+	remove.addEventListener("click", function () {
+		const pid = input.value - 0;
+		if (pid > 0) {
+			const savePidList = getSavePidList();
+			let index;
+			while ((index = savePidList.indexOf(pid)) !== -1) {
+				savePidList.splice(index, 1);
+				input.style.backgroundColor = '';
+			}
+			localStorage.setItem("savePidList", JSON.stringify(savePidList));
+		}
+	});
+	// “最后” 按钮点击事件
+	last.addEventListener("click", function () {
+		const savePidList = getSavePidList();
+		if (savePidList.length > 0) {
+			const lastSavePid = savePidList[savePidList.length - 1];
+			input.value = lastSavePid;
+			input.style.backgroundColor = '#f1e0b8';
+			doEnter(lastSavePid, false);
 		}
 	});
 
@@ -130,6 +161,8 @@ setTimeout(function () {
 		input.value = '116000000'; // 一个不错的PID起始值，值太小图不好看
 	}
 	input.focus(); // 自动获取焦点
+
+	isInSavePidList();
 }, 500);
 
 
@@ -179,7 +212,7 @@ function createImage (pid, n) {
 	} else {
 		img.src = `https://pixiv.nl/${pid}.jpg`;
 	}
-	if (n === 1 || auto.value !== '开启') {
+	if (n === 1 || auto.value !== '自动') {
 		img.style.width = windowWidth + "px";
 		img.style.height = "400px";
 	} else {
@@ -209,7 +242,7 @@ function createImage (pid, n) {
 		count.innerHTML = n;
 
 		const cost = new Date() - start;
-		if (auto.value === '开启' && cost < 1000) {
+		if (auto.value === '自动' && cost < 1000) {
 			setTimeout(function () {
 				createImage(pid, n + 1);
 			}, 500);
@@ -238,7 +271,7 @@ function createImage (pid, n) {
 
 		const time = n > 1 ? 1200 : 600;
 		setTimeout(function () {
-			if (auto.value === '开启' && pid === curPid) {
+			if (auto.value === '自动' && pid === curPid) {
 				doNext();
 			}
 		}, time);
@@ -315,20 +348,70 @@ function doEnter (pid, needSavePid) {
 }
 
 function doPrev () {
-	if (input.value === '') {
+	const pid = input.value - 0;
+	if (pid <= 0) {
 		input.focus();
 		return;
 	}
-	input.value = input.value - 1;
+
+	const savePidList = getSavePidList();
+	if (savePidList.length > 0) {
+		let i = 0;
+		for (; i < savePidList.length; i++) {
+			const savePid = savePidList[i];
+			if (savePid >= pid) {
+				if (i === 0) {
+					input.value = pid - 1;
+					input.style.backgroundColor = '';
+				} else {
+					input.value = savePidList[i - 1];
+					input.style.backgroundColor = '#f1e0b8';
+				}
+				break;
+			}
+		}
+		if (i === savePidList.length) {
+			input.value = savePidList[i - 1];
+			input.style.backgroundColor = '#f1e0b8';
+		}
+	} else {
+		input.value = pid - 1;
+		input.style.backgroundColor = '';
+	}
 	doEnter();
 }
 
 function doNext () {
-	if (input.value === '') {
+	const pid = input.value - 0;
+	if (pid <= 0) {
 		input.focus();
 		return;
 	}
-	input.value = input.value - 0 + 1;
+
+	const savePidList = getSavePidList();
+	if (savePidList.length > 0) {
+		let i = savePidList.length - 1;
+		for (; i >= 0; i--) {
+			const savePid = savePidList[i];
+			if (savePid <= pid) {
+				if (i === savePidList.length - 1) {
+					input.value = pid + 1;
+					input.style.backgroundColor = '';
+				} else {
+					input.value = savePidList[i + 1];
+					input.style.backgroundColor = '#f1e0b8';
+				}
+				break;
+			}
+		}
+		if (i === -1) {
+			input.value = savePidList[i + 1];
+			input.style.backgroundColor = '#f1e0b8';
+		}
+	} else {
+		input.value = pid + 1;
+		input.style.backgroundColor = '';
+	}
 	doEnter();
 }
 
@@ -336,10 +419,28 @@ function isMobileBrowser () {
 	return windowWidth < 500 || /Mobile|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
-function scrollToBottom() {
-	if (auto.value === '开启') {
+function scrollToBottom () {
+	if (auto.value === '自动') {
 		setTimeout(function () {
 			window.scrollTo(0, document.body.scrollHeight);
 		}, 10);
 	}
+}
+
+function getSavePidList () {
+	return JSON.parse(localStorage.getItem("savePidList") || "[]");
+}
+
+function isInSavePidList () {
+	const pid = input.value - 0;
+	if (pid > 0) {
+		const savePidList = getSavePidList();
+		for (let i = 0; i < savePidList.length; i++) {
+			if (pid === savePidList[i]) {
+				input.style.backgroundColor = '#f1e0b8';
+				return;
+			}
+		}
+	}
+	input.style.backgroundColor = '';
 }
