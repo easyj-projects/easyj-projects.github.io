@@ -195,6 +195,8 @@ function createImage (pid, n) {
 	};
 	// 绑定图片加载完成事件
 	img.onload = function () {
+		scrollToBottom();
+
 		img.onerror = null; // 图片加载成功，将onerror事件移除
 		stopImgInterval(img);
 
@@ -217,6 +219,8 @@ function createImage (pid, n) {
 	};
 	// 绑定图片加载失败事件
 	img.onerror = function (e) {
+		scrollToBottom();
+
 		img.onerror = null; // 触发一次error事件，就清除
 		stopImgInterval(img);
 
@@ -246,11 +250,7 @@ function createImage (pid, n) {
 			stopImgInterval(img);
 			img.title = `${img.id}  ${img.naturalWidth}✖️${img.naturalHeight}`;
 			showImg(img);
-			if (auto.value === '开启') {
-				setTimeout(function () {
-					window.scrollTo(0, document.body.scrollHeight);
-				}, 100);
-			}
+			scrollToBottom();
 		}
 	}, 10);
 
@@ -332,4 +332,12 @@ function doNext () {
 
 function isMobileBrowser () {
 	return windowWidth < 500 || /Mobile|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+function scrollToBottom() {
+	if (auto.value === '开启') {
+		setTimeout(function () {
+			window.scrollTo(0, document.body.scrollHeight);
+		}, 10);
+	}
 }
