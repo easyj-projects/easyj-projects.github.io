@@ -150,6 +150,8 @@ function createImage (pid, n) {
 		return;
 	}
 
+	let start = new Date();
+
 	// 创建img标签
 	const img = document.createElement("img");
 	img.id = `${pid}-${n}`;
@@ -187,7 +189,8 @@ function createImage (pid, n) {
 
 		count.innerHTML = n;
 
-		if (auto.value === '开启') {
+		const cost = new Date() - start;
+		if (auto.value === '开启' && cost < 1000) {
 			setTimeout(function () {
 				createImage(pid, n + 1);
 			}, 500);
@@ -212,7 +215,7 @@ function createImage (pid, n) {
 			imgs.innerHTML = '<h1>404 Not Found</h1><span>这个作品可能已被删除，或无法取得。</span>';
 		}
 
-		const time = n > 1 ? 1500 : 750;
+		const time = n > 1 ? 1200 : 600;
 		setTimeout(function () {
 			if (auto.value === '开启' && pid === curPid) {
 				doNext();
