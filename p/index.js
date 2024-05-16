@@ -9,7 +9,8 @@ const loading = document.getElementById("loading"); // loading效果
 const auto = document.getElementById("auto"); // 自动
 const save = document.getElementById("save"); // 收藏
 const remove = document.getElementById("remove"); // 删除
-const last = document.getElementById("last"); // 最后：加载最后一张收藏
+const first = document.getElementById("first"); // 首：加载第一张收藏
+const last = document.getElementById("last"); // 尾：加载最后一张收藏
 const prev = document.getElementById("prev"); // 上一张
 const next = document.getElementById("next"); // 下一张
 
@@ -100,7 +101,17 @@ let inFocus = false; // 输入框是否获取到了焦点
 			localStorage.setItem("savePidList", JSON.stringify(savePidList));
 		}
 	});
-	// “最后” 按钮点击事件
+	// “首” 按钮点击事件
+	first.addEventListener("click", function () {
+		const savePidList = getSavePidList();
+		if (savePidList.length > 0) {
+			const lastSavePid = savePidList[0];
+			input.value = lastSavePid;
+			input.style.backgroundColor = '#f1e0b8';
+			doEnter(lastSavePid, false);
+		}
+	});
+	// “尾” 按钮点击事件
 	last.addEventListener("click", function () {
 		const savePidList = getSavePidList();
 		if (savePidList.length > 0) {
