@@ -9,12 +9,16 @@
         body{padding:0;margin:0;font-size:20px}
 		#tools{position:fixed;left:0;top:0;z-index:1;background-color:#efefef;width:100%;padding:5px 5px 0 5px}
 		#tools div{padding-bottom:5px}
-		#imgs{margin-top:70px;padding:5px 0 0 5px}
-        img{margin-top:15px;background-color:#efefef;}
+		#imgs{margin-top:70px;padding:5px 0 0 5px;padding-bottom:10px}
+        img{margin-top:15px;background-color:#efefef}
 		img:first-child, img.hidden{margin-top:0}
+
 		.mobile #tools{top:auto;bottom:0}
-		.mobile #imgs{margin-top:0;padding-bottom:72px}
-		.mobile #imgs img:last-child{margin-bottom:70px;}
+		.mobile #imgs{margin-top:0;padding-bottom:80px}
+		.mobile #imgs img:last-child{margin-bottom:80px}
+
+		#configs{position:fixed;left:0;bottom:0;z-index:2;background-color:#efefef;border:1px solid #aaa;padding:5px;width:100%;display:none}
+        .mobile #configs{top:0;bottom:auto}
 	</style>
 </head>
 <body>
@@ -29,12 +33,26 @@
 	<div id="bottons">
 		<input id="auto" type="button" value="手动"/>
 
-		<input id="save" type="button" value="收藏" style="margin-left:17px"/>
+		<input id="save" type="button" value="收藏" style="margin-left:10px"/>
 		<input id="remove" type="button" value="删除"/>
 		<input id="last" type="button" value="最后"/>
 
-		<input id="prev" type="button" value="上一张" style="margin-left:17px"/>
+		<input id="prev" type="button" value="上一张" style="margin-left:10px"/>
 		<input id="next" type="button" value="下一张"/>
+
+		<input id="openConfigBtn" type="button" value="配置" style="margin-left:10px"/>
+	</div>
+</div>
+
+<div id="configs">
+	<div id="saveConfigPanel">
+		<div>
+			<label for="saveConfig">收藏PID列表：</label><br/>
+			<textarea id="saveConfig" style="width:95%" rows="10"></textarea>
+		</div>
+
+		<input id="closeConfigBtn" type="button" value="取消" />
+		<input id="saveConfigBtn" type="button" value="保存" style="margin-left:20px" />
 	</div>
 </div>
 

@@ -13,6 +13,12 @@ const last = document.getElementById("last"); // 最后：加载最后一张收�
 const prev = document.getElementById("prev"); // 上一张
 const next = document.getElementById("next"); // 下一张
 
+const configs = document.getElementById("configs"); // 配置框
+const openConfigBtn = document.getElementById("openConfigBtn"); // 打开配置
+const closeConfigBtn = document.getElementById("closeConfigBtn"); // 关闭配置
+const saveConfigBtn = document.getElementById("saveConfigBtn"); // 保存配置
+const saveConfig = document.getElementById("saveConfig"); // 收藏配置
+
 const imgs = document.getElementById("imgs"); // 图片列表
 
 
@@ -134,6 +140,52 @@ let inFocus = false; // 输入框是否获取到了焦点
 		if (e.key === 'ArrowRight') {
 			doNext();
 		}
+	});
+
+	// “配置” 按钮点击事件
+	openConfigBtn.addEventListener("click", function () {
+		saveConfig.style.width = (windowWidth - 10) + "px";
+		saveConfig.value = localStorage.getItem("savePidList") || '';
+		configs.style.display = 'block';
+	});
+
+	// “取消” 按钮点击事件
+	closeConfigBtn.addEventListener("click", function () {
+		configs.style.display = 'none';
+	});
+
+	// “保存” 按钮点击事件
+	saveConfigBtn.addEventListener("click", function () {
+		let pidList = saveConfig.value
+			.replaceAll(/[^0-9,\[\]\s]/g, '')
+			.replaceAll(/[,\s]{1,}/g, ',');
+
+		if (pidList !== '' && pidList !== ',' && pidList !== '[]' && pidList !== '[,]') {
+			if (pidList[0] === ',') {
+				pidList = pidList.substring(1);
+			}
+			if (pidList[pidList.length - 1] === ',') {
+				pidList = pidList.substring(0, pidList.length - 1);
+			}
+			if (pidList[0] !== '[') {
+				pidList = '[' + pidList;
+			}
+			if (pidList[pidList.length - 1] !== ']') {
+				pidList = pidList + ']';
+			}
+		}
+
+		if (pidList === '' || pidList === ',' || pidList === '[]' || pidList === '[,]') {
+			saveConfig.value = '';
+			alert("请输入收藏PID列表");
+			return;
+		}
+
+		const savePidList = JSON.parse(pidList);
+		savePidList.sort((a, b) => a - b);
+		localStorage.setItem("savePidList", JSON.stringify(savePidList));
+
+		configs.style.display = 'none';
 	});
 }
 
