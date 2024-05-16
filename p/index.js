@@ -77,7 +77,7 @@ let inFocus = false; // 输入框是否获取到了焦点
 			}
 
 			savePidList.push(pid);
-			savePidList.sort();
+			savePidList.sort((a, b) => a - b);
 			localStorage.setItem("savePidList", JSON.stringify(savePidList));
 		}
 	});
