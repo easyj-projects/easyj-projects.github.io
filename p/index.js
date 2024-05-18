@@ -8,7 +8,6 @@ const loading = document.getElementById("loading"); // loading效果
 
 const auto = document.getElementById("auto"); // 自动
 const save = document.getElementById("save"); // 收藏
-const remove = document.getElementById("remove"); // 删除
 const first = document.getElementById("first"); // 首：加载第一张收藏
 const last = document.getElementById("last"); // 尾：加载最后一张收藏
 const changeType = document.getElementById("changeType"); // 切换类型：仅收藏、全部的
@@ -75,31 +74,28 @@ let inFocus = false; // 输入框是否获取到了焦点
 	save.addEventListener("click", function () {
 		const pid = input.value - 0;
 		if (pid > 0) {
-			input.style.backgroundColor = '#f1e0b8';
+			if (save.value === '未收藏') {
+				inSave();
 
-			const savePidList = getSavePidList();
-			for (let i = 0; i < savePidList.length; i++) {
-				if (pid === savePidList[i]) {
-					return;
+				const savePidList = getSavePidList();
+				for (let i = 0; i < savePidList.length; i++) {
+					if (pid === savePidList[i]) {
+						return;
+					}
 				}
-			}
 
-			savePidList.push(pid);
-			savePidList.sort((a, b) => a - b);
-			localStorage.setItem("savePidList", JSON.stringify(savePidList));
-		}
-	});
-	// “删除” 按钮点击事件
-	remove.addEventListener("click", function () {
-		const pid = input.value - 0;
-		if (pid > 0) {
-			const savePidList = getSavePidList();
-			let index;
-			while ((index = savePidList.indexOf(pid)) !== -1) {
-				savePidList.splice(index, 1);
-				input.style.backgroundColor = '';
+				savePidList.push(pid);
+				savePidList.sort((a, b) => a - b);
+				localStorage.setItem("savePidList", JSON.stringify(savePidList));
+			} else {
+				const savePidList = getSavePidList();
+				let index;
+				while ((index = savePidList.indexOf(pid)) !== -1) {
+					savePidList.splice(index, 1);
+					unSave();
+				}
+				localStorage.setItem("savePidList", JSON.stringify(savePidList));
 			}
-			localStorage.setItem("savePidList", JSON.stringify(savePidList));
 		}
 	});
 	// “首” 按钮点击事件
@@ -108,7 +104,7 @@ let inFocus = false; // 输入框是否获取到了焦点
 		if (savePidList.length > 0) {
 			const lastSavePid = savePidList[0];
 			input.value = lastSavePid;
-			input.style.backgroundColor = '#f1e0b8';
+			inSave();
 			doEnter(lastSavePid, false);
 		}
 	});
@@ -118,7 +114,7 @@ let inFocus = false; // 输入框是否获取到了焦点
 		if (savePidList.length > 0) {
 			const lastSavePid = savePidList[savePidList.length - 1];
 			input.value = lastSavePid;
-			input.style.backgroundColor = '#f1e0b8';
+			inSave();
 			doEnter(lastSavePid, false);
 		}
 	});
@@ -439,24 +435,24 @@ function doPrev () {
 			if (savePid >= pid) {
 				if (i === 0) {
 					input.value = pid - 1;
-					input.style.backgroundColor = '';
+					unSave();
 				} else {
 					input.value = savePidList[i - 1];
-					input.style.backgroundColor = '#f1e0b8';
+					inSave();
 				}
 				break;
 			}
 		}
 		if (i === savePidList.length) {
 			input.value = savePidList[i - 1];
-			input.style.backgroundColor = '#f1e0b8';
+			inSave();
 		}
 	} else {
 		input.value = pid - 1;
 		if (changeType.value === '全部的') {
 			isInSavePidList();
 		} else {
-			input.style.backgroundColor = '';
+			unSave();
 		}
 	}
 	doEnter();
@@ -477,24 +473,24 @@ function doNext () {
 			if (savePid <= pid) {
 				if (i === savePidList.length - 1) {
 					input.value = pid + 1;
-					input.style.backgroundColor = '';
+					unSave();
 				} else {
 					input.value = savePidList[i + 1];
-					input.style.backgroundColor = '#f1e0b8';
+					inSave();
 				}
 				break;
 			}
 		}
 		if (i === -1) {
 			input.value = savePidList[i + 1];
-			input.style.backgroundColor = '#f1e0b8';
+			inSave();
 		}
 	} else {
 		input.value = pid + 1;
 		if (changeType.value === '全部的') {
 			isInSavePidList();
 		} else {
-			input.style.backgroundColor = '';
+			unSave();
 		}
 	}
 	doEnter();
@@ -522,10 +518,20 @@ function isInSavePidList () {
 		const savePidList = getSavePidList();
 		for (let i = 0; i < savePidList.length; i++) {
 			if (pid === savePidList[i]) {
-				input.style.backgroundColor = '#f1e0b8';
+				inSave();
 				return;
 			}
 		}
 	}
+	unSave();
+}
+
+function inSave() {
+	input.style.backgroundColor = '#f1e0b8';
+	save.value = "已收藏";
+}
+
+function unSave() {
 	input.style.backgroundColor = '';
+	save.value = "未收藏";
 }
