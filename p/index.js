@@ -250,15 +250,15 @@ function clearPid () {
 
 function showImg (img) {
 	img.title = `${img.id}  ${img.naturalWidth}✖️${img.naturalHeight}`;
-	img.classList.remove("hidden");
 	if (400 / img.naturalHeight * img.naturalWidth > windowWidth) {
 		// 宽度超过页面时，缩小显示
-		img.style.width = windowWidth + "px";
 		img.style.height = (windowWidth / img.naturalWidth * img.naturalHeight) + "px";
+		img.style.width = windowWidth + "px";
 	} else {
-		img.style.width = (400 / img.naturalHeight * img.naturalWidth) + "px";
 		img.style.height = "400px";
+		img.style.width = (400 / img.naturalHeight * img.naturalWidth) + "px";
 	}
+	img.classList.remove("hidden");
 }
 
 function stopImgInterval (img) {
@@ -286,11 +286,9 @@ function createImage (pid, n) {
 		img.src = `https://pixiv.nl/${pid}.jpg`;
 	}
 	if (n === 1 || auto.value !== '自动') {
-		img.style.width = windowWidth + "px";
 		img.style.height = "400px";
+		img.style.width = windowWidth + "px";
 	} else {
-		img.style.width = "0px";
-		img.style.height = "0px";
 		img.classList.add("hidden");
 	}
 	img.style.cursor = 'pointer';
