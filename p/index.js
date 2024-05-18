@@ -11,6 +11,7 @@ const save = document.getElementById("save"); // 收藏
 const remove = document.getElementById("remove"); // 删除
 const first = document.getElementById("first"); // 首：加载第一张收藏
 const last = document.getElementById("last"); // 尾：加载最后一张收藏
+const changeType = document.getElementById("changeType"); // 切换类型：仅收藏、全部的
 const prev = document.getElementById("prev"); // 上一张
 const next = document.getElementById("next"); // 下一张
 
@@ -119,6 +120,15 @@ let inFocus = false; // 输入框是否获取到了焦点
 			input.value = lastSavePid;
 			input.style.backgroundColor = '#f1e0b8';
 			doEnter(lastSavePid, false);
+		}
+	});
+
+	// “切换类型” 按钮点击事件
+	changeType.addEventListener("click", function () {
+		if (changeType.value === '仅收藏') {
+			changeType.value = '全部的';
+		} else {
+			changeType.value = '仅收藏';
 		}
 	});
 
@@ -418,7 +428,7 @@ function doPrev () {
 	}
 
 	const savePidList = getSavePidList();
-	if (savePidList.length > 0) {
+	if (savePidList.length > 0 && changeType.value === '仅收藏') {
 		let i = 0;
 		for (; i < savePidList.length; i++) {
 			const savePid = savePidList[i];
@@ -439,7 +449,11 @@ function doPrev () {
 		}
 	} else {
 		input.value = pid - 1;
-		input.style.backgroundColor = '';
+		if (changeType.value === '全部的') {
+			isInSavePidList();
+		} else {
+			input.style.backgroundColor = '';
+		}
 	}
 	doEnter();
 }
@@ -452,7 +466,7 @@ function doNext () {
 	}
 
 	const savePidList = getSavePidList();
-	if (savePidList.length > 0) {
+	if (savePidList.length > 0 && changeType.value === '仅收藏') {
 		let i = savePidList.length - 1;
 		for (; i >= 0; i--) {
 			const savePid = savePidList[i];
@@ -473,7 +487,11 @@ function doNext () {
 		}
 	} else {
 		input.value = pid + 1;
-		input.style.backgroundColor = '';
+		if (changeType.value === '全部的') {
+			isInSavePidList();
+		} else {
+			input.style.backgroundColor = '';
+		}
 	}
 	doEnter();
 }
