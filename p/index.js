@@ -337,7 +337,7 @@ function createImage (pid, n) {
 		if (n > 1) {
 			imgs.removeChild(img);
 		} else {
-			imgs.innerHTML = '<h1>404 Not Found</h1><span>这个作品可能已被删除，或无法取得。</span>';
+			imgs.innerHTML = '<div class="p404"><h1>404 Not Found</h1><span>这个作品可能已被删除，或无法取得。</span></div>';
 		}
 
 		const time = n > 1 ? 1200 : 600;
