@@ -165,9 +165,12 @@ let inFocus = false; // 输入框是否获取到了焦点
 
 	// “配置” 按钮点击事件
 	openConfigBtn.addEventListener("click", function () {
-		saveConfig.style.width = (windowWidth - 10) + "px";
-		saveConfig.value = localStorage.getItem("savePidList") || '';
-		configs.style.display = 'block';
+		if (configs.style.display === 'block') {
+			configs.style.display = 'none';
+		} else {
+			saveConfig.value = localStorage.getItem("savePidList") || '';
+			configs.style.display = 'block';
+		}
 	});
 
 	// “取消” 按钮点击事件
@@ -215,6 +218,7 @@ let inFocus = false; // 输入框是否获取到了焦点
 if (isMobileBrowser()) {
 	document.body.classList.add("mobile");
 	tools.style.width = windowWidth + "px";
+	saveConfig.style.width = (windowWidth - 10) + "px";
 }
 setTimeout(function () {
 	let needSavePid = true;
