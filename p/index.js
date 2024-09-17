@@ -281,9 +281,9 @@ function createImage (pid, n) {
 	img.title = img.id;
 	img.alt = img.id;
 	if (n > 1) {
-		img.src = `https://pixiv.nl/${pid}-${n}.jpg`;
+		img.src = `https://pixiv.shojo.cn/${pid}-${n}`;
 	} else {
-		img.src = `https://pixiv.nl/${pid}.jpg`;
+		img.src = `https://pixiv.shojo.cn/${pid}`;
 	}
 	if (n === 1 || auto.value !== '自动') {
 		img.style.height = "400px";
