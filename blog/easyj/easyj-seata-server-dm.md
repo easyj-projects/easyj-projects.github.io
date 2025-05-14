@@ -163,6 +163,7 @@ docker run \
     -e SEATA_IP=127.0.0.1 \
     -e SEATA_HTTP_PORT=7091 \
     -e SEATA_PORT=8091 \
+    -e LOGSTASH_ADDRESS=127.0.0.1:4560 \
     -p 7091:7091 \
     -p 8091:8091 \
     --restart=always \
